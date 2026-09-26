@@ -40,6 +40,23 @@ export function PlanChecklist({
   const completed = items.filter((i) => done[i.id]).length;
   const pct = items.length ? Math.round((completed / items.length) * 100) : 0;
 
+  if (items.length === 0) {
+    return (
+      <div className="rounded-2xl border border-dashed border-night/15 bg-white/80 p-8 text-center">
+        <p className="font-display text-lg font-semibold text-ink">No checklist items yet</p>
+        <p className="mt-2 text-sm text-muted max-w-md mx-auto leading-relaxed">
+          Edit your plan and pick a journey stage plus at least one goal or need so Norra can build a stage-aware
+          checklist. Organization only — not legal advice.
+        </p>
+        <p className="mt-4 text-sm">
+          <Link href="/resources" className="text-forest font-medium hover:underline">
+            Browse the Knowledge Hub →
+          </Link>
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="mb-8 rounded-2xl bg-forest text-cream p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">

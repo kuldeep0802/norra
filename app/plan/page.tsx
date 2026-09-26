@@ -117,6 +117,23 @@ export default function PlanPage() {
             </div>
           )}
 
+          {profile.goals.length === 0 && profile.needs.length === 0 && (
+            <div className="mt-6 rounded-2xl border border-amber/40 bg-amber/10 px-4 py-3.5 text-sm text-ink leading-relaxed">
+              <strong className="font-semibold">Tip:</strong> you have not selected goals or needs yet.{" "}
+              <button
+                type="button"
+                onClick={() => {
+                  setStep("form");
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+                className="text-forest font-medium underline-offset-2 hover:underline touch-manipulation"
+              >
+                Edit your plan
+              </button>{" "}
+              to add them — recommendations and checklist coverage get sharper.
+            </div>
+          )}
+
           <div className="mt-10">
             <h2 className="font-display text-xl sm:text-2xl font-semibold text-ink mb-4">
               Stage-aware checklist

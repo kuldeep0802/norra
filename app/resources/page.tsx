@@ -9,7 +9,7 @@ import { siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Knowledge Hub",
   description:
-    "Long-form Norra guides for newcomers to Canada — before landing, first week, housing, resumes, jobs, cities, and scam awareness — plus official government starting points.",
+    "Long-form Norra guides for newcomers to Canada — before landing, first week, SIN, banking, housing, resumes, jobs, cities, and scam awareness — plus official government starting points.",
   alternates: { canonical: "/resources/" },
   openGraph: {
     title: `Knowledge Hub · ${siteConfig.name}`,
@@ -65,7 +65,7 @@ export default function ResourcesPage() {
           <SectionHeader
             eyebrow="Knowledge Hub"
             title="Guides that make Canada easier to navigate"
-            description="Long-form, human-first articles for real newcomer moments — before landing, first week, housing, work, cities, and staying scam-aware. Search works in your browser — no account required."
+            description="Long-form, human-first articles for real newcomer moments — before landing, first week, SIN, banking, housing, work, cities, and staying scam-aware. Search and topic chips filter in your browser — no account required."
           />
           <Disclaimer className="mt-8">
             Guides are for organization and orientation. They are not immigration or legal advice. Prefer primary

@@ -109,7 +109,7 @@ export const beforeYouArriveItems: ChecklistItem[] = [
     id: "bya-9",
     label: "Notify your bank of travel; pack cards + some CAD cash",
     category: "Banking",
-    href: "/services/banking-finance",
+    href: "/resources/open-bank-account-newcomer",
   },
   {
     id: "bya-10",
@@ -177,13 +177,13 @@ export const arrivalItems: ChecklistItem[] = [
     id: "arr-6",
     label: "Open a bank account when ready (bring ID + status docs)",
     category: "Banking",
-    href: "/services/banking-finance",
+    href: "/resources/open-bank-account-newcomer",
   },
   {
     id: "arr-7",
     label: "Apply for a SIN when you are eligible",
     category: "Government",
-    href: "/government",
+    href: "/resources/get-sin-canada",
     officialHref: "https://www.canada.ca/en/employment-social-development/services/sin.html",
     officialLabel: "Service Canada — SIN",
   },
@@ -208,6 +208,7 @@ export const settlingItems: ChecklistItem[] = [
     id: "set-1",
     label: "Confirm SIN is issued and stored securely",
     category: "Government",
+    href: "/resources/get-sin-canada",
     officialHref: "https://www.canada.ca/en/employment-social-development/services/sin.html",
     officialLabel: "Service Canada — SIN",
   },
@@ -229,7 +230,7 @@ export const settlingItems: ChecklistItem[] = [
     id: "set-4",
     label: "Set up Canadian banking for rent and payroll",
     category: "Banking",
-    href: "/services/banking-finance",
+    href: "/resources/open-bank-account-newcomer",
   },
   {
     id: "set-5",
@@ -542,11 +543,49 @@ export function getPlanRecommendations(profile: PlanProfile): PlanRecommendation
       kind: "guide",
     });
   }
+  if (profile.stage === "pre-arrival") {
+    push({
+      title: "Open a bank account as a newcomer",
+      description: "Skim before you land so week-one account opening feels familiar.",
+      href: "/resources/open-bank-account-newcomer",
+      kind: "guide",
+    });
+  }
   if (profile.stage === "just-arrived" || profile.stage === "settling") {
     push({
       title: "Your first week in Canada",
       description: "SIM, banking, transit, and health coverage starting points.",
       href: "/resources/first-week-in-canada",
+      kind: "guide",
+    });
+    push({
+      title: "Get a Social Insurance Number (SIN)",
+      description: "Navigation checklist with official Service Canada links — verify eligibility there.",
+      href: "/resources/get-sin-canada",
+      kind: "guide",
+    });
+    push({
+      title: "Open a bank account as a newcomer",
+      description: "Orientation only — ID habits, questions to ask, scam-aware tips. No bank rankings.",
+      href: "/resources/open-bank-account-newcomer",
+      kind: "guide",
+    });
+  }
+  if (
+    profile.needs.includes("Banking & SIN") ||
+    profile.goals.includes("settle") ||
+    profile.stage === "already-here"
+  ) {
+    push({
+      title: "Get a Social Insurance Number (SIN)",
+      description: "Service Canada navigation checklist and phishing warnings.",
+      href: "/resources/get-sin-canada",
+      kind: "guide",
+    });
+    push({
+      title: "Open a bank account as a newcomer",
+      description: "FCAC-linked orientation for opening a personal account.",
+      href: "/resources/open-bank-account-newcomer",
       kind: "guide",
     });
   }

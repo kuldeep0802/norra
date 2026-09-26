@@ -168,8 +168,9 @@ function respond(input: string, profile: PlanProfile | null): Msg {
   if (/sin|tax|cra|ei\b|benefit|ohip|health card|government/.test(q)) {
     return withBias({
       role: "assistant",
-      text: "I can point to high-level government navigation pages and the first-week guide. For official rules and applications, use Canada.ca or your provincial site — Nora does not file anything for you.",
+      text: "I can point to high-level government navigation pages and our SIN checklist. For official rules and applications, use Canada.ca or your provincial site — Nora does not file anything for you.",
       links: [
+        { label: "Get a SIN checklist", href: "/resources/get-sin-canada" },
         { label: "First week guide", href: "/resources/first-week-in-canada" },
         { label: "Government guides", href: "/government" },
         { label: "My Canada Plan", href: "/plan" },
@@ -192,8 +193,9 @@ function respond(input: string, profile: PlanProfile | null): Msg {
       role: "assistant",
       text: "General banking orientation only — not financial advice. Compare banks yourself and speak with a licensed advisor when you need personalized help.",
       links: [
+        { label: "Open a bank account guide", href: "/resources/open-bank-account-newcomer" },
         { label: "Banking basics", href: "/services/banking-finance" },
-        { label: "First week guide", href: "/resources/first-week-in-canada" },
+        { label: "Get a SIN checklist", href: "/resources/get-sin-canada" },
         { label: "My Canada Plan", href: "/plan" },
       ],
     });

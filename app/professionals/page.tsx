@@ -7,6 +7,8 @@ import { Disclaimer } from "@/components/Disclaimer";
 import { DemoBanner } from "@/components/DemoBanner";
 import { Button } from "@/components/Button";
 import { providers, providerCategories } from "@/lib/data/providers";
+import { partnerCategoryLandings } from "@/lib/data/partnerCategories";
+import Link from "next/link";
 
 export default function ProfessionalsPage() {
   const [category, setCategory] = useState("All");
@@ -99,6 +101,26 @@ export default function ProfessionalsPage() {
           <Button href="/partner#interest" variant="outline" className="shrink-0 min-h-11">
             Providers: express interest
           </Button>
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-night/5 bg-white p-5 sm:p-6">
+          <p className="font-semibold text-ink text-sm">Browse category interest pages</p>
+          <p className="mt-1 text-xs text-muted leading-relaxed">
+            Honest early-stage landings — no fake providers. Each links to the partner interest form with a
+            prefilled category.
+          </p>
+          <ul className="mt-3 flex flex-wrap gap-2">
+            {partnerCategoryLandings.map((c) => (
+              <li key={c.slug}>
+                <Link
+                  href={`/partner/${c.slug}`}
+                  className="inline-flex items-center rounded-full border border-night/10 bg-cream px-3 py-2 text-xs font-medium text-forest hover:border-forest/40 min-h-10"
+                >
+                  {c.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

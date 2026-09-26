@@ -5,6 +5,7 @@ import { Mail, Save, Trash2 } from "lucide-react";
 import { founder } from "@/lib/data/founder";
 import { cities } from "@/lib/data/cities";
 import { Button } from "./Button";
+import { resolvePartnerFormCategory } from "@/lib/data/partnerCategories";
 
 export const partnerInterestCategories = [
   "Immigration / RCIC or lawyer",
@@ -93,6 +94,16 @@ export function PartnerInterestForm() {
 
   useEffect(() => {
     setDraftCount(loadDrafts().length);
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const raw = params.get("category");
+      const resolved = resolvePartnerFormCategory(raw);
+      if (resolved) {
+        setForm((prev) => (prev.category ? prev : { ...prev, category: resolved }));
+      }
+    } catch {
+      /* ignore */
+    }
   }, []);
 
   function update<K extends keyof PartnerInterestDraft>(key: K, value: PartnerInterestDraft[K]) {

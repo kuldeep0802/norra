@@ -215,3 +215,27 @@ export function resolveHealthLinksForCity(cityOrProvince: string): ResolvedHealt
 
 /** Health checklist item ids that should get city-aware officialHref */
 export const HEALTH_CHECKLIST_BASE_IDS = ["arr-8", "set-2", "here-4"] as const;
+
+/** Ordered list of province/territory names for Plan profile select */
+export const PROVINCE_TERRITORY_OPTIONS = Object.keys(provincialHealthByProvince) as string[];
+
+/**
+ * Resolve health links from Plan city + optional province (when city is Other / empty).
+ * Prefer known city → province mapping; fall back to explicit province selection.
+ */
+export function resolveHealthLinksForPlan(city: string, province?: string): ResolvedHealthLinks {
+  const cityRaw = (city || "").trim();
+  const provinceRaw = (province || "").trim();
+  const cityIsOther = !cityRaw || cityRaw === "Other / Not sure yet";
+
+  if (!cityIsOther) {
+    const fromCity = resolveHealthLinksForCity(cityRaw);
+    if (fromCity.provincial) return fromCity;
+  }
+
+  if (provinceRaw) {
+    return resolveHealthLinksForCity(provinceRaw);
+  }
+
+  return resolveHealthLinksForCity(cityIsOther ? "" : cityRaw);
+}

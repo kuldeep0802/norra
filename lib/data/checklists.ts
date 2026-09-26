@@ -1,8 +1,14 @@
 import {
   FEDERAL_HEALTH_OVERVIEW,
   HEALTH_CHECKLIST_BASE_IDS,
-  resolveHealthLinksForCity,
+  resolveHealthLinksForPlan,
 } from "./healthLinks";
+import {
+  BANKING_CHECKLIST_BASE_IDS,
+  OFFICIAL_BANKING,
+  OFFICIAL_SIN,
+  SIN_CHECKLIST_BASE_IDS,
+} from "./officialLinks";
 
 export type ChecklistItem = {
   id: string;
@@ -116,6 +122,8 @@ export const beforeYouArriveItems: ChecklistItem[] = [
     label: "Notify your bank of travel; pack cards + some CAD cash",
     category: "Banking",
     href: "/resources/open-bank-account-newcomer",
+    officialHref: OFFICIAL_BANKING.href,
+    officialLabel: OFFICIAL_BANKING.label,
   },
   {
     id: "bya-10",
@@ -184,14 +192,16 @@ export const arrivalItems: ChecklistItem[] = [
     label: "Open a bank account when ready (bring ID + status docs)",
     category: "Banking",
     href: "/resources/open-bank-account-newcomer",
+    officialHref: OFFICIAL_BANKING.href,
+    officialLabel: OFFICIAL_BANKING.label,
   },
   {
     id: "arr-7",
     label: "Apply for a SIN when you are eligible",
     category: "Government",
     href: "/resources/get-sin-canada",
-    officialHref: "https://www.canada.ca/en/employment-social-development/services/sin.html",
-    officialLabel: "Service Canada — SIN",
+    officialHref: OFFICIAL_SIN.href,
+    officialLabel: OFFICIAL_SIN.label,
   },
   {
     id: "arr-8",
@@ -215,8 +225,8 @@ export const settlingItems: ChecklistItem[] = [
     label: "Confirm SIN is issued and stored securely",
     category: "Government",
     href: "/resources/get-sin-canada",
-    officialHref: "https://www.canada.ca/en/employment-social-development/services/sin.html",
-    officialLabel: "Service Canada — SIN",
+    officialHref: OFFICIAL_SIN.href,
+    officialLabel: OFFICIAL_SIN.label,
   },
   {
     id: "set-2",
@@ -238,6 +248,8 @@ export const settlingItems: ChecklistItem[] = [
     label: "Set up Canadian banking for rent and payroll",
     category: "Banking",
     href: "/resources/open-bank-account-newcomer",
+    officialHref: OFFICIAL_BANKING.href,
+    officialLabel: OFFICIAL_BANKING.label,
   },
   {
     id: "set-5",
@@ -419,6 +431,8 @@ export const statusOptions = [
 export type PlanProfile = {
   stage: PlanStage | "";
   city: string;
+  /** Province/territory when city is Other / empty — used for health deep-links */
+  province: string;
   arrival: string;
   family: string;
   goals: PlanGoal[];
@@ -429,6 +443,7 @@ export type PlanProfile = {
 export const emptyPlanProfile: PlanProfile = {
   stage: "",
   city: "",
+  province: "",
   arrival: "",
   family: "Just me",
   goals: [],
@@ -522,7 +537,7 @@ export function buildPlanChecklist(profile: PlanProfile): ChecklistItem[] {
     add(settlingItems.filter((i) => i.id === "set-2" || i.id === "set-5"));
   }
 
-  const health = resolveHealthLinksForCity(profile.city);
+  const health = resolveHealthLinksForPlan(profile.city, profile.province);
   const provincialOfficial = health.provincial
     ? { href: health.provincial.href, label: `${health.provincial.planName} — official site` }
     : { href: FEDERAL_HEALTH_OVERVIEW.href, label: FEDERAL_HEALTH_OVERVIEW.label };
@@ -530,6 +545,8 @@ export function buildPlanChecklist(profile: PlanProfile): ChecklistItem[] {
   return items.map((item) => {
     const baseId = item.id;
     const isHealthOfficial = (HEALTH_CHECKLIST_BASE_IDS as readonly string[]).includes(baseId);
+    const isSinOfficial = (SIN_CHECKLIST_BASE_IDS as readonly string[]).includes(baseId);
+    const isBankingOfficial = (BANKING_CHECKLIST_BASE_IDS as readonly string[]).includes(baseId);
     const next: ChecklistItem = {
       ...item,
       id: `plan-${profile.stage || "general"}-${item.id}`,
@@ -544,8 +561,16 @@ export function buildPlanChecklist(profile: PlanProfile): ChecklistItem[] {
       } else {
         next.description =
           (item.description ? item.description + " " : "") +
-          "City unknown — use the national health guide and federal overview. Always verify on the official site.";
+          "Province unknown — use the national health guide and federal overview, or pick a province in your plan. Always verify on the official site.";
       }
+    }
+    if (isSinOfficial) {
+      next.officialHref = OFFICIAL_SIN.href;
+      next.officialLabel = OFFICIAL_SIN.label;
+    }
+    if (isBankingOfficial) {
+      next.officialHref = OFFICIAL_BANKING.href;
+      next.officialLabel = OFFICIAL_BANKING.label;
     }
     return next;
   });
@@ -627,7 +652,7 @@ export function getPlanRecommendations(profile: PlanProfile): PlanRecommendation
     profile.stage === "just-arrived" ||
     profile.stage === "settling"
   ) {
-    const health = resolveHealthLinksForCity(profile.city);
+    const health = resolveHealthLinksForPlan(profile.city, profile.province);
     const place = health.provincial
       ? `${health.provincial.planName} (${health.province})`
       : "your province or territory";
@@ -699,8 +724,8 @@ export function getPlanRecommendations(profile: PlanProfile): PlanRecommendation
       kind: "service",
     });
   }
-  if (profile.city && profile.city !== "Other / Not sure yet") {
-    const health = resolveHealthLinksForCity(profile.city);
+  if ((profile.city && profile.city !== "Other / Not sure yet") || profile.province) {
+    const health = resolveHealthLinksForPlan(profile.city, profile.province);
     push({
       title: "Compare Canadian cities",
       description: "How to weigh cost, climate, jobs, and community fit.",
@@ -710,7 +735,7 @@ export function getPlanRecommendations(profile: PlanProfile): PlanRecommendation
     push({
       title: "Get a provincial health card",
       description: health.provincial
-        ? `Your plan city maps to ${health.provincial.planName} (${health.province}). Open the official enrolment link on your plan dashboard — verify on the official site.`
+        ? `Your plan maps to ${health.provincial.planName} (${health.province}). Open the official enrolment link on your plan dashboard — verify on the official site.`
         : "Open the national health-card guide. Always verify on the official site.",
       href: "/resources/get-health-card-canada",
       kind: "guide",

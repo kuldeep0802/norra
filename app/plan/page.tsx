@@ -7,6 +7,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { Button } from "@/components/Button";
 import { PlanChecklist } from "@/components/PlanChecklist";
 import { PlanHealthLinks } from "@/components/PlanHealthLinks";
+import { PlanOfficialLinks } from "@/components/PlanOfficialLinks";
 import { DemoBanner } from "@/components/DemoBanner";
 import { Disclaimer } from "@/components/Disclaimer";
 import {
@@ -23,6 +24,7 @@ import {
   stageOptions,
 } from "@/lib/data/checklists";
 import { cities } from "@/lib/data/cities";
+import { PROVINCE_TERRITORY_OPTIONS } from "@/lib/data/healthLinks";
 
 export default function PlanPage() {
   const [step, setStep] = useState<"form" | "dashboard">("form");
@@ -80,8 +82,20 @@ export default function PlanPage() {
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="My Canada Plan"
-            title={profile.city ? `Your plan for ${profile.city}` : "Your Canada plan"}
-            description={`${stageLabel || "Stage not set"}${profile.arrival ? ` · Arrival ${profile.arrival}` : ""} · ${profile.family}`}
+            title={
+              profile.city && profile.city !== "Other / Not sure yet"
+                ? `Your plan for ${profile.city}`
+                : profile.province
+                  ? `Your plan for ${profile.province}`
+                  : "Your Canada plan"
+            }
+            description={`${stageLabel || "Stage not set"}${
+              profile.city && profile.city !== "Other / Not sure yet"
+                ? ` · ${profile.city}`
+                : profile.province
+                  ? ` · ${profile.province}`
+                  : ""
+            }${profile.arrival ? ` · Arrival ${profile.arrival}` : ""} · ${profile.family}`}
           />
 
           <DemoBanner className="mt-6">
@@ -139,7 +153,9 @@ export default function PlanPage() {
             </div>
           )}
 
-          <PlanHealthLinks city={profile.city} />
+          <PlanHealthLinks city={profile.city} province={profile.province} />
+
+          <PlanOfficialLinks />
 
           <div className="mt-10">
             <h2 className="font-display text-xl sm:text-2xl font-semibold text-ink mb-4">
@@ -277,7 +293,16 @@ export default function PlanPage() {
             <select
               required
               value={profile.city}
-              onChange={(e) => setProfile((p) => ({ ...p, city: e.target.value }))}
+              onChange={(e) => {
+                const city = e.target.value;
+                const known = cities.find((c) => c.name === city);
+                setProfile((p) => ({
+                  ...p,
+                  city,
+                  // Clear province when a known city is chosen (province comes from city map)
+                  province: known ? "" : p.province,
+                }));
+              }}
               className="mt-1.5 w-full rounded-xl border border-night/10 bg-cream px-4 py-3 min-h-12 text-base"
             >
               <option value="">Select city…</option>
@@ -289,6 +314,28 @@ export default function PlanPage() {
               <option value="Other / Not sure yet">Other / Not sure yet</option>
             </select>
           </label>
+
+          {(!profile.city || profile.city === "Other / Not sure yet") && (
+            <label className="block">
+              <span className="text-sm font-medium">Province / Territory</span>
+              <span className="block text-xs text-muted mt-0.5 mb-1.5">
+                Optional but recommended — unlocks the matching official provincial health-card link. Always
+                verify on the official site; Norra does not invent eligibility.
+              </span>
+              <select
+                value={profile.province}
+                onChange={(e) => setProfile((p) => ({ ...p, province: e.target.value }))}
+                className="mt-0.5 w-full rounded-xl border border-night/10 bg-cream px-4 py-3 min-h-12 text-base"
+              >
+                <option value="">Select province/territory (optional)…</option>
+                {PROVINCE_TERRITORY_OPTIONS.map((prov) => (
+                  <option key={prov} value={prov}>
+                    {prov}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
 
           <label className="block">
             <span className="text-sm font-medium">Arrival date (optional)</span>

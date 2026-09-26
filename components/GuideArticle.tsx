@@ -4,10 +4,46 @@ import { Guide } from "@/lib/data/guides";
 import { Disclaimer } from "@/components/Disclaimer";
 import { Button } from "@/components/Button";
 import { SectionHeader } from "@/components/SectionHeader";
+import { siteConfig } from "@/lib/site";
+import { founder } from "@/lib/data/founder";
 
 export function GuideArticle({ guide }: { guide: Guide }) {
+  const pageUrl = `${siteConfig.url}/resources/${guide.slug}/`;
+
+  const articleLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: guide.title,
+    description: guide.metaDescription,
+    datePublished: guide.datePublished,
+    dateModified: guide.dateModified,
+    author: {
+      "@type": "Person",
+      name: founder.name,
+      email: founder.email,
+      jobTitle: `${founder.title}, Norra (early-stage)`,
+      url: `${siteConfig.url}/about/`,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
+      description: "Early-stage Canadian navigation and organization tool — not a government service.",
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": pageUrl,
+    },
+    inLanguage: "en-CA",
+    isAccessibleForFree: true,
+  };
+
   return (
     <article className="py-10 sm:py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
+      />
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <p className="text-sm text-muted mb-4">
           <Link href="/resources" className="text-forest hover:underline">
@@ -17,17 +53,16 @@ export function GuideArticle({ guide }: { guide: Guide }) {
           <span>{guide.eyebrow}</span>
         </p>
 
-        <SectionHeader
-          eyebrow={guide.eyebrow}
-          title={guide.title}
-          description={guide.summary}
-        />
+        <SectionHeader eyebrow={guide.eyebrow} title={guide.title} description={guide.summary} />
 
         <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-muted">
           <span className="inline-flex items-center gap-1">
             <Clock className="h-3.5 w-3.5" /> ~{guide.readingMinutes} min read
           </span>
           <span>Updated {guide.updatedLabel}</span>
+          <span>
+            By {founder.name} · {siteConfig.name} (early-stage)
+          </span>
         </div>
 
         <Disclaimer className="mt-8">

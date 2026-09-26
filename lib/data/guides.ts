@@ -12,8 +12,13 @@ export type Guide = {
   metaDescription: string;
   eyebrow: string;
   summary: string;
+  /** Topic chips used by Knowledge Hub search */
+  topics: string[];
   readingMinutes: number;
   updatedLabel: string;
+  /** ISO date for Article JSON-LD (accurate to publish cycle) */
+  datePublished: string;
+  dateModified: string;
   relatedHrefs: { label: string; href: string }[];
   sections: GuideSection[];
 };
@@ -28,8 +33,11 @@ export const guides: Guide[] = [
     eyebrow: "Pre-arrival",
     summary:
       "Use the weeks before your flight to organize documents, book short-stay lodging, and map your first 48 hours — without treating Norra as immigration advice.",
+    topics: ["pre-arrival", "documents", "packing", "IRCC", "checklist", "flight"],
     readingMinutes: 9,
     updatedLabel: "Sep 2026",
+    datePublished: "2026-09-26",
+    dateModified: "2026-09-26",
     relatedHrefs: [
       { label: "My Canada Plan", href: "/plan" },
       { label: "Before you arrive checklist", href: "/before-you-arrive" },
@@ -111,8 +119,11 @@ export const guides: Guide[] = [
     eyebrow: "Arrival",
     summary:
       "Your first week is about stability: sleep, phone service, a bank account when ready, and starting SIN and health coverage processes that apply to you.",
+    topics: ["arrival", "first week", "SIN", "banking", "SIM", "transit", "health"],
     readingMinutes: 10,
     updatedLabel: "Sep 2026",
+    datePublished: "2026-09-26",
+    dateModified: "2026-09-26",
     relatedHrefs: [
       { label: "My Canada Plan", href: "/plan" },
       { label: "Arrival services", href: "/arrival" },
@@ -195,8 +206,11 @@ export const guides: Guide[] = [
     eyebrow: "Housing",
     summary:
       "Short-stay lodging buys you time to view longer-term places in person. Treat every below-market “perfect” listing with skepticism.",
+    topics: ["housing", "short stay", "scams", "Airbnb", "hotel", "lease"],
     readingMinutes: 8,
     updatedLabel: "Sep 2026",
+    datePublished: "2026-09-26",
+    dateModified: "2026-09-26",
     relatedHrefs: [
       { label: "My Canada Plan", href: "/plan" },
       { label: "Housing (sample layout)", href: "/housing" },
@@ -261,8 +275,11 @@ export const guides: Guide[] = [
     eyebrow: "Work",
     summary:
       "A Canadian resume is usually concise, accomplishment-focused, and tailored to the role. This is organization guidance — not career counselling or a hiring guarantee.",
+    topics: ["work", "resume", "CV", "jobs", "LinkedIn", "career"],
     readingMinutes: 8,
     updatedLabel: "Sep 2026",
+    datePublished: "2026-09-26",
+    dateModified: "2026-09-26",
     relatedHrefs: [
       { label: "First Canadian job guide", href: "/resources/first-canadian-job" },
       { label: "Jobs (sample layout)", href: "/jobs" },
@@ -327,8 +344,11 @@ export const guides: Guide[] = [
     eyebrow: "Work",
     summary:
       "Job search in Canada mixes online applications, referrals, and patience. Confirm your work authorization on IRCC — Norra does not assess eligibility.",
+    topics: ["work", "jobs", "networking", "interview", "career", "scams"],
     readingMinutes: 9,
     updatedLabel: "Sep 2026",
+    datePublished: "2026-09-26",
+    dateModified: "2026-09-26",
     relatedHrefs: [
       { label: "Canadian resume guide", href: "/resources/canadian-resume" },
       { label: "Jobs (sample layout)", href: "/jobs" },
@@ -392,8 +412,11 @@ export const guides: Guide[] = [
     eyebrow: "Cities",
     summary:
       "There is no single “best” city. Use a simple scorecard for cost, work, climate, transit, and community — then visit Norra’s city pages for orientation notes.",
+    topics: ["cities", "Toronto", "Vancouver", "Calgary", "Montreal", "Ottawa", "cost of living"],
     readingMinutes: 7,
     updatedLabel: "Sep 2026",
+    datePublished: "2026-09-26",
+    dateModified: "2026-09-26",
     relatedHrefs: [
       { label: "All cities", href: "/cities" },
       { label: "My Canada Plan", href: "/plan" },
@@ -455,9 +478,13 @@ export const guides: Guide[] = [
     eyebrow: "Safety",
     summary:
       "Scammers target urgency and confusion. Slow down, verify identities, and never pay for guaranteed immigration outcomes.",
+    topics: ["safety", "scams", "housing", "jobs", "immigration", "fraud"],
     readingMinutes: 8,
     updatedLabel: "Sep 2026",
+    datePublished: "2026-09-26",
+    dateModified: "2026-09-26",
     relatedHrefs: [
+      { label: "My Canada Plan", href: "/plan" },
       { label: "Safety centre", href: "/safety" },
       { label: "Temporary accommodation", href: "/resources/temporary-accommodation" },
       { label: "First job guide", href: "/resources/first-canadian-job" },
@@ -531,4 +558,33 @@ export function getGuide(slug: string): Guide | undefined {
 
 export function getAllGuideSlugs(): string[] {
   return guides.map((g) => g.slug);
+}
+
+/** Flat lowercase corpus for client-side Knowledge Hub search */
+export function guideSearchCorpus(guide: Guide): string {
+  const chunks: string[] = [
+    guide.title,
+    guide.metaTitle,
+    guide.metaDescription,
+    guide.eyebrow,
+    guide.summary,
+    ...guide.topics,
+  ];
+  for (const section of guide.sections) {
+    chunks.push(section.heading);
+    if (section.paragraphs) chunks.push(...section.paragraphs);
+    if (section.bullets) chunks.push(...section.bullets);
+    if (section.callout?.text) chunks.push(section.callout.text);
+  }
+  return chunks.join(" ").toLowerCase();
+}
+
+export function filterGuides(query: string): Guide[] {
+  const q = query.trim().toLowerCase();
+  if (!q) return guides;
+  const terms = q.split(/\s+/).filter(Boolean);
+  return guides.filter((g) => {
+    const corpus = guideSearchCorpus(g);
+    return terms.every((t) => corpus.includes(t));
+  });
 }

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, Sparkles, Map } from "lucide-react";
+import { Menu, X, Sparkles, Map, Search } from "lucide-react";
 import { Logo } from "./Logo";
 import { Button } from "./Button";
 import { mainNav } from "@/lib/data/nav";
@@ -39,6 +39,14 @@ export function Nav() {
           </nav>
 
           <div className="hidden md:flex items-center gap-2">
+            <Link
+              href="/resources#search"
+              className="inline-flex items-center gap-1.5 min-h-11 px-3 py-2 text-sm font-medium text-muted hover:text-forest hover:bg-sand rounded-full transition-colors"
+              aria-label="Search Knowledge Hub"
+            >
+              <Search className="h-4 w-4" />
+              <span className="hidden lg:inline">Search guides</span>
+            </Link>
             <Link
               href="/assistant"
               className="inline-flex items-center gap-1.5 min-h-11 px-3 py-2 text-sm font-medium text-forest hover:bg-sand rounded-full transition-colors"
@@ -82,6 +90,9 @@ export function Nav() {
               </Link>
             ))}
             <div className="pt-3 flex flex-col gap-2">
+              <Button href="/resources#search" variant="outline" className="min-h-12" onClick={() => setOpen(false)}>
+                Search guides
+              </Button>
               <Button href="/assistant" variant="outline" className="min-h-12" onClick={() => setOpen(false)}>
                 Ask Nora
               </Button>

@@ -1,10 +1,9 @@
-import Link from "next/link";
-import { ArrowRight, BookOpen, ExternalLink } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Disclaimer } from "@/components/Disclaimer";
 import { Button } from "@/components/Button";
-import { guides } from "@/lib/data/guides";
+import { GuideSearch } from "@/components/GuideSearch";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -66,7 +65,7 @@ export default function ResourcesPage() {
           <SectionHeader
             eyebrow="Knowledge Hub"
             title="Guides that make Canada easier to navigate"
-            description="Long-form, human-first articles for real newcomer moments — before landing, first week, housing, work, cities, and staying scam-aware. No filler. No fake stats."
+            description="Long-form, human-first articles for real newcomer moments — before landing, first week, housing, work, cities, and staying scam-aware. Search works in your browser — no account required."
           />
           <Disclaimer className="mt-8">
             Guides are for organization and orientation. They are not immigration or legal advice. Prefer primary
@@ -80,29 +79,8 @@ export default function ResourcesPage() {
           </div>
         </div>
 
-        <div className="mt-12 sm:mt-14">
-          <div className="flex items-center gap-2 mb-6">
-            <BookOpen className="h-5 w-5 text-forest" />
-            <h2 className="font-display text-2xl font-semibold text-ink">Norra guides</h2>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-            {guides.map((g) => (
-              <Link
-                key={g.slug}
-                href={`/resources/${g.slug}`}
-                className="group flex flex-col rounded-2xl border border-night/5 bg-white p-5 sm:p-6 hover:border-forest/30 hover:shadow-md transition-all touch-manipulation min-h-[11rem]"
-              >
-                <span className="text-xs font-semibold uppercase tracking-wide text-forest">{g.eyebrow}</span>
-                <h3 className="mt-2 font-display text-lg font-semibold text-ink group-hover:text-forest leading-snug">
-                  {g.title}
-                </h3>
-                <p className="mt-2 text-sm text-muted leading-relaxed flex-1 line-clamp-3">{g.summary}</p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-forest">
-                  Read guide <ArrowRight className="h-3.5 w-3.5" />
-                </span>
-              </Link>
-            ))}
-          </div>
+        <div className="mt-10 sm:mt-12">
+          <GuideSearch />
         </div>
 
         <div className="mt-16 max-w-3xl">

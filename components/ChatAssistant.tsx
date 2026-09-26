@@ -1,13 +1,19 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { Send, Sparkles } from "lucide-react";
 import { Button } from "./Button";
+import {
+  loadPlanProfile,
+  PlanProfile,
+  stageOptions,
+  goalOptions,
+} from "@/lib/data/checklists";
 
 type Msg = { role: "user" | "assistant"; text: string; links?: { label: string; href: string }[] };
 
-const suggestions = [
+const baseSuggestions = [
   "I'm arriving at Pearson next week",
   "Help me find housing in Toronto",
   "What do I need for a study permit?",
@@ -16,139 +22,281 @@ const suggestions = [
   "Build my Canada Plan",
 ];
 
-function respond(input: string): Msg {
+function uniqueLinks(links: { label: string; href: string }[]) {
+  const seen = new Set<string>();
+  return links.filter((l) => {
+    if (seen.has(l.href)) return false;
+    seen.add(l.href);
+    return true;
+  });
+}
+
+function profileContextLinks(profile: PlanProfile | null): { label: string; href: string }[] {
+  if (!profile?.stage) {
+    return [
+      { label: "Build My Canada Plan", href: "/plan" },
+      { label: "Knowledge Hub", href: "/resources" },
+    ];
+  }
+  const links: { label: string; href: string }[] = [
+    { label: "Open My Canada Plan", href: "/plan" },
+  ];
+  if (profile.stage === "planning" || profile.stage === "pre-arrival") {
+    links.push({ label: "Prepare before landing", href: "/resources/prepare-before-landing" });
+  }
+  if (profile.stage === "just-arrived" || profile.stage === "settling") {
+    links.push({ label: "First week guide", href: "/resources/first-week-in-canada" });
+  }
+  if (profile.goals.includes("housing")) {
+    links.push({ label: "Temp accommodation guide", href: "/resources/temporary-accommodation" });
+  }
+  if (profile.goals.includes("work")) {
+    links.push({ label: "Canadian resume", href: "/resources/canadian-resume" });
+    links.push({ label: "First Canadian job", href: "/resources/first-canadian-job" });
+  }
+  if (profile.goals.includes("study")) {
+    links.push({ label: "Students overview", href: "/students" });
+  }
+  if (profile.city && profile.city !== "Other / Not sure yet") {
+    links.push({ label: "Compare cities", href: "/resources/compare-canadian-cities" });
+  }
+  links.push({ label: "Knowledge Hub", href: "/resources" });
+  return uniqueLinks(links).slice(0, 5);
+}
+
+function greetingFor(profile: PlanProfile | null): Msg {
+  if (!profile?.stage) {
+    return {
+      role: "assistant",
+      text: "Hi, I'm Nora — a rule-based demo guide (not immigration or legal advice). I don't see a Canada Plan on this device yet. Build one so I can bias tips toward your stage and goals, or ask me about arrival, housing, jobs, or checklists.",
+      links: [
+        { label: "Build My Canada Plan", href: "/plan" },
+        { label: "Knowledge Hub", href: "/resources" },
+        { label: "Arrival services", href: "/arrival" },
+      ],
+    };
+  }
+
+  const stageLabel = stageOptions.find((s) => s.value === profile.stage)?.label || profile.stage;
+  const goalLabels = profile.goals
+    .map((g) => goalOptions.find((o) => o.value === g)?.label || g)
+    .filter(Boolean);
+  const goalsBit = goalLabels.length ? ` Goals: ${goalLabels.join(", ")}.` : "";
+  const cityBit = profile.city ? ` City: ${profile.city}.` : "";
+
+  return {
+    role: "assistant",
+    text: `Hi — I'm Nora (demo, rule-based). I see your Canada Plan on this device: ${stageLabel}.${cityBit}${goalsBit} I'll lean toward relevant guides and Plan CTAs. I never give immigration or legal advice — verify status questions on IRCC and with authorized professionals.`,
+    links: profileContextLinks(profile),
+  };
+}
+
+function suggestionsFor(profile: PlanProfile | null): string[] {
+  if (!profile?.stage) return baseSuggestions;
+  const out: string[] = [];
+  if (profile.stage === "planning" || profile.stage === "pre-arrival") {
+    out.push("What should I prepare before landing?");
+  }
+  if (profile.stage === "just-arrived" || profile.stage === "settling") {
+    out.push("What should I do in my first week?");
+    out.push("How do I get a SIN?");
+  }
+  if (profile.goals.includes("housing")) out.push("Help me find temporary housing");
+  if (profile.goals.includes("work")) out.push("How do I write a Canadian resume?");
+  if (profile.goals.includes("study")) out.push("Where do I start as a student?");
+  out.push("Show my Canada Plan");
+  out.push("Avoid newcomer scams");
+  return [...new Set(out)].slice(0, 6);
+}
+
+function respond(input: string, profile: PlanProfile | null): Msg {
   const q = input.toLowerCase();
+  const bias = profileContextLinks(profile);
+
+  const withBias = (msg: Msg): Msg => ({
+    ...msg,
+    links: uniqueLinks([...(msg.links || []), ...bias]).slice(0, 5),
+  });
 
   if (/visa|permit|immigration|pgwp|express entry|pr\b|citizenship|study permit|work permit/.test(q)) {
-    return {
+    return withBias({
       role: "assistant",
-      text: "I can help you explore immigration topics with checklists and overviews. Important: Norra is not a law firm or immigration consultancy. For eligibility, filings, or legal advice, connect with an authorized RCIC or immigration lawyer (independently — sample marketplace profiles are fictional). I won't invent policies or guarantee outcomes.",
+      text: "I can point you to immigration overviews and checklists. Important: Nora is not a lawyer or RCIC and does not give immigration advice. For eligibility, filings, or legal questions, use IRCC and independently verify authorized professionals. Sample marketplace profiles on Norra are fictional.",
       links: [
         { label: "Immigration guides", href: "/immigration" },
-        { label: "Authorized professionals", href: "/professionals" },
+        { label: "Prepare before landing", href: "/resources/prepare-before-landing" },
         { label: "Document organizer", href: "/documents" },
       ],
-    };
+    });
   }
-  if (/housing|rent|apartment|lease|room/.test(q)) {
-    return {
+  if (/housing|rent|apartment|lease|room|accommodation|airbnb/.test(q)) {
+    return withBias({
       role: "assistant",
-      text: "I can show you demo housing listings and anti-scam tips. Always verify landlords carefully — never wire deposits to strangers. Sample housing on Norra is fictional.",
+      text: "Start with scam-aware temporary lodging habits, then longer-term housing. Sample listings on Norra are fictional — never wire deposits to strangers. Add housing to My Canada Plan so it stays on your checklist.",
       links: [
-        { label: "Browse housing", href: "/housing" },
-        { label: "Safety tips", href: "/safety" },
-        { label: "Arrival temp stay", href: "/arrival" },
+        { label: "Temp accommodation guide", href: "/resources/temporary-accommodation" },
+        { label: "Browse housing (sample)", href: "/housing" },
+        { label: "Avoid scams", href: "/resources/avoid-newcomer-scams" },
+        { label: "My Canada Plan", href: "/plan" },
       ],
-    };
+    });
   }
   if (/job|career|resume|linkedin|interview|work/.test(q)) {
-    return {
+    return withBias({
       role: "assistant",
-      text: "Explore demo job listings and book career coaches for resume or interview help. Listings are labelled Demo — fictional employers, not verified companies.",
+      text: "Use the resume and first-job guides for orientation. Job cards on Norra are labelled Demo — fictional employers. For coaching, sample marketplace profiles are not real bookings.",
       links: [
-        { label: "Browse jobs", href: "/jobs" },
-        { label: "Career coaches", href: "/professionals" },
+        { label: "Canadian resume guide", href: "/resources/canadian-resume" },
+        { label: "First Canadian job", href: "/resources/first-canadian-job" },
+        { label: "Browse jobs (sample)", href: "/jobs" },
+        { label: "My Canada Plan", href: "/plan" },
       ],
-    };
+    });
   }
-  if (/airport|arriv|pickup|pearson|yyz|landing/.test(q)) {
-    return {
+  if (/airport|arriv|pickup|pearson|yyz|landing|first week/.test(q)) {
+    return withBias({
       role: "assistant",
-      text: "Let's get your arrival sorted — pickup, SIM, temp housing, and first-week essentials. You can start a demo booking from the Arrival page.",
+      text: "Arrival week is about reducing friction: pickup, SIM, temp stay, banking, and essentials. Tick those in My Canada Plan — organization only, not advice on your legal status.",
       links: [
+        { label: "First week guide", href: "/resources/first-week-in-canada" },
+        { label: "Prepare before landing", href: "/resources/prepare-before-landing" },
         { label: "Arrival services", href: "/arrival" },
-        { label: "Before you arrive checklist", href: "/before-you-arrive" },
+        { label: "My Canada Plan", href: "/plan" },
       ],
-    };
+    });
   }
   if (/sin|tax|cra|ei\b|benefit|ohip|health card|government/.test(q)) {
-    return {
+    return withBias({
       role: "assistant",
-      text: "I can point you to high-level guides on SIN, taxes, benefits, and healthcare registration. For official rules and applications, always use Canada.ca or your provincial site. For tax filings, consider a licensed professional.",
+      text: "I can point to high-level government navigation pages and the first-week guide. For official rules and applications, use Canada.ca or your provincial site — Nora does not file anything for you.",
       links: [
+        { label: "First week guide", href: "/resources/first-week-in-canada" },
         { label: "Government guides", href: "/government" },
-        { label: "Tax professionals", href: "/professionals" },
+        { label: "My Canada Plan", href: "/plan" },
       ],
-    };
+    });
   }
   if (/health|doctor|clinic|medical/.test(q)) {
-    return {
+    return withBias({
       role: "assistant",
-      text: "Norra is not a medical provider. I can help you understand provincial health registration steps and when to seek licensed care. For emergencies, call 911.",
+      text: "Norra is not a medical provider. I can share orientation links about provincial health registration. For emergencies, call 911.",
       links: [
         { label: "Healthcare navigation", href: "/services/healthcare" },
+        { label: "First week guide", href: "/resources/first-week-in-canada" },
         { label: "Government / health cards", href: "/government" },
       ],
-    };
+    });
   }
   if (/bank|finance|money|credit/.test(q)) {
-    return {
+    return withBias({
       role: "assistant",
-      text: "I can share general tips on opening a Canadian bank account. This is not financial advice — for personalized guidance, speak with a licensed advisor or your bank.",
+      text: "General banking orientation only — not financial advice. Compare banks yourself and speak with a licensed advisor when you need personalized help.",
       links: [
         { label: "Banking basics", href: "/services/banking-finance" },
-        { label: "Find advisors", href: "/professionals" },
+        { label: "First week guide", href: "/resources/first-week-in-canada" },
+        { label: "My Canada Plan", href: "/plan" },
       ],
-    };
+    });
   }
-  if (/plan|checklist|started|journey/.test(q)) {
+  if (/scam|fraud|safe|safety/.test(q)) {
+    return withBias({
+      role: "assistant",
+      text: "Scam awareness matters for housing, jobs, and immigration offers. Read the guide, and remember Norra’s marketplace cards are sample/demo — not verified real providers.",
+      links: [
+        { label: "Avoid newcomer scams", href: "/resources/avoid-newcomer-scams" },
+        { label: "Safety centre", href: "/safety" },
+        { label: "My Canada Plan", href: "/plan" },
+      ],
+    });
+  }
+  if (/plan|checklist|started|journey|my canada/.test(q)) {
     return {
       role: "assistant",
-      text: "My Canada Plan builds a personalized checklist from your status, city, and goals. Takes a few minutes.",
+      text: profile?.stage
+        ? "Your Canada Plan is saved in this browser. Open it to tick stage-aware items or edit your profile. Still not immigration advice — just organization."
+        : "My Canada Plan builds a personalized checklist from your status, city, and goals. Progress stays on this device until accounts exist.",
       links: [
-        { label: "Build my plan", href: "/plan" },
+        { label: profile?.stage ? "Open My Canada Plan" : "Build My Canada Plan", href: "/plan" },
+        { label: "Knowledge Hub", href: "/resources" },
         { label: "Before you arrive", href: "/before-you-arrive" },
       ],
     };
   }
   if (/professional|lawyer|consultant|book|coach/.test(q)) {
-    return {
+    return withBias({
       role: "assistant",
-      text: "Browse our marketplace of demo providers — immigration, career, settlement, tax, airport transfers, and more. Verification badges are demo labels in this prototype.",
+      text: "Browse the sample marketplace layout — immigration, career, settlement, tax, transfers, and more. Verification badges are demo labels. Hire authorized pros independently; Nora does not vouch for them.",
       links: [
-        { label: "Find professionals", href: "/professionals" },
+        { label: "Find professionals (sample)", href: "/professionals" },
         { label: "How verification works", href: "/professionals#verification" },
       ],
-    };
+    });
   }
   if (/city|toronto|vancouver|calgary|montreal|ottawa/.test(q)) {
-    return {
+    return withBias({
       role: "assistant",
-      text: "Explore city guides for housing, jobs, transit, and settlement notes. Norra isn't limited to the featured cities — they're starting points.",
-      links: [{ label: "City guides", href: "/cities" }],
-    };
+      text: "City pages and the compare guide help you weigh cost, climate, jobs, and fit. Set a city in My Canada Plan so recommendations can lean that way.",
+      links: [
+        { label: "Compare cities guide", href: "/resources/compare-canadian-cities" },
+        { label: "City guides", href: "/cities" },
+        { label: "My Canada Plan", href: "/plan" },
+      ],
+    });
   }
 
-  return {
+  return withBias({
     role: "assistant",
-    text: "I'm Nora, your in-product guide. I can help you find services, checklists, city guides, and professionals. For immigration, legal, health, or finance topics, I'll tell you when you need a licensed professional — I don't invent eligibility or policies.",
-    links: [
-      { label: "Explore services", href: "/services" },
-      { label: "My Canada Plan", href: "/plan" },
-      { label: "Ask about arrival", href: "/arrival" },
-    ],
-  };
+    text: profile?.stage
+      ? "I'm Nora — rule-based demo only. Ask about arrival, housing, jobs, government steps, or scams, and I'll route you to guides plus your Plan. I don't invent eligibility or policies."
+      : "I'm Nora — rule-based demo only. Build My Canada Plan so I can personalize routing, or ask about arrival, housing, jobs, or checklists. I don't invent eligibility or policies.",
+    links: profile?.stage
+      ? [
+          { label: "Open My Canada Plan", href: "/plan" },
+          { label: "Knowledge Hub", href: "/resources" },
+          { label: "Ask about arrival", href: "/arrival" },
+        ]
+      : [
+          { label: "Build My Canada Plan", href: "/plan" },
+          { label: "Knowledge Hub", href: "/resources" },
+          { label: "Ask about arrival", href: "/arrival" },
+        ],
+  });
 }
 
 export function ChatAssistant() {
-  const [messages, setMessages] = useState<Msg[]>([
-    {
-      role: "assistant",
-      text: "Hi, I'm Nora — your guide to navigating life in Canada. Ask me about arrival, housing, jobs, immigration overviews, or building your plan. I'll keep you pointed toward the right tools (and licensed pros when needed).",
-    },
-  ]);
+  const [profile, setProfile] = useState<PlanProfile | null>(null);
+  const [ready, setReady] = useState(false);
+  const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const p = loadPlanProfile();
+    const has = Boolean(p?.stage);
+    setProfile(has ? p : null);
+    setMessages([greetingFor(has ? p : null)]);
+    setReady(true);
+  }, []);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const suggestions = useMemo(() => suggestionsFor(profile), [profile]);
+
   function send(text: string) {
     const trimmed = text.trim();
     if (!trimmed) return;
-    setMessages((m) => [...m, { role: "user", text: trimmed }, respond(trimmed)]);
+    setMessages((m) => [...m, { role: "user", text: trimmed }, respond(trimmed, profile)]);
     setInput("");
+  }
+
+  if (!ready) {
+    return (
+      <div className="flex flex-col h-[min(70vh,640px)] rounded-2xl border border-night/10 bg-white shadow-lg overflow-hidden items-center justify-center text-sm text-muted">
+        Loading Nora…
+      </div>
+    );
   }
 
   return (
@@ -159,7 +307,11 @@ export function ChatAssistant() {
         </div>
         <div>
           <p className="font-semibold">Nora</p>
-          <p className="text-xs text-sky">Your Canadian journey guide · Demo AI</p>
+          <p className="text-xs text-sky">
+            {profile?.stage
+              ? `Demo · using your Canada Plan${profile.city ? ` · ${profile.city}` : ""}`
+              : "Your Canadian journey guide · Demo (rule-based)"}
+          </p>
         </div>
       </div>
 
@@ -168,7 +320,9 @@ export function ChatAssistant() {
           <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
             <div
               className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
-                m.role === "user" ? "bg-forest text-cream rounded-br-md" : "bg-white border border-night/5 text-ink rounded-bl-md shadow-sm"
+                m.role === "user"
+                  ? "bg-forest text-cream rounded-br-md"
+                  : "bg-white border border-night/5 text-ink rounded-bl-md shadow-sm"
               }`}
             >
               <p>{m.text}</p>
@@ -176,7 +330,7 @@ export function ChatAssistant() {
                 <div className="mt-3 flex flex-wrap gap-2">
                   {m.links.map((l) => (
                     <Link
-                      key={l.href}
+                      key={l.href + l.label}
                       href={l.href}
                       className="inline-flex rounded-full bg-sand px-3 py-1 text-xs font-medium text-forest hover:bg-forest hover:text-cream transition-colors"
                     >

@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-forest: #0B4F4A;
+  --color-forest-dark: #083D39;
+  --color-forest-light: #0E6460;
+  --color-night: #0A1F1C;
+  --color-cream: #F7F3EC;
+  --color-sand: #EDE6DA;
+  --color-amber: #D4A574;
+  --color-amber-dark: #C4905A;
+  --color-sky: #C8D9D6;
+  --color-ink: #14201E;
+  --color-muted: #5A6B68;
+  --color-success: #2D8A6E;
+  --color-white: #FFFFFF;
+  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-fraunces);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+::selection {
+  background: #0B4F4A;
+  color: #F7F3EC;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #EDE6DA;
+}
+::-webkit-scrollbar-thumb {
+  background: #0B4F4A;
+  border-radius: 4px;
+}
+
+/* Hide scrollbar for mobile bottom nav area */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

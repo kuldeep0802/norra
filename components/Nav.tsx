@@ -12,7 +12,7 @@ export function Nav() {
 
   // Primary links for desktop (avoid overcrowding); full list in mobile drawer
   const desktopNav = mainNav.filter((item) =>
-    ["/plan", "/services", "/immigration", "/housing", "/jobs", "/professionals", "/about"].includes(item.href)
+    ["/plan", "/resources", "/services", "/immigration", "/housing", "/jobs", "/professionals", "/about"].includes(item.href)
   );
 
   return (

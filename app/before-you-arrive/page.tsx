@@ -22,10 +22,15 @@ export default function BeforeYouArrivePage() {
         <div className="mt-10">
           <PlanChecklist items={beforeYouArriveItems} storageKey="norra-before-arrive" />
         </div>
-        <div className="mt-10 flex flex-wrap gap-3">
-          <Button href="/arrival">Arrival services</Button>
-          <Button href="/plan" variant="outline">
-            Full Canada Plan
+        <div className="mt-10 flex flex-col sm:flex-row flex-wrap gap-3">
+          <Button href="/plan" className="min-h-11">
+            Build My Canada Plan
+          </Button>
+          <Button href="/resources/prepare-before-landing" variant="outline" className="min-h-11">
+            Read full prepare-before-landing guide
+          </Button>
+          <Button href="/arrival" variant="outline" className="min-h-11">
+            Arrival services
           </Button>
         </div>
       </div>

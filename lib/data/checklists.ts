@@ -4,35 +4,382 @@ export type ChecklistItem = {
   description?: string;
   category: string;
   href?: string;
+  /** Official source URL when pointing to factual gov pages */
+  officialHref?: string;
+  officialLabel?: string;
 };
 
+export type PlanStage =
+  | "planning"
+  | "pre-arrival"
+  | "just-arrived"
+  | "settling"
+  | "already-here";
+
+export type PlanGoal = "study" | "work" | "housing" | "settle";
+
+export const stageOptions: { value: PlanStage; label: string; hint: string }[] = [
+  {
+    value: "planning",
+    label: "Still planning / researching",
+    hint: "Comparing cities, pathways, and what to prepare",
+  },
+  {
+    value: "pre-arrival",
+    label: "Approved / preparing to travel",
+    hint: "Documents, lodging, and first-week logistics",
+  },
+  {
+    value: "just-arrived",
+    label: "Just landed (first 1–2 weeks)",
+    hint: "Airport → SIM → temporary housing → essentials",
+  },
+  {
+    value: "settling",
+    label: "Settling in (first months)",
+    hint: "SIN, health coverage, longer housing, work/school",
+  },
+  {
+    value: "already-here",
+    label: "Already living in Canada",
+    hint: "Optimize housing, work, and everyday systems",
+  },
+];
+
+export const goalOptions: { value: PlanGoal; label: string }[] = [
+  { value: "study", label: "Study" },
+  { value: "work", label: "Work" },
+  { value: "housing", label: "Housing" },
+  { value: "settle", label: "Settle / everyday life" },
+];
+
 export const beforeYouArriveItems: ChecklistItem[] = [
-  { id: "bya-1", label: "Valid passport with enough blank pages", category: "Documents" },
-  { id: "bya-2", label: "Visa / permit / eTA confirmation printed + digital", category: "Documents", href: "/immigration" },
-  { id: "bya-3", label: "Letter of acceptance or job offer (if applicable)", category: "Documents" },
-  { id: "bya-4", label: "Proof of funds / financial documents", category: "Documents" },
-  { id: "bya-5", label: "Travel medical insurance for first weeks", category: "Insurance", href: "/services/healthcare" },
-  { id: "bya-6", label: "Temporary accommodation booked (first 1–2 weeks)", category: "Housing", href: "/housing" },
-  { id: "bya-7", label: "Airport pickup or transit plan to lodging", category: "Airport", href: "/arrival" },
-  { id: "bya-8", label: "Canadian SIM / eSIM research", category: "Connectivity", href: "/services/sim-internet" },
-  { id: "bya-9", label: "Notify bank of travel; pack cards + some CAD cash", category: "Banking", href: "/services/banking-finance" },
-  { id: "bya-10", label: "School enrollment / orientation dates confirmed", category: "Education", href: "/students" },
-  { id: "bya-11", label: "Employment start date and onboarding docs ready", category: "Work", href: "/jobs" },
-  { id: "bya-12", label: "Weather-appropriate packing for your arrival city", category: "Everyday", href: "/cities" },
-  { id: "bya-13", label: "Emergency contacts + embassy/consulate info saved", category: "Safety", href: "/safety" },
-  { id: "bya-14", label: "Digital copies of all key documents in secure cloud", category: "Documents", href: "/documents" },
+  {
+    id: "bya-1",
+    label: "Valid passport with enough blank pages",
+    category: "Documents",
+    description: "Check expiry dates for you and anyone travelling with you.",
+  },
+  {
+    id: "bya-2",
+    label: "Visa / permit / eTA confirmation saved (print + digital)",
+    category: "Documents",
+    href: "/immigration",
+    officialHref: "https://www.canada.ca/en/immigration-refugees-citizenship.html",
+    officialLabel: "IRCC",
+  },
+  {
+    id: "bya-3",
+    label: "Letter of acceptance or job offer packet (if applicable)",
+    category: "Documents",
+  },
+  {
+    id: "bya-4",
+    label: "Proof-of-funds documents organized for border questions",
+    category: "Documents",
+    description: "What you need depends on your status — confirm on IRCC for your stream.",
+    officialHref: "https://www.canada.ca/en/immigration-refugees-citizenship.html",
+    officialLabel: "IRCC",
+  },
+  {
+    id: "bya-5",
+    label: "Travel medical insurance covering the first weeks",
+    category: "Insurance",
+    href: "/services/healthcare",
+  },
+  {
+    id: "bya-6",
+    label: "Temporary accommodation booked for first 1–2 weeks",
+    category: "Housing",
+    href: "/resources/temporary-accommodation",
+  },
+  {
+    id: "bya-7",
+    label: "Airport pickup or transit plan to lodging",
+    category: "Airport",
+    href: "/arrival",
+  },
+  {
+    id: "bya-8",
+    label: "Research Canadian SIM / eSIM options",
+    category: "Connectivity",
+    href: "/services/sim-internet",
+  },
+  {
+    id: "bya-9",
+    label: "Notify your bank of travel; pack cards + some CAD cash",
+    category: "Banking",
+    href: "/services/banking-finance",
+  },
+  {
+    id: "bya-10",
+    label: "School enrollment / orientation dates confirmed",
+    category: "Education",
+    href: "/students",
+  },
+  {
+    id: "bya-11",
+    label: "Employment start date and onboarding docs ready",
+    category: "Work",
+    href: "/jobs",
+  },
+  {
+    id: "bya-12",
+    label: "Weather-appropriate packing for your arrival city",
+    category: "Everyday",
+    href: "/cities",
+  },
+  {
+    id: "bya-13",
+    label: "Emergency contacts + embassy/consulate info saved offline",
+    category: "Safety",
+    href: "/safety",
+  },
+  {
+    id: "bya-14",
+    label: "Digital copies of key documents in secure cloud storage",
+    category: "Documents",
+    href: "/documents",
+  },
 ];
 
 export const arrivalItems: ChecklistItem[] = [
-  { id: "arr-1", label: "Clear immigration / CBSA hall with documents ready", category: "Airport" },
-  { id: "arr-2", label: "Collect luggage and meet pickup (or find transit)", category: "Airport", href: "/arrival" },
-  { id: "arr-3", label: "Get a local SIM / eSIM and test data", category: "Connectivity" },
-  { id: "arr-4", label: "Check into temporary housing", category: "Housing" },
-  { id: "arr-5", label: "Buy essentials (toiletries, snacks, transit card)", category: "Everyday" },
-  { id: "arr-6", label: "Open a bank account (bring ID + status docs)", category: "Banking" },
-  { id: "arr-7", label: "Apply for SIN when eligible", category: "Government", href: "/government" },
-  { id: "arr-8", label: "Start provincial health coverage process", category: "Healthcare", href: "/government" },
-  { id: "arr-9", label: "Attend orientation / settlement intake if booked", category: "Settlement", href: "/settlement" },
+  {
+    id: "arr-1",
+    label: "Clear immigration / CBSA with documents ready in hand",
+    category: "Airport",
+    description: "Have passport, visa/permit/eTA, and supporting letters accessible — not buried in luggage.",
+  },
+  {
+    id: "arr-2",
+    label: "Collect luggage and follow your pickup or transit plan",
+    category: "Airport",
+    href: "/arrival",
+  },
+  {
+    id: "arr-3",
+    label: "Get a local SIM / eSIM and confirm data works",
+    category: "Connectivity",
+    href: "/services/sim-internet",
+  },
+  {
+    id: "arr-4",
+    label: "Check into temporary housing and save the address offline",
+    category: "Housing",
+    href: "/resources/temporary-accommodation",
+  },
+  {
+    id: "arr-5",
+    label: "Buy essentials (toiletries, snacks, transit card)",
+    category: "Everyday",
+  },
+  {
+    id: "arr-6",
+    label: "Open a bank account when ready (bring ID + status docs)",
+    category: "Banking",
+    href: "/services/banking-finance",
+  },
+  {
+    id: "arr-7",
+    label: "Apply for a SIN when you are eligible",
+    category: "Government",
+    href: "/government",
+    officialHref: "https://www.canada.ca/en/employment-social-development/services/sin.html",
+    officialLabel: "Service Canada — SIN",
+  },
+  {
+    id: "arr-8",
+    label: "Start provincial health coverage process for your province",
+    category: "Healthcare",
+    href: "/government",
+    officialHref: "https://www.canada.ca/en/immigration-refugees-citizenship/services/settle-canada/health-care.html",
+    officialLabel: "Health care in Canada",
+  },
+  {
+    id: "arr-9",
+    label: "Attend orientation / settlement intake if you booked one",
+    category: "Settlement",
+    href: "/settlement",
+  },
+];
+
+export const settlingItems: ChecklistItem[] = [
+  {
+    id: "set-1",
+    label: "Confirm SIN is issued and stored securely",
+    category: "Government",
+    officialHref: "https://www.canada.ca/en/employment-social-development/services/sin.html",
+    officialLabel: "Service Canada — SIN",
+  },
+  {
+    id: "set-2",
+    label: "Complete provincial health registration steps for your province",
+    category: "Healthcare",
+    description: "Waiting periods and forms differ by province — verify on your province’s site.",
+    officialHref: "https://www.canada.ca/en/immigration-refugees-citizenship/services/settle-canada/health-care.html",
+    officialLabel: "Health care overview",
+  },
+  {
+    id: "set-3",
+    label: "Search longer-term housing with a scam-aware checklist",
+    category: "Housing",
+    href: "/resources/temporary-accommodation",
+  },
+  {
+    id: "set-4",
+    label: "Set up Canadian banking for rent and payroll",
+    category: "Banking",
+    href: "/services/banking-finance",
+  },
+  {
+    id: "set-5",
+    label: "Find a family doctor / walk-in clinic near you",
+    category: "Healthcare",
+    href: "/services/healthcare",
+  },
+  {
+    id: "set-6",
+    label: "Learn local transit routes and reload your transit card",
+    category: "Everyday",
+    href: "/services/transportation",
+  },
+  {
+    id: "set-7",
+    label: "Bookmark IRCC account / status tools you actually use",
+    category: "Immigration",
+    href: "/immigration",
+    officialHref: "https://www.canada.ca/en/immigration-refugees-citizenship.html",
+    officialLabel: "IRCC",
+  },
+  {
+    id: "set-8",
+    label: "Connect with a settlement agency for language or employment help",
+    category: "Settlement",
+    href: "/settlement",
+    officialHref: "https://www.canada.ca/en/immigration-refugees-citizenship/services/settle-canada.html",
+    officialLabel: "Settle in Canada",
+  },
+];
+
+export const studyItems: ChecklistItem[] = [
+  {
+    id: "stu-1",
+    label: "Confirm program start date, orientation, and campus address",
+    category: "Study",
+    href: "/students",
+  },
+  {
+    id: "stu-2",
+    label: "Review study-permit conditions on IRCC (not Norra)",
+    category: "Study",
+    officialHref: "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada.html",
+    officialLabel: "Study in Canada — IRCC",
+  },
+  {
+    id: "stu-3",
+    label: "Set up student email, portal, and tuition payment method",
+    category: "Study",
+    href: "/students",
+  },
+  {
+    id: "stu-4",
+    label: "Ask school about housing, health insurance, and work-on/off campus rules",
+    category: "Study",
+    href: "/students",
+  },
+];
+
+export const workItems: ChecklistItem[] = [
+  {
+    id: "wrk-1",
+    label: "Prepare a Canadian-style resume draft",
+    category: "Work",
+    href: "/resources/canadian-resume",
+  },
+  {
+    id: "wrk-2",
+    label: "List target roles and gather references / work samples",
+    category: "Work",
+    href: "/resources/first-canadian-job",
+  },
+  {
+    id: "wrk-3",
+    label: "Confirm you understand your work authorization (verify on IRCC)",
+    category: "Work",
+    officialHref: "https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada.html",
+    officialLabel: "Work in Canada — IRCC",
+  },
+  {
+    id: "wrk-4",
+    label: "Set up Job Bank / LinkedIn alerts (use official & reputable sites)",
+    category: "Work",
+    href: "/jobs",
+  },
+];
+
+export const housingItems: ChecklistItem[] = [
+  {
+    id: "hou-1",
+    label: "Decide temporary vs longer-term housing timeline",
+    category: "Housing",
+    href: "/resources/temporary-accommodation",
+  },
+  {
+    id: "hou-2",
+    label: "Budget for first/last month, deposits, and moving costs",
+    category: "Housing",
+    href: "/housing",
+  },
+  {
+    id: "hou-3",
+    label: "Use a scam-aware viewing checklist before sending money",
+    category: "Housing",
+    href: "/resources/avoid-newcomer-scams",
+  },
+  {
+    id: "hou-4",
+    label: "Compare neighbourhoods against commute and budget",
+    category: "Housing",
+    href: "/resources/compare-canadian-cities",
+  },
+];
+
+export const alreadyHereItems: ChecklistItem[] = [
+  {
+    id: "here-1",
+    label: "Review status documents and upcoming expiry dates",
+    category: "Immigration",
+    href: "/immigration",
+    officialHref: "https://www.canada.ca/en/immigration-refugees-citizenship.html",
+    officialLabel: "IRCC",
+  },
+  {
+    id: "here-2",
+    label: "Audit housing: lease terms, renewals, and scam-safe next moves",
+    category: "Housing",
+    href: "/housing",
+  },
+  {
+    id: "here-3",
+    label: "Update Canadian resume and job search plan",
+    category: "Work",
+    href: "/resources/canadian-resume",
+  },
+  {
+    id: "here-4",
+    label: "Confirm health card / coverage status for your province",
+    category: "Healthcare",
+    officialHref: "https://www.canada.ca/en/immigration-refugees-citizenship/services/settle-canada/health-care.html",
+    officialLabel: "Health care overview",
+  },
+  {
+    id: "here-5",
+    label: "Organize taxes / benefits bookmarks for CRA when relevant",
+    category: "Government",
+    href: "/government",
+    officialHref: "https://www.canada.ca/en/revenue-agency.html",
+    officialLabel: "CRA",
+  },
 ];
 
 export const planNeedOptions = [
@@ -48,6 +395,7 @@ export const planNeedOptions = [
   "Government benefits",
 ] as const;
 
+/** @deprecated Prefer stageOptions; kept for older UI copy */
 export const statusOptions = [
   "Planning to come",
   "Visitor / TRV",
@@ -58,3 +406,231 @@ export const statusOptions = [
   "Citizen",
   "Prefer not to say",
 ] as const;
+
+export type PlanProfile = {
+  stage: PlanStage | "";
+  city: string;
+  arrival: string;
+  family: string;
+  goals: PlanGoal[];
+  needs: string[];
+  notes: string;
+};
+
+export const emptyPlanProfile: PlanProfile = {
+  stage: "",
+  city: "",
+  arrival: "",
+  family: "Just me",
+  goals: [],
+  needs: [],
+  notes: "",
+};
+
+const PLAN_PROFILE_KEY = "norra-canada-plan-profile";
+
+export function loadPlanProfile(): PlanProfile | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(PLAN_PROFILE_KEY);
+    if (!raw) return null;
+    return { ...emptyPlanProfile, ...JSON.parse(raw) } as PlanProfile;
+  } catch {
+    return null;
+  }
+}
+
+export function savePlanProfile(profile: PlanProfile) {
+  if (typeof window === "undefined") return;
+  try {
+    localStorage.setItem(PLAN_PROFILE_KEY, JSON.stringify(profile));
+  } catch {
+    /* ignore */
+  }
+}
+
+export function clearPlanProfile() {
+  if (typeof window === "undefined") return;
+  try {
+    localStorage.removeItem(PLAN_PROFILE_KEY);
+  } catch {
+    /* ignore */
+  }
+}
+
+/** Build a stage- and goal-aware checklist (organization only — not legal advice). */
+export function buildPlanChecklist(profile: PlanProfile): ChecklistItem[] {
+  const items: ChecklistItem[] = [];
+  const seen = new Set<string>();
+
+  function add(list: ChecklistItem[]) {
+    for (const item of list) {
+      if (seen.has(item.id)) continue;
+      seen.add(item.id);
+      items.push(item);
+    }
+  }
+
+  switch (profile.stage) {
+    case "planning":
+      add(beforeYouArriveItems.slice(0, 8));
+      add(housingItems.slice(0, 2));
+      break;
+    case "pre-arrival":
+      add(beforeYouArriveItems);
+      add(arrivalItems.slice(0, 4));
+      break;
+    case "just-arrived":
+      add(arrivalItems);
+      add(settlingItems.slice(0, 4));
+      break;
+    case "settling":
+      add(settlingItems);
+      add(arrivalItems.filter((i) => ["arr-6", "arr-7", "arr-8"].includes(i.id)));
+      break;
+    case "already-here":
+      add(alreadyHereItems);
+      add(settlingItems.slice(0, 3));
+      break;
+    default:
+      add(beforeYouArriveItems.slice(0, 6));
+      add(arrivalItems.slice(0, 4));
+  }
+
+  if (profile.goals.includes("study")) add(studyItems);
+  if (profile.goals.includes("work")) add(workItems);
+  if (profile.goals.includes("housing")) add(housingItems);
+  if (profile.goals.includes("settle")) add(settlingItems.slice(0, 5));
+
+  // Need-based nudges
+  if (profile.needs.includes("Find a job") && !profile.goals.includes("work")) add(workItems);
+  if (profile.needs.includes("Find housing") && !profile.goals.includes("housing")) add(housingItems);
+  if (profile.needs.includes("School / kids")) add(studyItems.slice(0, 2));
+  if (profile.needs.includes("Banking & SIN")) {
+    add(arrivalItems.filter((i) => ["arr-6", "arr-7"].includes(i.id)));
+  }
+  if (profile.needs.includes("Healthcare registration")) {
+    add(settlingItems.filter((i) => i.id === "set-2" || i.id === "set-5"));
+  }
+
+  return items.map((item, i) => ({
+    ...item,
+    id: `plan-${profile.stage || "general"}-${item.id}`,
+  }));
+}
+
+export type PlanRecommendation = {
+  title: string;
+  description: string;
+  href: string;
+  kind: "guide" | "service" | "sample";
+  badge?: string;
+};
+
+export function getPlanRecommendations(profile: PlanProfile): PlanRecommendation[] {
+  const out: PlanRecommendation[] = [];
+  const push = (r: PlanRecommendation) => {
+    if (out.some((x) => x.href === r.href)) return;
+    out.push(r);
+  };
+
+  if (profile.stage === "planning" || profile.stage === "pre-arrival") {
+    push({
+      title: "How to prepare before landing",
+      description: "Documents, lodging, and first-week logistics — organization only.",
+      href: "/resources/prepare-before-landing",
+      kind: "guide",
+    });
+  }
+  if (profile.stage === "just-arrived" || profile.stage === "settling") {
+    push({
+      title: "Your first week in Canada",
+      description: "SIM, banking, transit, and health coverage starting points.",
+      href: "/resources/first-week-in-canada",
+      kind: "guide",
+    });
+  }
+  if (profile.goals.includes("housing") || profile.needs.includes("Find housing")) {
+    push({
+      title: "Temporary accommodation (scam-aware)",
+      description: "Short-stay options and red flags before you send money.",
+      href: "/resources/temporary-accommodation",
+      kind: "guide",
+    });
+    push({
+      title: "Sample housing layout",
+      description: "Fictional listings for UI only — not real inventory.",
+      href: "/housing",
+      kind: "sample",
+      badge: "Sample",
+    });
+  }
+  if (profile.goals.includes("work") || profile.needs.includes("Find a job")) {
+    push({
+      title: "Canadian resume guide",
+      description: "Structure and habits employers often expect — not a guarantee.",
+      href: "/resources/canadian-resume",
+      kind: "guide",
+    });
+    push({
+      title: "Finding your first Canadian job",
+      description: "Search habits, networking, and scam-aware applications.",
+      href: "/resources/first-canadian-job",
+      kind: "guide",
+    });
+    push({
+      title: "Sample jobs layout",
+      description: "Fictional employers for layout only.",
+      href: "/jobs",
+      kind: "sample",
+      badge: "Sample",
+    });
+  }
+  if (profile.goals.includes("study") || profile.needs.includes("School / kids")) {
+    push({
+      title: "Students overview",
+      description: "Orientation pointers for studying in Canada.",
+      href: "/students",
+      kind: "service",
+    });
+  }
+  if (profile.needs.includes("Connect with professionals") || profile.needs.includes("Immigration & status")) {
+    push({
+      title: "Sample marketplace",
+      description: "Fictional provider cards showing a future booking layout.",
+      href: "/professionals",
+      kind: "sample",
+      badge: "Sample",
+    });
+    push({
+      title: "Immigration guides",
+      description: "Pathway overviews — verify everything on IRCC.",
+      href: "/immigration",
+      kind: "service",
+    });
+  }
+  if (profile.city && profile.city !== "Other / Not sure yet") {
+    push({
+      title: "Compare Canadian cities",
+      description: "How to weigh cost, climate, jobs, and community fit.",
+      href: "/resources/compare-canadian-cities",
+      kind: "guide",
+    });
+  }
+  if (out.length < 3) {
+    push({
+      title: "Avoid common newcomer scams",
+      description: "Housing, jobs, and immigration red flags.",
+      href: "/resources/avoid-newcomer-scams",
+      kind: "guide",
+    });
+  }
+  push({
+    title: "Knowledge Hub",
+    description: "All Norra long-form guides in one place.",
+    href: "/resources",
+    kind: "guide",
+  });
+
+  return out.slice(0, 6);
+}

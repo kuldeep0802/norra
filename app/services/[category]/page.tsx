@@ -47,13 +47,15 @@ export default async function ServiceCategoryPage({ params }: { params: Promise<
             </div>
           ))}
         </div>
-        <div className="mt-12 flex flex-wrap gap-3">
-          <Button href="/professionals">Find a professional</Button>
-          <Button href="/plan" variant="outline">
-            Build my plan
+        <div className="mt-12 flex flex-col sm:flex-row flex-wrap gap-3">
+          <Button href="/plan" className="min-h-11">
+            Build My Canada Plan
           </Button>
-          <Button href="/assistant" variant="ghost">
-            Ask Nora
+          <Button href="/resources" variant="outline" className="min-h-11">
+            Knowledge Hub
+          </Button>
+          <Button href="/professionals" variant="outline" className="min-h-11">
+            Sample marketplace
           </Button>
         </div>
       </div>

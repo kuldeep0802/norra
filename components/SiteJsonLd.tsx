@@ -2,7 +2,7 @@ import { siteConfig } from "@/lib/site";
 import { founder } from "@/lib/data/founder";
 
 export function SiteJsonLd() {
-  const data = {
+  const organization = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: siteConfig.name,
@@ -28,10 +28,31 @@ export function SiteJsonLd() {
       availableLanguage: ["en", "fr"],
     },
   };
+
+  const website = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteConfig.name,
+    url: siteConfig.url,
+    description: siteConfig.description,
+    inLanguage: "en-CA",
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+  };
+
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(website) }}
+      />
+    </>
   );
 }

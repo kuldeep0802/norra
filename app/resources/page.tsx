@@ -1,40 +1,132 @@
+import Link from "next/link";
+import { ArrowRight, BookOpen, ExternalLink } from "lucide-react";
+import type { Metadata } from "next";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Disclaimer } from "@/components/Disclaimer";
+import { Button } from "@/components/Button";
+import { guides } from "@/lib/data/guides";
+import { siteConfig } from "@/lib/site";
 
-export const metadata = { title: "Resources" };
+export const metadata: Metadata = {
+  title: "Knowledge Hub",
+  description:
+    "Long-form Norra guides for newcomers to Canada — before landing, first week, housing, resumes, jobs, cities, and scam awareness — plus official government starting points.",
+  alternates: { canonical: "/resources/" },
+  openGraph: {
+    title: `Knowledge Hub · ${siteConfig.name}`,
+    description:
+      "Practical long-form guides for navigating life in Canada — organization and orientation, not legal advice.",
+    url: `${siteConfig.url}/resources/`,
+  },
+};
 
-const links = [
-  { title: "Immigration, Refugees and Citizenship Canada", href: "https://www.canada.ca/en/immigration-refugees-citizenship.html", note: "Official immigration programs and forms." },
-  { title: "Canada.ca benefits finder", href: "https://www.canada.ca/en/services/benefits.html", note: "Federal benefits overview." },
-  { title: "Service Canada", href: "https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html", note: "SIN and many in-person services." },
-  { title: "CRA", href: "https://www.canada.ca/en/revenue-agency.html", note: "Taxes and benefits administration." },
-  { title: "Settle in Canada", href: "https://www.canada.ca/en/immigration-refugees-citizenship/services/settle-canada.html", note: "Government settlement orientation." },
-  { title: "CICC (immigration consultants)", href: "https://college-ic.ca", note: "Verify RCIC standing." },
+const officialLinks = [
+  {
+    title: "Immigration, Refugees and Citizenship Canada",
+    href: "https://www.canada.ca/en/immigration-refugees-citizenship.html",
+    note: "Official immigration programs, accounts, and forms.",
+  },
+  {
+    title: "Settle in Canada",
+    href: "https://www.canada.ca/en/immigration-refugees-citizenship/services/settle-canada.html",
+    note: "Government settlement orientation and service finder.",
+  },
+  {
+    title: "Service Canada — SIN",
+    href: "https://www.canada.ca/en/employment-social-development/services/sin.html",
+    note: "Social Insurance Number eligibility and application.",
+  },
+  {
+    title: "Health care for newcomers",
+    href: "https://www.canada.ca/en/immigration-refugees-citizenship/services/settle-canada/health-care.html",
+    note: "Federal overview — then check your province.",
+  },
+  {
+    title: "Canada.ca benefits",
+    href: "https://www.canada.ca/en/services/benefits.html",
+    note: "Federal benefits overview.",
+  },
+  {
+    title: "CRA",
+    href: "https://www.canada.ca/en/revenue-agency.html",
+    note: "Taxes and benefits administration.",
+  },
+  {
+    title: "CICC (immigration consultants)",
+    href: "https://college-ic.ca",
+    note: "Verify RCIC standing independently.",
+  },
 ];
 
 export default function ResourcesPage() {
   return (
-    <div className="py-16">
-      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          eyebrow="Resources"
-          title="Trusted starting points"
-          description="Curated official and reference links. Always prefer primary government sources for decisions."
-        />
-        <Disclaimer className="mt-8">
-          External links are provided for convenience. Norra does not control third-party content and is not
-          affiliated with the Government of Canada.
-        </Disclaimer>
-        <ul className="mt-10 space-y-4">
-          {links.map((l) => (
-            <li key={l.href} className="rounded-2xl bg-white border border-night/5 p-5">
-              <a href={l.href} target="_blank" rel="noopener noreferrer" className="font-semibold text-forest hover:underline">
-                {l.title} ↗
-              </a>
-              <p className="mt-1 text-sm text-muted">{l.note}</p>
-            </li>
-          ))}
-        </ul>
+    <div className="py-10 sm:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl">
+          <SectionHeader
+            eyebrow="Knowledge Hub"
+            title="Guides that make Canada easier to navigate"
+            description="Long-form, human-first articles for real newcomer moments — before landing, first week, housing, work, cities, and staying scam-aware. No filler. No fake stats."
+          />
+          <Disclaimer className="mt-8">
+            Guides are for organization and orientation. They are not immigration or legal advice. Prefer primary
+            government sources for decisions about your status, benefits, or health coverage.
+          </Disclaimer>
+          <div className="mt-6">
+            <Button href="/plan" className="min-h-12">
+              Build My Canada Plan
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+
+        <div className="mt-12 sm:mt-14">
+          <div className="flex items-center gap-2 mb-6">
+            <BookOpen className="h-5 w-5 text-forest" />
+            <h2 className="font-display text-2xl font-semibold text-ink">Norra guides</h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+            {guides.map((g) => (
+              <Link
+                key={g.slug}
+                href={`/resources/${g.slug}`}
+                className="group flex flex-col rounded-2xl border border-night/5 bg-white p-5 sm:p-6 hover:border-forest/30 hover:shadow-md transition-all touch-manipulation min-h-[11rem]"
+              >
+                <span className="text-xs font-semibold uppercase tracking-wide text-forest">{g.eyebrow}</span>
+                <h3 className="mt-2 font-display text-lg font-semibold text-ink group-hover:text-forest leading-snug">
+                  {g.title}
+                </h3>
+                <p className="mt-2 text-sm text-muted leading-relaxed flex-1 line-clamp-3">{g.summary}</p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-forest">
+                  Read guide <ArrowRight className="h-3.5 w-3.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-16 max-w-3xl">
+          <h2 className="font-display text-2xl font-semibold text-ink">Official starting points</h2>
+          <p className="mt-2 text-muted text-sm sm:text-base">
+            External links for convenience. Norra is not affiliated with the Government of Canada.
+          </p>
+          <ul className="mt-6 space-y-3">
+            {officialLinks.map((l) => (
+              <li key={l.href} className="rounded-2xl bg-white border border-night/5 p-4 sm:p-5">
+                <a
+                  href={l.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-semibold text-forest hover:underline"
+                >
+                  {l.title}
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </a>
+                <p className="mt-1 text-sm text-muted">{l.note}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

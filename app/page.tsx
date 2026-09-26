@@ -1,5 +1,6 @@
+import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Sparkles, Map, Shield, Plane, Landmark } from "lucide-react";
+import { ArrowRight, Sparkles, Map, Shield, Plane, Landmark, BookOpen } from "lucide-react";
 import { Hero } from "@/components/Hero";
 import { JourneyPicker } from "@/components/JourneyPicker";
 import { NeedsGrid } from "@/components/NeedsGrid";
@@ -17,6 +18,7 @@ import { jobs } from "@/lib/data/jobs";
 import { cities } from "@/lib/data/cities";
 import { providers } from "@/lib/data/providers";
 import { ProviderCard } from "@/components/ProviderCard";
+import { guides } from "@/lib/data/guides";
 
 export default function HomePage() {
   return (
@@ -53,6 +55,53 @@ export default function HomePage() {
                 sizes="(max-width:1024px) 100vw, 50vw"
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+
+      {/* Knowledge Hub */}
+      <section className="py-16 sm:py-20 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-2 text-forest text-sm font-semibold mb-3">
+                <BookOpen className="h-4 w-4" /> Knowledge Hub
+              </div>
+              <h2 className="font-display text-3xl sm:text-4xl font-semibold text-ink leading-tight">
+                Long-form guides for real newcomer moments.
+              </h2>
+              <p className="mt-3 text-muted leading-relaxed">
+                Before landing, first week, temporary housing, Canadian resumes, first jobs, city comparisons, and scam awareness — written to be useful, not fluffy.
+              </p>
+            </div>
+            <Button href="/resources" variant="outline" className="shrink-0 min-h-11">
+              Open Knowledge Hub
+            </Button>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {guides.slice(0, 6).map((g) => (
+              <Link
+                key={g.slug}
+                href={`/resources/${g.slug}`}
+                className="rounded-2xl border border-night/5 bg-cream p-5 hover:border-forest/30 hover:bg-white transition-all touch-manipulation min-h-[8.5rem] flex flex-col"
+              >
+                <span className="text-xs font-semibold uppercase tracking-wide text-forest">{g.eyebrow}</span>
+                <span className="mt-2 font-semibold text-ink leading-snug">{g.title}</span>
+                <span className="mt-2 text-sm text-muted line-clamp-2 flex-1">{g.summary}</span>
+                <span className="mt-3 text-sm font-medium text-forest inline-flex items-center gap-1">
+                  Read <ArrowRight className="h-3.5 w-3.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
+          <div className="mt-8 flex flex-col sm:flex-row gap-3">
+            <Button href="/plan" className="min-h-12 w-full sm:w-auto justify-center">
+              Build My Canada Plan
+            </Button>
+            <Button href="/resources/avoid-newcomer-scams" variant="outline" className="min-h-12 w-full sm:w-auto justify-center">
+              Scam-awareness guide
+            </Button>
           </div>
         </div>
       </section>

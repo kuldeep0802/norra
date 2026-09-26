@@ -17,7 +17,7 @@ export function MobileBottomNav() {
   const pathname = usePathname();
   return (
     <nav
-      className="md:hidden fixed bottom-0 inset-x-0 z-50 border-t border-night/10 bg-cream/95 backdrop-blur-xl pb-[env(safe-area-inset-bottom)]"
+      className="print-hide md:hidden fixed bottom-0 inset-x-0 z-50 border-t border-night/10 bg-cream/95 backdrop-blur-xl pb-[env(safe-area-inset-bottom)]"
       aria-label="Mobile"
     >
       <div className="flex justify-around items-stretch h-[4.25rem] px-1">

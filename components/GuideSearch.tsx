@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, BookOpen, Search, X } from "lucide-react";
 import { filterGuides, guides, hubTopicChips, type Guide } from "@/lib/data/guides";
+import { buildPlanHref, hubTopicToPlanQuery } from "@/lib/data/checklists";
 
 function GuideCard({ g }: { g: Guide }) {
   return (
@@ -167,8 +168,12 @@ export function GuideSearch() {
           <div className="rounded-2xl border border-dashed border-night/15 bg-white/80 p-8 sm:p-10 text-center">
             <p className="font-display text-lg font-semibold text-ink">No guides match those filters</p>
             <p className="mt-2 text-sm text-muted max-w-md mx-auto leading-relaxed">
-              Try another topic chip, fewer search words, or clear filters. You can also open My Canada Plan for a
-              stage-aware checklist.
+              Try another topic chip, fewer search words, or clear filters. Or build a stage-aware checklist in My
+              Canada Plan
+              {hasTopic && hubTopicToPlanQuery[topic]?.need
+                ? ` with “${topic}” mapped to a plan need`
+                : ""}
+              .
             </p>
             <div className="mt-5 flex flex-wrap justify-center gap-2">
               {["housing", "SIN", "banking", "resume", "scams"].map((chip) => (
@@ -193,11 +198,24 @@ export function GuideSearch() {
                 Show all guides
               </button>
             </div>
-            <p className="mt-6">
-              <Link href="/plan" className="text-forest font-medium hover:underline inline-flex items-center gap-1">
-                Build My Canada Plan <ArrowRight className="h-3.5 w-3.5" />
+            <div className="mt-6 flex flex-col items-center gap-2">
+              <Link
+                href={buildPlanHref(hubTopicToPlanQuery[topic] || {})}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-forest text-cream px-5 py-3 text-sm font-medium min-h-12 touch-manipulation hover:opacity-95"
+              >
+                Build My Canada Plan
+                <ArrowRight className="h-4 w-4" />
               </Link>
-            </p>
+              {hasTopic && (hubTopicToPlanQuery[topic]?.need || hubTopicToPlanQuery[topic]?.goal) ? (
+                <p className="text-xs text-muted">
+                  Opens Plan with
+                  {hubTopicToPlanQuery[topic]?.need ? ` need “${hubTopicToPlanQuery[topic].need}”` : ""}
+                  {hubTopicToPlanQuery[topic]?.need && hubTopicToPlanQuery[topic]?.goal ? " ·" : ""}
+                  {hubTopicToPlanQuery[topic]?.goal ? ` goal “${hubTopicToPlanQuery[topic].goal}”` : ""}{" "}
+                  preselected when your profile is empty or missing that item.
+                </p>
+              ) : null}
+            </div>
           </div>
         ) : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">

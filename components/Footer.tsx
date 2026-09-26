@@ -5,7 +5,7 @@ import { founder } from "@/lib/data/founder";
 
 export function Footer() {
   return (
-    <footer className="bg-night text-cream">
+    <footer className="print-hide bg-night text-cream">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">

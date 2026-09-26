@@ -2,12 +2,13 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, BookOpen, MapPin, RefreshCw, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, MapPin, RefreshCw, Sparkles, X } from "lucide-react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Button } from "@/components/Button";
 import { PlanChecklist } from "@/components/PlanChecklist";
 import { PlanHealthLinks } from "@/components/PlanHealthLinks";
 import { PlanOfficialLinks } from "@/components/PlanOfficialLinks";
+import { PlanActions } from "@/components/PlanActions";
 import { DemoBanner } from "@/components/DemoBanner";
 import { Disclaimer } from "@/components/Disclaimer";
 import {
@@ -20,6 +21,8 @@ import {
   PlanProfile,
   PlanStage,
   planNeedOptions,
+  resolveGoalFromQuery,
+  resolveNeedFromQuery,
   savePlanProfile,
   stageOptions,
 } from "@/lib/data/checklists";
@@ -29,16 +32,102 @@ import { PROVINCE_TERRITORY_OPTIONS } from "@/lib/data/healthLinks";
 export default function PlanPage() {
   const [step, setStep] = useState<"form" | "dashboard">("form");
   const [profile, setProfile] = useState<PlanProfile>(emptyPlanProfile);
+  const [citySwitchOffer, setCitySwitchOffer] = useState<{
+    name: string;
+    province: string;
+    slug: string;
+  } | null>(null);
+  const [queryNote, setQueryNote] = useState<string | null>(null);
 
   useEffect(() => {
     const saved = loadPlanProfile();
-    if (saved?.stage) {
-      // Backfill province from city map when a known city was saved without province
-      const known = cities.find((c) => c.name === saved.city);
-      const next = known && !saved.province ? { ...saved, province: known.province } : saved;
-      setProfile(next);
-      if (known && !saved.province) savePlanProfile(next);
+    const params = new URLSearchParams(window.location.search);
+    const cityParam = params.get("city")?.trim() || "";
+    const provinceParam = params.get("province")?.trim() || "";
+    const needFromQuery = resolveNeedFromQuery(params.get("need"));
+    const goalFromQuery = resolveGoalFromQuery(params.get("goal"));
+
+    const resolvedCity = cityParam
+      ? cities.find((c) => c.slug === cityParam.toLowerCase()) ||
+        cities.find((c) => c.name.toLowerCase() === cityParam.toLowerCase())
+      : undefined;
+
+    // Province short codes (ON, BC, …) or full names from ?province=
+    const provinceFromCode = (() => {
+      if (!provinceParam) return "";
+      const upper = provinceParam.toUpperCase();
+      const codeMap: Record<string, string> = {
+        ON: "Ontario",
+        AB: "Alberta",
+        BC: "British Columbia",
+        QC: "Quebec",
+        MB: "Manitoba",
+        NS: "Nova Scotia",
+        NB: "New Brunswick",
+        NL: "Newfoundland and Labrador",
+        PE: "Prince Edward Island",
+        SK: "Saskatchewan",
+        NT: "Northwest Territories",
+        YT: "Yukon",
+        NU: "Nunavut",
+      };
+      if (codeMap[upper]) return codeMap[upper];
+      const match = PROVINCE_TERRITORY_OPTIONS.find(
+        (p) => p.toLowerCase() === provinceParam.toLowerCase()
+      );
+      return match || "";
+    })();
+
+    let next: PlanProfile = saved
+      ? {
+          ...emptyPlanProfile,
+          ...saved,
+          // Backfill province from city map when a known city was saved without province
+          province:
+            saved.province ||
+            cities.find((c) => c.name === saved.city)?.province ||
+            "",
+        }
+      : { ...emptyPlanProfile };
+
+    const profileEmpty = !next.stage;
+    const notes: string[] = [];
+
+    if (resolvedCity) {
+      if (profileEmpty || !next.city) {
+        next = { ...next, city: resolvedCity.name, province: resolvedCity.province };
+        notes.push(`Prefilling ${resolvedCity.name}, ${resolvedCity.province}`);
+      } else if (next.city !== resolvedCity.name) {
+        setCitySwitchOffer({
+          name: resolvedCity.name,
+          province: resolvedCity.province,
+          slug: resolvedCity.slug,
+        });
+      } else if (!next.province) {
+        next = { ...next, province: resolvedCity.province };
+      }
+    } else if (provinceFromCode && (profileEmpty || !next.province)) {
+      next = { ...next, province: provinceFromCode };
+      if (!next.city) next = { ...next, city: "Other / Not sure yet" };
+      notes.push(`Prefilling province ${provinceFromCode}`);
+    }
+
+    if (needFromQuery && !next.needs.includes(needFromQuery)) {
+      next = { ...next, needs: [...next.needs, needFromQuery] };
+      notes.push(`Added need: ${needFromQuery}`);
+    }
+    if (goalFromQuery && !next.goals.includes(goalFromQuery)) {
+      next = { ...next, goals: [...next.goals, goalFromQuery] };
+      notes.push(`Added goal: ${goalFromQuery}`);
+    }
+
+    setProfile(next);
+    if (next.stage) {
+      savePlanProfile(next);
       setStep("dashboard");
+    }
+    if (notes.length && (profileEmpty || needFromQuery || goalFromQuery)) {
+      setQueryNote(notes.join(" · "));
     }
   }, []);
 
@@ -77,12 +166,29 @@ export default function PlanPage() {
     } catch {
       /* ignore */
     }
+    setCitySwitchOffer(null);
+    setQueryNote(null);
     setStep("form");
+  }
+
+  function acceptCitySwitch() {
+    if (!citySwitchOffer) return;
+    setProfile((prev) => {
+      const next = {
+        ...prev,
+        city: citySwitchOffer.name,
+        province: citySwitchOffer.province,
+      };
+      savePlanProfile(next);
+      return next;
+    });
+    setCitySwitchOffer(null);
+    setQueryNote(`Switched plan city to ${citySwitchOffer.name}`);
   }
 
   if (step === "dashboard") {
     return (
-      <div className="py-10 sm:py-16">
+      <div className="plan-print-root py-10 sm:py-16">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="My Canada Plan"
@@ -102,7 +208,79 @@ export default function PlanPage() {
             }${profile.arrival ? ` · Arrival ${profile.arrival}` : ""} · ${profile.family}`}
           />
 
-          <DemoBanner className="mt-6">
+          <div className="print-only hidden print:block mb-6 border-b border-night/20 pb-4">
+            <p className="font-display text-2xl font-semibold text-ink">My Canada Plan</p>
+            <p className="text-sm text-muted mt-1">
+              {[
+                stageLabel,
+                profile.city && profile.city !== "Other / Not sure yet" ? profile.city : profile.province,
+                profile.arrival ? `Arrival ${profile.arrival}` : null,
+                profile.family,
+              ]
+                .filter(Boolean)
+                .join(" · ")}
+            </p>
+            <p className="text-xs text-muted mt-2">Printed from Norra — organization only, not official advice.</p>
+          </div>
+
+          {citySwitchOffer && (
+            <div
+              className="print-hide mt-6 rounded-2xl border border-amber/50 bg-amber/15 px-4 py-4 sm:px-5 flex flex-col sm:flex-row sm:items-center gap-3"
+              role="status"
+            >
+              <div className="flex-1 min-w-0">
+                <p className="font-semibold text-ink text-sm">
+                  Switch plan city to {citySwitchOffer.name}?
+                </p>
+                <p className="mt-1 text-xs text-muted leading-relaxed">
+                  Your saved plan uses{" "}
+                  <span className="font-medium text-ink">
+                    {profile.city || "no city"}
+                    {profile.province ? `, ${profile.province}` : ""}
+                  </span>
+                  . Update to {citySwitchOffer.name}, {citySwitchOffer.province}? Checklist ticks stay on this
+                  device.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2 shrink-0">
+                <button
+                  type="button"
+                  onClick={acceptCitySwitch}
+                  className="inline-flex items-center justify-center rounded-full bg-forest text-cream px-4 py-2.5 text-xs font-medium min-h-11 touch-manipulation"
+                >
+                  Use {citySwitchOffer.name}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCitySwitchOffer(null)}
+                  className="inline-flex items-center justify-center gap-1 rounded-full border border-night/15 px-3 py-2.5 text-xs font-medium text-muted min-h-11 touch-manipulation"
+                  aria-label="Dismiss city switch suggestion"
+                >
+                  <X className="h-3.5 w-3.5" />
+                  Keep current
+                </button>
+              </div>
+            </div>
+          )}
+
+          {queryNote && !citySwitchOffer && (
+            <div className="print-hide mt-6 rounded-xl border border-forest/20 bg-forest/5 px-4 py-3 text-xs text-muted flex items-start justify-between gap-3">
+              <p>
+                <span className="font-semibold text-forest">From link: </span>
+                {queryNote}
+              </p>
+              <button
+                type="button"
+                onClick={() => setQueryNote(null)}
+                className="shrink-0 text-muted hover:text-ink min-h-9 min-w-9 inline-flex items-center justify-center"
+                aria-label="Dismiss"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          )}
+
+          <DemoBanner className="print-hide mt-6">
             <strong className="text-forest">Real in this browser:</strong> your profile and checklist ticks save to
             localStorage on this device.{" "}
             <strong className="text-forest">Not built yet:</strong> Norra accounts, cross-device sync, or shared
@@ -173,10 +351,11 @@ export default function PlanPage() {
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
             />
+            <PlanActions profile={profile} items={items} storageKey="norra-canada-plan" />
           </div>
 
           {recommendations.length > 0 && (
-            <div className="mt-12">
+            <div className="print-hide mt-12">
               <div className="flex items-center gap-2 mb-4">
                 <BookOpen className="h-5 w-5 text-forest" />
                 <h2 className="font-display text-xl sm:text-2xl font-semibold text-ink">
@@ -213,7 +392,7 @@ export default function PlanPage() {
             </div>
           )}
 
-          <div className="mt-10 flex flex-col sm:flex-row flex-wrap gap-3">
+          <div className="print-hide mt-10 flex flex-col sm:flex-row flex-wrap gap-3">
             <Button
               variant="outline"
               className="min-h-12 w-full sm:w-auto justify-center"
@@ -252,6 +431,57 @@ export default function PlanPage() {
           title="Build My Canada Plan"
           description="Tell us your stage, city, and goals — get a living checklist with concrete next steps and guides. Organization only; not immigration advice."
         />
+
+        {citySwitchOffer && (
+          <div
+            className="mt-6 rounded-2xl border border-amber/50 bg-amber/15 px-4 py-4 sm:px-5 flex flex-col sm:flex-row sm:items-center gap-3"
+            role="status"
+          >
+            <div className="flex-1 min-w-0">
+              <p className="font-semibold text-ink text-sm">
+                Use {citySwitchOffer.name} for this plan?
+              </p>
+              <p className="mt-1 text-xs text-muted leading-relaxed">
+                Link suggested {citySwitchOffer.name}, {citySwitchOffer.province}. Your form currently has{" "}
+                {profile.city || "no city"}.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2 shrink-0">
+              <button
+                type="button"
+                onClick={acceptCitySwitch}
+                className="inline-flex items-center justify-center rounded-full bg-forest text-cream px-4 py-2.5 text-xs font-medium min-h-11 touch-manipulation"
+              >
+                Use {citySwitchOffer.name}
+              </button>
+              <button
+                type="button"
+                onClick={() => setCitySwitchOffer(null)}
+                className="inline-flex items-center justify-center rounded-full border border-night/15 px-3 py-2.5 text-xs font-medium text-muted min-h-11 touch-manipulation"
+              >
+                Dismiss
+              </button>
+            </div>
+          </div>
+        )}
+
+        {queryNote && (
+          <div className="mt-6 rounded-xl border border-forest/20 bg-forest/5 px-4 py-3 text-xs text-muted flex items-start justify-between gap-3">
+            <p>
+              <span className="font-semibold text-forest">From link: </span>
+              {queryNote}
+            </p>
+            <button
+              type="button"
+              onClick={() => setQueryNote(null)}
+              className="shrink-0 text-muted hover:text-ink min-h-9 min-w-9 inline-flex items-center justify-center"
+              aria-label="Dismiss"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+        )}
+
         <DemoBanner className="mt-8">
           <strong className="text-forest">Real functionality:</strong> this planner works in your browser and saves
           locally. <strong className="text-forest">Coming later:</strong> accounts and sync across devices.

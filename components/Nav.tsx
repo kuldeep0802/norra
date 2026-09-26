@@ -16,7 +16,7 @@ export function Nav() {
   );
 
   return (
-    <header className="sticky top-0 z-50 border-b border-night/5 bg-cream/95 backdrop-blur-xl">
+    <header className="print-hide sticky top-0 z-50 border-b border-night/5 bg-cream/95 backdrop-blur-xl">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 lg:h-[4.25rem] items-center justify-between gap-3">
           <Logo />

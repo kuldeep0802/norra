@@ -105,3 +105,31 @@ textarea:focus-visible,
   outline: 2px solid var(--color-cream);
   outline-offset: 2px;
 }
+
+
+/* Print: plan checklist + profile without chrome */
+@media print {
+  .print-hide,
+  .skip-to-content,
+  header,
+  footer,
+  nav[aria-label="Mobile"] {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  main {
+    padding-bottom: 0 !important;
+  }
+  .plan-print-root a[href]::after {
+    content: none !important;
+  }
+  .plan-print-root {
+    padding-top: 0 !important;
+  }
+}

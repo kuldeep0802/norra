@@ -49,6 +49,27 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
           Norra serves people across Canada — not only featured cities.
         </Disclaimer>
 
+        <div className="rounded-2xl border border-forest/20 bg-forest text-cream p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center gap-4">
+          <div className="flex-1 min-w-0">
+            <p className="text-sky text-xs font-semibold uppercase tracking-wide">My Canada Plan</p>
+            <h2 className="mt-1 font-display text-xl sm:text-2xl font-semibold leading-snug">
+              Build My Canada Plan for {city.name}
+            </h2>
+            <p className="mt-2 text-sm text-sky/90 leading-relaxed">
+              Prefills {city.name}, {city.province} on your local checklist planner. Organization only — not
+              immigration advice. Plan data stays on this device.
+            </p>
+          </div>
+          <Button
+            href={`/plan/?city=${city.slug}`}
+            variant="amber"
+            size="lg"
+            className="shrink-0 w-full sm:w-auto min-h-12 justify-center touch-manipulation"
+          >
+            Build My Canada Plan for {city.name}
+          </Button>
+        </div>
+
         <div className="flex flex-wrap gap-2">
           {city.highlights.map((h) => (
             <span key={h} className="rounded-full bg-sand px-3 py-1 text-sm font-medium text-forest">

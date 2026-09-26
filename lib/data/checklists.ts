@@ -776,3 +776,74 @@ export function getPlanRecommendations(profile: PlanProfile): PlanRecommendation
 
   return out.slice(0, 6);
 }
+
+/** Short aliases for ?need= query params → planNeedOptions values */
+export const needQueryAliases: Record<string, (typeof planNeedOptions)[number]> = {
+  immigration: "Immigration & status",
+  status: "Immigration & status",
+  housing: "Find housing",
+  job: "Find a job",
+  jobs: "Find a job",
+  work: "Find a job",
+  arrival: "Airport & arrival",
+  airport: "Airport & arrival",
+  banking: "Banking & SIN",
+  sin: "Banking & SIN",
+  health: "Healthcare registration",
+  healthcare: "Healthcare registration",
+  school: "School / kids",
+  kids: "School / kids",
+  professionals: "Connect with professionals",
+  city: "Learn the city",
+  cities: "Learn the city",
+  benefits: "Government benefits",
+  government: "Government benefits",
+};
+
+/** Map Knowledge Hub topic chip ids → plan query (need and/or goal) */
+export const hubTopicToPlanQuery: Record<
+  string,
+  { need?: string; goal?: PlanGoal }
+> = {
+  Housing: { need: "housing", goal: "housing" },
+  Health: { need: "health" },
+  Banking: { need: "banking" },
+  Work: { need: "job", goal: "work" },
+  "Pre-arrival": { need: "arrival" },
+  Arrival: { need: "arrival" },
+  Government: { need: "government" },
+  Cities: { need: "city" },
+  Safety: {},
+};
+
+export function resolveNeedFromQuery(raw: string | null): string | null {
+  if (!raw) return null;
+  const trimmed = raw.trim();
+  if (!trimmed) return null;
+  const lower = trimmed.toLowerCase();
+  if (needQueryAliases[lower]) return needQueryAliases[lower];
+  const exact = planNeedOptions.find((n) => n.toLowerCase() === lower);
+  if (exact) return exact;
+  return null;
+}
+
+export function resolveGoalFromQuery(raw: string | null): PlanGoal | null {
+  if (!raw) return null;
+  const lower = raw.trim().toLowerCase();
+  const match = goalOptions.find((g) => g.value === lower || g.label.toLowerCase() === lower);
+  return match ? match.value : null;
+}
+
+/** Build /plan/?… query from city slug and optional need/goal aliases */
+export function buildPlanHref(opts: {
+  citySlug?: string;
+  need?: string;
+  goal?: PlanGoal | string;
+}): string {
+  const params = new URLSearchParams();
+  if (opts.citySlug) params.set("city", opts.citySlug);
+  if (opts.need) params.set("need", opts.need);
+  if (opts.goal) params.set("goal", String(opts.goal));
+  const qs = params.toString();
+  return qs ? `/plan/?${qs}` : "/plan/";
+}

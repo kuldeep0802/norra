@@ -171,6 +171,7 @@ function respond(input: string, profile: PlanProfile | null): Msg {
       text: "I can point to high-level government navigation pages and our SIN checklist. For official rules and applications, use Canada.ca or your provincial site — Nora does not file anything for you.",
       links: [
         { label: "Get a SIN checklist", href: "/resources/get-sin-canada" },
+        { label: "Provincial health-card guide", href: "/resources/get-health-card-canada" },
         { label: "First week guide", href: "/resources/first-week-in-canada" },
         { label: "Government guides", href: "/government" },
         { label: "My Canada Plan", href: "/plan" },
@@ -180,11 +181,12 @@ function respond(input: string, profile: PlanProfile | null): Msg {
   if (/health|doctor|clinic|medical/.test(q)) {
     return withBias({
       role: "assistant",
-      text: "Norra is not a medical provider. I can share orientation links about provincial health registration. For emergencies, call 911.",
+      text: "Norra is not a medical provider. I can share orientation links about provincial health registration — verify eligibility on official provincial sites. For emergencies, call 911.",
       links: [
+        { label: "Provincial health-card guide", href: "/resources/get-health-card-canada" },
         { label: "Healthcare navigation", href: "/services/healthcare" },
         { label: "First week guide", href: "/resources/first-week-in-canada" },
-        { label: "Government / health cards", href: "/government" },
+        { label: "My Canada Plan", href: "/plan" },
       ],
     });
   }

@@ -191,7 +191,7 @@ export const arrivalItems: ChecklistItem[] = [
     id: "arr-8",
     label: "Start provincial health coverage process for your province",
     category: "Healthcare",
-    href: "/government",
+    href: "/resources/get-health-card-canada",
     officialHref: "https://www.canada.ca/en/immigration-refugees-citizenship/services/settle-canada/health-care.html",
     officialLabel: "Health care in Canada",
   },
@@ -217,6 +217,7 @@ export const settlingItems: ChecklistItem[] = [
     label: "Complete provincial health registration steps for your province",
     category: "Healthcare",
     description: "Waiting periods and forms differ by province — verify on your province’s site.",
+    href: "/resources/get-health-card-canada",
     officialHref: "https://www.canada.ca/en/immigration-refugees-citizenship/services/settle-canada/health-care.html",
     officialLabel: "Health care overview",
   },
@@ -370,6 +371,7 @@ export const alreadyHereItems: ChecklistItem[] = [
     id: "here-4",
     label: "Confirm health card / coverage status for your province",
     category: "Healthcare",
+    href: "/resources/get-health-card-canada",
     officialHref: "https://www.canada.ca/en/immigration-refugees-citizenship/services/settle-canada/health-care.html",
     officialLabel: "Health care overview",
   },
@@ -570,6 +572,12 @@ export function getPlanRecommendations(profile: PlanProfile): PlanRecommendation
       href: "/resources/open-bank-account-newcomer",
       kind: "guide",
     });
+    push({
+      title: "Get a provincial health card",
+      description: "Orientation map to official OHIP, MSP, AHCIP, RAMQ and other government links — verify eligibility there.",
+      href: "/resources/get-health-card-canada",
+      kind: "guide",
+    });
   }
   if (
     profile.needs.includes("Banking & SIN") ||
@@ -586,6 +594,18 @@ export function getPlanRecommendations(profile: PlanProfile): PlanRecommendation
       title: "Open a bank account as a newcomer",
       description: "FCAC-linked orientation for opening a personal account.",
       href: "/resources/open-bank-account-newcomer",
+      kind: "guide",
+    });
+  }
+  if (
+    profile.needs.includes("Healthcare registration") ||
+    profile.goals.includes("settle") ||
+    profile.stage === "already-here"
+  ) {
+    push({
+      title: "Get a provincial health card",
+      description: "Orientation map to official OHIP, MSP, AHCIP, RAMQ and other government links — verify eligibility there.",
+      href: "/resources/get-health-card-canada",
       kind: "guide",
     });
   }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Check, ExternalLink } from "lucide-react";
+import { Check, ExternalLink, ListChecks, Sparkles } from "lucide-react";
 import { ChecklistItem } from "@/lib/data/checklists";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -9,11 +9,15 @@ import Link from "next/link";
 export function PlanChecklist({
   items,
   storageKey,
+  onEditPlan,
 }: {
   items: ChecklistItem[];
   storageKey: string;
+  /** Optional callback when user should return to the plan form */
+  onEditPlan?: () => void;
 }) {
   const [done, setDone] = useState<Record<string, boolean>>({});
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     try {
@@ -22,6 +26,7 @@ export function PlanChecklist({
     } catch {
       /* ignore */
     }
+    setHydrated(true);
   }, [storageKey]);
 
   function toggle(id: string) {
@@ -43,27 +48,44 @@ export function PlanChecklist({
   if (items.length === 0) {
     return (
       <div className="rounded-2xl border border-dashed border-night/15 bg-white/80 p-8 text-center">
-        <p className="font-display text-lg font-semibold text-ink">No checklist items yet</p>
+        <ListChecks className="h-8 w-8 text-forest mx-auto opacity-80" />
+        <p className="mt-3 font-display text-lg font-semibold text-ink">No checklist items yet</p>
         <p className="mt-2 text-sm text-muted max-w-md mx-auto leading-relaxed">
-          Edit your plan and pick a journey stage plus at least one goal or need so Norra can build a stage-aware
-          checklist. Organization only — not legal advice.
+          Pick a journey stage and at least one goal or need so Norra can build a stage-aware checklist.
+          Ticks save only in this browser&apos;s localStorage — not in a Norra account yet.
         </p>
-        <p className="mt-4 text-sm">
-          <Link href="/resources" className="text-forest font-medium hover:underline">
+        <div className="mt-5 flex flex-col sm:flex-row items-center justify-center gap-3">
+          {onEditPlan ? (
+            <button
+              type="button"
+              onClick={onEditPlan}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-forest text-cream px-5 py-3 text-sm font-medium min-h-12 touch-manipulation hover:opacity-95"
+            >
+              <Sparkles className="h-4 w-4" />
+              Pick goals & build checklist
+            </button>
+          ) : null}
+          <Link
+            href="/resources"
+            className="text-forest font-medium hover:underline text-sm min-h-11 inline-flex items-center"
+          >
             Browse the Knowledge Hub →
           </Link>
-        </p>
+        </div>
       </div>
     );
   }
 
   return (
     <div>
-      <div className="mb-8 rounded-2xl bg-forest text-cream p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="mb-6 rounded-2xl bg-forest text-cream p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <p className="text-sky text-sm">Progress</p>
           <p className="font-display text-2xl sm:text-3xl font-semibold mt-1">
             {completed} / {items.length} complete
+          </p>
+          <p className="mt-1 text-xs text-sky/90">
+            Saved in this browser only (localStorage) — not synced to an account yet.
           </p>
         </div>
         <div className="w-full sm:w-48">
@@ -73,6 +95,47 @@ export function PlanChecklist({
           <p className="text-xs text-sky mt-2 text-right">{pct}%</p>
         </div>
       </div>
+
+      {hydrated && pct === 0 && (
+        <div className="mb-8 rounded-2xl border border-forest/25 bg-sky/30 px-4 py-4 sm:px-5 text-sm text-ink leading-relaxed">
+          <p className="font-semibold text-forest flex items-center gap-2">
+            <Sparkles className="h-4 w-4 shrink-0" />
+            Ready when you are
+          </p>
+          <p className="mt-1.5 text-muted">
+            Your checklist is at 0%. Tick the first item you can finish this week — or{" "}
+            {onEditPlan ? (
+              <button
+                type="button"
+                onClick={onEditPlan}
+                className="text-forest font-medium underline-offset-2 hover:underline touch-manipulation"
+              >
+                edit goals / needs
+              </button>
+            ) : (
+              <span className="text-forest font-medium">edit your plan</span>
+            )}{" "}
+            so the list matches what you care about. Progress stays on this device until accounts exist.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-3">
+            {onEditPlan && (
+              <button
+                type="button"
+                onClick={onEditPlan}
+                className="inline-flex items-center gap-1.5 rounded-full bg-forest text-cream px-4 py-2.5 text-xs font-medium min-h-11 touch-manipulation"
+              >
+                Pick goals / refine plan
+              </button>
+            )}
+            <Link
+              href="/resources"
+              className="inline-flex items-center text-xs font-medium text-forest hover:underline min-h-11"
+            >
+              Read a guide first →
+            </Link>
+          </div>
+        </div>
+      )}
 
       <div className="space-y-8">
         {categories.map((cat) => (

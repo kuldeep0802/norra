@@ -6,6 +6,45 @@ import { Button } from "@/components/Button";
 import { SectionHeader } from "@/components/SectionHeader";
 import { siteConfig } from "@/lib/site";
 import { founder } from "@/lib/data/founder";
+import { tokenizeLinks, type LinkifyToken } from "@/lib/utils";
+
+function RichText({ text, className }: { text: string; className?: string }) {
+  const tokens = tokenizeLinks(text);
+  const hasLink = tokens.some((t) => typeof t !== "string");
+  if (!hasLink) {
+    return <span className={className}>{text}</span>;
+  }
+  return (
+    <span className={className}>
+      {tokens.map((t: LinkifyToken, idx) => {
+        if (typeof t === "string") return <span key={`t${idx}`}>{t}</span>;
+        if (t.href.startsWith("/")) {
+          return (
+            <Link
+              key={t.key}
+              href={t.href}
+              className="font-medium text-forest underline underline-offset-2 hover:text-ink"
+            >
+              {t.label}
+            </Link>
+          );
+        }
+        return (
+          <a
+            key={t.key}
+            href={t.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-forest underline underline-offset-2 break-all hover:text-ink"
+          >
+            {t.label}
+            <ExternalLink className="inline h-3 w-3 ml-0.5 align-text-top opacity-70" />
+          </a>
+        );
+      })}
+    </span>
+  );
+}
 
 export function GuideArticle({ guide }: { guide: Guide }) {
   const pageUrl = `${siteConfig.url}/resources/${guide.slug}/`;
@@ -79,7 +118,7 @@ export function GuideArticle({ guide }: { guide: Guide }) {
               </h2>
               {section.paragraphs?.map((p) => (
                 <p key={p.slice(0, 48)} className="mt-3 text-muted leading-relaxed text-[15px] sm:text-base">
-                  {p}
+                  <RichText text={p} />
                 </p>
               ))}
               {section.bullets && (
@@ -87,7 +126,7 @@ export function GuideArticle({ guide }: { guide: Guide }) {
                   {section.bullets.map((b) => (
                     <li key={b.slice(0, 48)} className="flex gap-2">
                       <span className="text-forest mt-1.5 shrink-0">•</span>
-                      <span>{b}</span>
+                      <RichText text={b} />
                     </li>
                   ))}
                 </ul>
@@ -109,7 +148,9 @@ export function GuideArticle({ guide }: { guide: Guide }) {
                         ? "Stay careful"
                         : "Practical tip"}
                   </p>
-                  <p className="text-ink/90">{section.callout.text}</p>
+                  <p className="text-ink/90">
+                    <RichText text={section.callout.text} />
+                  </p>
                 </div>
               )}
             </section>

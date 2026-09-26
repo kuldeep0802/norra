@@ -54,7 +54,7 @@ export const guides: Guide[] = [
         ],
         callout: {
           kind: "verify",
-          text: "Always confirm visa, permit, eTA, and entry requirements on Immigration, Refugees and Citizenship Canada (IRCC) for your situation: canada.ca/en/immigration-refugees-citizenship.html",
+          text: "Always confirm visa, permit, eTA, and entry requirements on Immigration, Refugees and Citizenship Canada (IRCC) for your situation: [IRCC on Canada.ca](https://www.canada.ca/en/immigration-refugees-citizenship.html)",
         },
       },
       {
@@ -101,7 +101,7 @@ export const guides: Guide[] = [
         ],
         callout: {
           kind: "verify",
-          text: "Government overview of health care for newcomers: canada.ca/en/immigration-refugees-citizenship/services/settle-canada/health-care.html — then check your province’s site.",
+          text: "Government overview of health care for newcomers: [Health care in Canada](https://www.canada.ca/en/immigration-refugees-citizenship/services/settle-canada/health-care.html) — then check your province’s site or Norra’s provincial health-card guide.",
         },
       },
       {
@@ -129,6 +129,7 @@ export const guides: Guide[] = [
     relatedHrefs: [
       { label: "My Canada Plan", href: "/plan" },
       { label: "Get a SIN", href: "/resources/get-sin-canada" },
+      { label: "Get a health card", href: "/resources/get-health-card-canada" },
       { label: "Open a bank account", href: "/resources/open-bank-account-newcomer" },
       { label: "Arrival services", href: "/arrival" },
       { label: "Avoid scams", href: "/resources/avoid-newcomer-scams" },
@@ -166,7 +167,7 @@ export const guides: Guide[] = [
         ],
         callout: {
           kind: "verify",
-          text: "Official SIN information: canada.ca/en/employment-social-development/services/sin.html — then open Norra’s dedicated SIN checklist from Related links below.",
+          text: "Official SIN information: [Service Canada — SIN](https://www.canada.ca/en/employment-social-development/services/sin.html) — then open Norra’s dedicated SIN checklist from Related links below.",
         },
       },
       {
@@ -176,7 +177,7 @@ export const guides: Guide[] = [
         ],
         callout: {
           kind: "verify",
-          text: "Start with the federal overview, then open your province’s site: canada.ca/en/immigration-refugees-citizenship/services/settle-canada/health-care.html",
+          text: "Start with the federal overview, then use Norra’s provincial link map or open your province’s site: [Health care in Canada](https://www.canada.ca/en/immigration-refugees-citizenship/services/settle-canada/health-care.html) · [Provincial health-card guide](/resources/get-health-card-canada)",
         },
       },
       {
@@ -186,7 +187,7 @@ export const guides: Guide[] = [
         ],
         callout: {
           kind: "verify",
-          text: "Settle in Canada (Government of Canada): canada.ca/en/immigration-refugees-citizenship/services/settle-canada.html",
+          text: "Settle in Canada (Government of Canada): https://www.canada.ca/en/immigration-refugees-citizenship/services/settle-canada.html",
         },
       },
       {
@@ -366,7 +367,7 @@ export const guides: Guide[] = [
         ],
         callout: {
           kind: "verify",
-          text: "Work in Canada — IRCC: canada.ca/en/immigration-refugees-citizenship/services/work-canada.html",
+          text: "Work in Canada — IRCC: https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada.html",
         },
       },
       {
@@ -530,7 +531,7 @@ export const guides: Guide[] = [
         ],
         callout: {
           kind: "verify",
-          text: "College of Immigration and Citizenship Consultants (CICC): college-ic.ca — and provincial/territorial law societies for lawyers. IRCC: canada.ca/en/immigration-refugees-citizenship.html",
+          text: "College of Immigration and Citizenship Consultants (CICC): https://college-ic.ca — and provincial/territorial law societies for lawyers. IRCC: https://www.canada.ca/en/immigration-refugees-citizenship.html",
         },
       },
       {
@@ -571,6 +572,7 @@ export const guides: Guide[] = [
     dateModified: "2026-09-26",
     relatedHrefs: [
       { label: "Open a bank account", href: "/resources/open-bank-account-newcomer" },
+      { label: "Get a health card", href: "/resources/get-health-card-canada" },
       { label: "First week in Canada", href: "/resources/first-week-in-canada" },
       { label: "Avoid newcomer scams", href: "/resources/avoid-newcomer-scams" },
       { label: "My Canada Plan", href: "/plan" },
@@ -585,7 +587,7 @@ export const guides: Guide[] = [
         ],
         callout: {
           kind: "verify",
-          text: "Start on the official SIN hub and follow the apply tool for your status: canada.ca/en/employment-social-development/services/sin.html — Apply path: canada.ca/en/employment-social-development/services/sin/apply.html",
+          text: "Start on the official SIN hub and follow the apply tool for your status: [SIN — Service Canada](https://www.canada.ca/en/employment-social-development/services/sin.html) · [Apply for a SIN](https://www.canada.ca/en/employment-social-development/services/sin/apply.html)",
         },
       },
       {
@@ -608,7 +610,7 @@ export const guides: Guide[] = [
         ],
         callout: {
           kind: "verify",
-          text: "Temporary residents overview: canada.ca/en/employment-social-development/services/sin/temporary-residents.html — Required documents overview: canada.ca/en/employment-social-development/services/sin/required-documents.html",
+          text: "Temporary residents overview: https://www.canada.ca/en/employment-social-development/services/sin/temporary-residents.html — Required documents overview: https://www.canada.ca/en/employment-social-development/services/sin/required-documents.html",
         },
       },
       {
@@ -635,7 +637,7 @@ export const guides: Guide[] = [
         ],
         callout: {
           kind: "verify",
-          text: "Official online application entry (Government of Canada): sin-nas.canada.ca/en/Sin/ — only use it after reading the Canada.ca Apply page for your situation.",
+          text: "Official online application entry (Government of Canada): sin-nas.https://www.canada.ca/en/Sin/ — only use it after reading the Canada.ca Apply page for your situation.",
         },
       },
       {
@@ -693,6 +695,7 @@ export const guides: Guide[] = [
     dateModified: "2026-09-26",
     relatedHrefs: [
       { label: "Get a SIN", href: "/resources/get-sin-canada" },
+      { label: "Get a health card", href: "/resources/get-health-card-canada" },
       { label: "First week in Canada", href: "/resources/first-week-in-canada" },
       { label: "Avoid newcomer scams", href: "/resources/avoid-newcomer-scams" },
       { label: "My Canada Plan", href: "/plan" },
@@ -707,7 +710,7 @@ export const guides: Guide[] = [
         ],
         callout: {
           kind: "verify",
-          text: "Financial Consumer Agency of Canada (FCAC) — opening a bank account: canada.ca/en/financial-consumer-agency/services/banking/opening-bank-account.html",
+          text: "Financial Consumer Agency of Canada (FCAC) — [Opening a bank account](https://www.canada.ca/en/financial-consumer-agency/services/banking/opening-bank-account.html)",
         },
       },
       {
@@ -734,7 +737,7 @@ export const guides: Guide[] = [
         ],
         callout: {
           kind: "verify",
-          text: "FCAC explains identification approaches and that you may be able to open an account even if you are not a Canadian citizen — confirm current details: canada.ca/en/financial-consumer-agency/services/banking/opening-bank-account.html",
+          text: "FCAC explains identification approaches and that you may be able to open an account even if you are not a Canadian citizen — confirm current details: [FCAC — Opening a bank account](https://www.canada.ca/en/financial-consumer-agency/services/banking/opening-bank-account.html)",
         },
       },
       {
@@ -745,7 +748,7 @@ export const guides: Guide[] = [
         ],
         callout: {
           kind: "verify",
-          text: "Know your rights when opening a personal account: canada.ca/en/financial-consumer-agency/services/rights-responsibilities/rights-banking/accounts-rights-responsibilities.html",
+          text: "Know your rights when opening a personal account: [FCAC — Account rights](https://www.canada.ca/en/financial-consumer-agency/services/rights-responsibilities/rights-banking/accounts-rights-responsibilities.html)",
         },
       },
       {
@@ -791,6 +794,147 @@ export const guides: Guide[] = [
       },
     ],
   },
+
+  {
+    slug: "get-health-card-canada",
+    title: "How to get a provincial health card in Canada",
+    metaTitle: "Get a Provincial Health Card in Canada — Newcomer Guide",
+    metaDescription:
+      "Orientation guide to provincial and territorial health coverage in Canada: why you need a health card, official OHIP/MSP/AHCIP/RAMQ and other government links, waiting-period cautions, and scam warnings — no invented eligibility.",
+    eyebrow: "Health",
+    summary:
+      "Public health insurance in Canada is run by provinces and territories — not a single federal health card. Use this as a navigation map to official sites. Norra does not decide eligibility or give medical advice.",
+    topics: [
+      "health",
+      "health card",
+      "OHIP",
+      "MSP",
+      "AHCIP",
+      "RAMQ",
+      "provincial",
+      "government",
+      "coverage",
+      "newcomer",
+      "scams",
+    ],
+    readingMinutes: 11,
+    updatedLabel: "Sep 2026",
+    datePublished: "2026-09-26",
+    dateModified: "2026-09-26",
+    relatedHrefs: [
+      { label: "My Canada Plan", href: "/plan" },
+      { label: "Get a SIN", href: "/resources/get-sin-canada" },
+      { label: "First week in Canada", href: "/resources/first-week-in-canada" },
+      { label: "Settlement", href: "/settlement" },
+      { label: "Avoid newcomer scams", href: "/resources/avoid-newcomer-scams" },
+      { label: "Government guides", href: "/government" },
+    ],
+    sections: [
+      {
+        heading: "What this guide is (and is not)",
+        paragraphs: [
+          "This page orients newcomers to Canada’s public health insurance systems: why coverage matters, that plans are provincial or territorial (not one federal health card), and where to open the official application pages for major jurisdictions.",
+          "Norra does not assess your eligibility, does not invent waiting periods or document lists, and does not provide medical advice. Rules change — always confirm on the official site for the province or territory where you live.",
+        ],
+        callout: {
+          kind: "verify",
+          text: "Federal newcomer overview (then open your province or territory): [Health care in Canada — IRCC](https://www.canada.ca/en/immigration-refugees-citizenship/services/settle-canada/health-care.html)",
+        },
+      },
+      {
+        heading: "Why provincial or territorial coverage matters",
+        paragraphs: [
+          "Most medically necessary physician and hospital services for eligible residents are insured through the plan of the province or territory where you live. Without coverage (or private insurance that fills a gap), you may be billed as an uninsured patient.",
+          "A health card is usually how you show enrolment when you see a doctor, visit a clinic, or go to a hospital. Exact benefits, identity rules, and how cards are issued differ by jurisdiction.",
+        ],
+        bullets: [
+          "Coverage is not one Canada-wide health card — each province and territory runs its own plan",
+          "Eligibility often depends on legal status, residency tests, and documents listed on that jurisdiction’s site",
+          "Waiting periods may apply in some places for some situations — do not assume timelines from blogs or this page; read the official page for where you live",
+          "Many newcomers arrange private travel or gap medical insurance until public coverage starts — compare policies yourself",
+        ],
+        callout: {
+          kind: "tip",
+          text: "Add “Healthcare registration” in My Canada Plan (stage Just landed or Settling in) so health checklist items appear beside SIN and banking.",
+        },
+      },
+      {
+        heading: "Quick navigation checklist",
+        bullets: [
+          "Confirm which province or territory will be your primary residence",
+          "Open that jurisdiction’s official health-card / enrolment page from the list below (or from the federal overview)",
+          "Read eligibility, documents, and any waiting-period language on that official page only",
+          "Apply only through channels that page describes (in person, online, mail, registry agent, etc.)",
+          "Keep proof of application and any temporary coverage letters",
+          "Until you are covered, clarify how you will pay for urgent care and whether private insurance applies",
+        ],
+        callout: {
+          kind: "warning",
+          text: "This is not medical advice. For emergencies in Canada, call 911. For eligibility questions, contact the provincial or territorial plan named on the official site — not Norra.",
+        },
+      },
+      {
+        heading: "Official provincial and territorial starting points",
+        paragraphs: [
+          "Each link below was checked against government domains before publishing. Open the page for your jurisdiction and follow its instructions. If a smaller territory’s process is unclear to you, use the federal overview and that territory’s government site — do not trust random “apply for health card” ads.",
+        ],
+        bullets: [
+          "Ontario (OHIP) — Apply for OHIP and get a health card: https://www.ontario.ca/page/apply-ohip-and-get-health-card",
+          "British Columbia (MSP) — Apply for MSP: https://www2.gov.bc.ca/gov/content/health/health-drug-coverage/msp/bc-residents/eligibility-and-enrolment/apply-for-msp",
+          "Alberta (AHCIP) — How to apply for AHCIP: https://www.alberta.ca/ahcip-how-to-apply",
+          "Québec (RAMQ) — Register for health insurance: https://www.ramq.gouv.qc.ca/en/citizens/health-insurance/register",
+          "Québec newcomers (RAMQ online path): https://www.ramq.gouv.qc.ca/en/newcomers-register-health-insurance-online",
+          "Manitoba — Manitoba Health Card and Coverage: https://manitoba.ca/health/mhsip/",
+          "Saskatchewan — Apply for a health card (eHealth Saskatchewan): https://www.ehealthsask.ca/residents/health-cards/apply-for-a-health-card",
+          "Nova Scotia (MSI) — Apply for a Health Card: https://www.novascotia.ca/apply-health-card",
+          "New Brunswick (Medicare) — Applying for Medicare Coverage: https://www2.gnb.ca/content/gnb/en/departments/health/DrugPlans/content/medicare/ApplyingforaCard.html",
+          "Newfoundland and Labrador (MCP): https://www.gov.nl.ca/hcs/mcp/",
+          "Prince Edward Island — Apply for PEI Health Card: https://www.princeedwardisland.ca/en/service/apply-for-pei-health-card",
+          "Yukon — Apply for a Yukon health care card: https://yukon.ca/en/health-care-card",
+          "Northwest Territories — Applying for Health Care: https://www.hss.gov.nt.ca/en/services/applying-health-care",
+          "Nunavut — Nunavut Health Care Plan (Government of Nunavut): https://www.gov.nu.ca/en/health/nunavut-health-care-plan",
+        ],
+        callout: {
+          kind: "verify",
+          text: "Always re-check the URL bar for official domains (.gov, .gc.ca, .ca government sites such as ontario.ca, alberta.ca, ramq.gouv.qc.ca). Start from [Health care in Canada](https://www.canada.ca/en/immigration-refugees-citizenship/services/settle-canada/health-care.html) if you are unsure which plan applies.",
+        },
+      },
+      {
+        heading: "Waiting periods and eligibility — verify, don’t invent",
+        paragraphs: [
+          "Some jurisdictions describe waiting periods before coverage begins; others state that eligible residents have coverage without a wait. The details depend on your status and where you live.",
+          "Norra will not quote waiting times, eligibility lists, or “guaranteed” start dates here. Read the official page for your province or territory, including any temporary-resident or student rules.",
+        ],
+        callout: {
+          kind: "verify",
+          text: "If you cannot find a clear official page for your situation, use the federal overview and contact information published by that province or territory’s health ministry — never rely on paid “fast-track health card” middlemen.",
+        },
+      },
+      {
+        heading: "Scam warnings — fake health-card sites",
+        paragraphs: [
+          "Fraudsters clone government branding and sell “priority” health-card applications or ask for fees, gift cards, or crypto. Public enrolment channels described on official sites do not work that way.",
+        ],
+        bullets: [
+          "Do not pay a stranger to “register you for OHIP/MSP/RAMQ” outside official channels",
+          "Ignore cold texts or DMs that demand your immigration documents to “activate” a health card today",
+          "Type official URLs yourself or use links from canada.ca / provincial government sites — avoid ads that look almost identical",
+          "Norra’s marketplace cards are demo layout only and cannot enrol you in any health plan",
+        ],
+        callout: {
+          kind: "warning",
+          text: "Cross-check with Norra’s Avoid newcomer scams guide (Related links below). Prefer official domains; report fraud concerns through channels listed by the Canadian Anti-Fraud Centre on Government of Canada pages when appropriate.",
+        },
+      },
+      {
+        heading: "Put it on My Canada Plan",
+        paragraphs: [
+          "Choose stage “Just landed” or “Settling in,” or add the need “Healthcare registration,” so provincial health checklist items appear with SIN and banking. Tick items as you finish — progress stays in this browser’s localStorage until accounts exist.",
+        ],
+      },
+    ],
+  },
+
 ];
 
 export function getGuide(slug: string): Guide | undefined {
@@ -826,6 +970,7 @@ export const hubTopicChips: { id: string; label: string }[] = [
   { id: "Pre-arrival", label: "Pre-arrival" },
   { id: "Arrival", label: "Arrival" },
   { id: "Government", label: "Government" },
+  { id: "Health", label: "Health" },
   { id: "Banking", label: "Banking" },
   { id: "Housing", label: "Housing" },
   { id: "Work", label: "Work" },

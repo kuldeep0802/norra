@@ -118,19 +118,23 @@ export default function PlanPage() {
           )}
 
           {profile.goals.length === 0 && profile.needs.length === 0 && (
-            <div className="mt-6 rounded-2xl border border-amber/40 bg-amber/10 px-4 py-3.5 text-sm text-ink leading-relaxed">
-              <strong className="font-semibold">Tip:</strong> you have not selected goals or needs yet.{" "}
+            <div className="mt-6 rounded-2xl border border-amber/40 bg-amber/10 px-4 py-4 sm:px-5 text-sm text-ink leading-relaxed">
+              <p className="font-semibold text-ink">No goals selected yet</p>
+              <p className="mt-1.5 text-muted">
+                Your stage still builds a starter checklist, but picking goals (Study, Work, Housing, Settle) or needs
+                (Banking & SIN, Healthcare registration, …) sharpens recommendations. Ticks stay in this
+                browser&apos;s localStorage only.
+              </p>
               <button
                 type="button"
                 onClick={() => {
                   setStep("form");
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
-                className="text-forest font-medium underline-offset-2 hover:underline touch-manipulation"
+                className="mt-3 inline-flex items-center justify-center rounded-full bg-forest text-cream px-4 py-2.5 text-xs font-medium min-h-11 touch-manipulation"
               >
-                Edit your plan
-              </button>{" "}
-              to add them — recommendations and checklist coverage get sharper.
+                Pick goals & needs
+              </button>
             </div>
           )}
 
@@ -138,7 +142,14 @@ export default function PlanPage() {
             <h2 className="font-display text-xl sm:text-2xl font-semibold text-ink mb-4">
               Stage-aware checklist
             </h2>
-            <PlanChecklist items={items} storageKey="norra-canada-plan" />
+            <PlanChecklist
+              items={items}
+              storageKey="norra-canada-plan"
+              onEditPlan={() => {
+                setStep("form");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+            />
           </div>
 
           {recommendations.length > 0 && (

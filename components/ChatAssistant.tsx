@@ -264,7 +264,7 @@ function respond(input: string, profile: PlanProfile | null): Msg {
   if (/professional|lawyer|consultant|book|coach/.test(q)) {
     return withBias({
       role: "assistant",
-      text: "Browse the sample marketplace layout — immigration, career, settlement, tax, transfers, and more. Verification badges are demo labels. Hire authorized pros independently; Nora does not vouch for them.",
+      text: "Browse the sample marketplace layout — immigration, career, settlement, tax, transfers, and more. Profiles are fictional samples with no verification. Hire any real professional independently; Nora does not vouch for anyone.",
       links: [
         { label: "Find professionals (sample)", href: "/professionals" },
         { label: "How verification works", href: "/professionals#verification" },

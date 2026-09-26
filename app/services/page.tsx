@@ -13,11 +13,12 @@ export default function ServicesPage() {
         <SectionHeader
           eyebrow="Services"
           title="Everything you need to navigate Canada"
-          description="Browse by need — from immigration overviews to everyday life. Book help when you're ready."
+          description="Browse by need — from immigration overviews to everyday life. Take a next step when you're ready."
         />
         <Disclaimer className="mt-8 max-w-3xl">
-          Norra provides navigation and admin help. For immigration, legal, medical, or financial advice, we
-          connect you with authorized professionals. We do not guarantee outcomes.
+          Norra provides navigation and admin help. For immigration, legal, medical, or financial advice, consult
+          an authorized or licensed professional you choose independently — Norra does not vet or refer professionals. We
+          do not guarantee outcomes.
         </Disclaimer>
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {serviceCategories.map((cat) => (

@@ -124,7 +124,7 @@ export const providers: Provider[] = [
     verification: "Sample profile",
     availability: "Booking for tax season",
     demo: true,
-    bio: "Demo profile — Daniel provides licensed tax services. Confirm credentials independently. Norra is not a financial institution.",
+    bio: "Demo profile — fictional tax-services layout, not a real person. Confirm any real preparer's credentials independently. Norra is not a financial institution.",
     reviews: [
       { author: "Chris P.", rating: 5, text: "Patient explanations for first Canadian return. (Demo review)", date: "2026-04-15" },
     ],

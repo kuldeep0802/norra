@@ -25,7 +25,7 @@ export default function ImmigrationPage() {
             light
             eyebrow="Immigration & status"
             title="Navigate status questions with clarity"
-            description="Checklists, document tools, and connections to authorized professionals. Norra does not file applications or give legal advice."
+            description="Checklists, document tools, and pointers to official sources. Norra does not file applications, give legal advice, or vet representatives."
           />
         </div>
       </section>
@@ -82,10 +82,10 @@ export default function ImmigrationPage() {
             </Button>
           </div>
           <div className="rounded-2xl bg-sand p-6">
-            <h3 className="font-display text-xl font-semibold">Authorized professionals</h3>
-            <p className="mt-2 text-sm text-muted">Find demo RCICs and immigration lawyers. Always verify credentials on official registries.</p>
+            <h3 className="font-display text-xl font-semibold">Getting regulated advice</h3>
+            <p className="mt-2 text-sm text-muted">Norra does not vet representatives. Check any RCIC on the CICC registry or a lawyer with their law society. Our marketplace page shows fictional samples only.</p>
             <Button href="/professionals" size="sm" className="mt-4">
-              Find help
+              View sample layout
             </Button>
           </div>
           <div className="rounded-2xl bg-sand p-6">

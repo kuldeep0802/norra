@@ -12,7 +12,7 @@ export default function AssistantPage() {
         <SectionHeader
           eyebrow="Ask Nora"
           title="Your in-product guide"
-          description="Rule-based demo assistant that routes you to services, checklists, and professionals. Not a substitute for licensed advice."
+          description="Rule-based demo assistant that routes you to guides, checklists, and official sources. Not a substitute for licensed advice."
           align="center"
         />
         <DemoBanner emphasis className="mt-8">

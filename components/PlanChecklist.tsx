@@ -313,7 +313,7 @@ export function PlanChecklist({
                             {item.href && (
                               <Link
                                 href={item.href}
-                                className="inline-flex items-center text-xs text-forest font-medium hover:underline min-h-9"
+                                className="inline-flex items-center text-xs text-forest font-medium hover:underline min-h-9 pointer-coarse:min-h-11 pointer-coarse:text-sm pointer-coarse:pr-2 touch-manipulation"
                               >
                                 Related on Norra →
                               </Link>
@@ -323,7 +323,7 @@ export function PlanChecklist({
                                 href={item.officialHref}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 text-xs text-muted font-medium hover:text-forest hover:underline min-h-9"
+                                className="inline-flex items-center gap-1 text-xs text-muted font-medium hover:text-forest hover:underline min-h-9 pointer-coarse:min-h-11 pointer-coarse:text-sm pointer-coarse:pr-2 touch-manipulation"
                               >
                                 {item.officialLabel || "Official source"}
                                 <ExternalLink className="h-3 w-3" aria-hidden />

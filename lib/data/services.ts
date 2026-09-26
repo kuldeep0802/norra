@@ -14,7 +14,7 @@ export const serviceCategories: ServiceCategory[] = [
     slug: "immigration-status",
     title: "Immigration & Status",
     shortTitle: "Immigration",
-    description: "Navigate study permits, work permits, PR pathways, and status questions with clear guidance — and connect with authorized professionals when you need advice.",
+    description: "Navigate study permits, work permits, PR pathways, and status questions with clear guidance — and know when to hire an authorized representative independently.",
     icon: "FileCheck",
     color: "forest",
     href: "/immigration",
@@ -23,8 +23,8 @@ export const serviceCategories: ServiceCategory[] = [
       { name: "Work permit & PGWP", description: "Understand common pathways and what documents you may need." },
       { name: "Visitor & TRV", description: "Travel document checklists and arrival planning." },
       { name: "PR pathways overview", description: "High-level maps of Express Entry, PNP, and family sponsorship — not eligibility advice." },
-      { name: "Extensions & restoration", description: "Timelines and document prep; connect to authorized reps for filings." },
-      { name: "Connect to authorized professionals", description: "Find RCIC / lawyers for regulated advice.", href: "/professionals" },
+      { name: "Extensions & restoration", description: "Timelines and document prep; filings are made by you or a representative you choose." },
+      { name: "Sample marketplace layout", description: "Fictional profiles only — check any real RCIC or lawyer on CICC / law society registries yourself.", href: "/professionals" },
     ],
   },
   {
@@ -47,7 +47,7 @@ export const serviceCategories: ServiceCategory[] = [
     slug: "housing",
     title: "Housing",
     shortTitle: "Housing",
-    description: "Find temporary and longer-term housing with scam-aware browsing and verified listing badges on demo properties.",
+    description: "Find temporary and longer-term housing with scam-aware tips and clearly labelled sample listings — Norra does not list or inspect real rentals.",
     icon: "Home",
     color: "forest",
     href: "/housing",
@@ -112,7 +112,7 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       { name: "Opening a bank account", description: "What documents banks typically ask for." },
       { name: "Credit building basics", description: "General education — not personalized advice." },
-      { name: "Connect to advisors", description: "Find licensed financial professionals.", href: "/professionals" },
+      { name: "Sample advisor layouts", description: "Fictional profiles — choose any real advisor independently.", href: "/professionals" },
     ],
   },
   {
@@ -126,7 +126,7 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       { name: "Health card registration", description: "Provincial steps overview.", href: "/government" },
       { name: "Find clinics & walk-ins", description: "How to locate care in your city." },
-      { name: "When to see a professional", description: "Connect with licensed practitioners.", href: "/professionals" },
+      { name: "When to see a professional", description: "Know when to seek licensed care — find practitioners through provincial resources." },
     ],
   },
   {
@@ -161,13 +161,13 @@ export const serviceCategories: ServiceCategory[] = [
     slug: "legal-professional",
     title: "Legal & Professional",
     shortTitle: "Legal",
-    description: "Connect with authorized immigration consultants, lawyers, notaries, and other licensed professionals.",
+    description: "Understand when you may need an immigration consultant, lawyer, or notary — and how to check their registration yourself.",
     icon: "Scale",
     color: "forest",
     href: "/professionals",
     services: [
-      { name: "Find professionals", description: "Marketplace of demo providers.", href: "/professionals" },
-      { name: "Verification explained", description: "How Norra shows verification status." },
+      { name: "Sample marketplace", description: "Fictional demo profiles for layout only — not referrals.", href: "/professionals" },
+      { name: "No verification yet", description: "Norra does not vet professionals today — check regulator registries (e.g. CICC, law societies) yourself." },
       { name: "When you need licensed advice", description: "Clear boundaries on what Norra can and cannot do." },
     ],
   },

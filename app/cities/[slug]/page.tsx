@@ -43,6 +43,16 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
           <p className="mt-3 text-sky max-w-2xl">{city.tagline}</p>
           <p className="mt-2 text-sm text-sky/70">Population {city.population}</p>
         </div>
+        {city.imageCredit && (
+          <a
+            href={city.imageCredit.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute top-2 right-3 text-[10px] text-sky/70 hover:text-cream underline-offset-2 hover:underline"
+          >
+            {city.imageCredit.text}
+          </a>
+        )}
       </section>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 space-y-14">

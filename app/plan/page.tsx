@@ -11,6 +11,8 @@ import { PlanOfficialLinks } from "@/components/PlanOfficialLinks";
 import { PlanActions } from "@/components/PlanActions";
 import { DemoBanner } from "@/components/DemoBanner";
 import { Disclaimer } from "@/components/Disclaimer";
+import { PlanStageTimeline } from "@/components/PlanStageTimeline";
+import { PlanProgressSummary } from "@/components/PlanProgressSummary";
 import {
   buildPlanChecklist,
   emptyPlanProfile,
@@ -228,6 +230,11 @@ export default function PlanPage() {
                   : ""
             }${profile.arrival ? ` · Arrival ${profile.arrival}` : ""} · ${profile.family}`}
           />
+
+          <div className="print-hide mt-6 grid gap-3">
+            <PlanProgressSummary total={items.length} />
+            <PlanStageTimeline stage={profile.stage} />
+          </div>
 
           <div className="print-only hidden print:block mb-6 border-b border-night/20 pb-4">
             <p className="font-display text-2xl font-semibold text-ink">My Canada Plan</p>

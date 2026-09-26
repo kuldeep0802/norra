@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight, Search, Sparkles, Map, Shield, BookOpen } from "lucide-react";
 import { Hero } from "@/components/Hero";
 import { NeedsGrid } from "@/components/NeedsGrid";
@@ -16,20 +15,47 @@ import { jobs } from "@/lib/data/jobs";
 import { cities } from "@/lib/data/cities";
 import { providers } from "@/lib/data/providers";
 import { ProviderCard } from "@/components/ProviderCard";
-import { getFeaturedGuides } from "@/lib/data/guides";
+import { getFeaturedGuides, guides } from "@/lib/data/guides";
+import { countAllPlanChecklistItems, stageOptions } from "@/lib/data/checklists";
+import { StagePicker } from "@/components/StagePicker";
+import { PlanTeaser } from "@/components/PlanTeaser";
+import { SiteCounters } from "@/components/SiteCounters";
+import { GuideCard } from "@/components/GuideCard";
+import { Reveal } from "@/components/motion/Reveal";
 
 export default function HomePage() {
   const featured = getFeaturedGuides();
+  // Honest, site-derived counts only (content on this site — never users or customers)
+  const siteCounts = [
+    { value: guides.length, label: "practical guides", icon: "guides" as const },
+    { value: cities.length, label: "city guides", icon: "cities" as const },
+    { value: countAllPlanChecklistItems(), label: "plan checklist items", icon: "checklist" as const },
+    { value: stageOptions.length, label: "journey stages in the planner", icon: "stages" as const },
+  ];
 
   return (
     <>
       <Hero />
+
+      {/* What's inside — honest counts derived from site content */}
+      <section aria-labelledby="inside-heading" className="py-10 sm:py-12 bg-sand">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Reveal>
+            <h2 id="inside-heading" className="text-sm font-semibold tracking-wide uppercase text-forest mb-4">
+              What&apos;s inside Norra today
+            </h2>
+            <SiteCounters counts={siteCounts} />
+          </Reveal>
+        </div>
+      </section>
+
       <NeedsGrid />
+      <StagePicker />
 
       {/* Plan — central product */}
       <section className="py-16 sm:py-20 bg-sand">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl bg-night text-cream overflow-hidden grid lg:grid-cols-2">
+          <Reveal className="rounded-3xl bg-night text-cream overflow-hidden grid lg:grid-cols-2">
             <div className="p-8 sm:p-12 lg:p-14 flex flex-col justify-center">
               <div className="inline-flex items-center gap-2 text-amber text-sm font-semibold mb-4">
                 <Map className="h-4 w-4" aria-hidden /> Central product · My Canada Plan
@@ -46,16 +72,10 @@ export default function HomePage() {
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </div>
-            <div className="relative min-h-[220px] sm:min-h-[280px]">
-              <Image
-                src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1000&q=80"
-                alt="Airplane wing above clouds"
-                fill
-                className="object-cover"
-                sizes="(max-width:1024px) 100vw, 50vw"
-              />
+            <div className="relative px-6 pb-10 pt-2 sm:px-10 lg:py-12 flex items-center bg-[radial-gradient(circle_at_70%_30%,rgba(14,100,96,0.55),transparent_65%)]">
+              <PlanTeaser />
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -111,19 +131,10 @@ export default function HomePage() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {featured.map((g) => (
-              <Link
-                key={g.slug}
-                href={`/resources/${g.slug}`}
-                className="rounded-2xl border border-night/5 bg-cream p-5 hover:border-forest/30 hover:bg-white transition-all touch-manipulation min-h-[8.5rem] flex flex-col"
-              >
-                <span className="text-xs font-semibold uppercase tracking-wide text-forest">{g.eyebrow}</span>
-                <span className="mt-2 font-semibold text-ink leading-snug">{g.title}</span>
-                <span className="mt-2 text-sm text-muted line-clamp-2 flex-1">{g.summary}</span>
-                <span className="mt-3 text-sm font-medium text-forest inline-flex items-center gap-1">
-                  Read <ArrowRight className="h-3.5 w-3.5" />
-                </span>
-              </Link>
+            {featured.map((g, i) => (
+              <Reveal key={g.slug} delay={(i % 3) * 70} className="h-full">
+                <GuideCard guide={g} />
+              </Reveal>
             ))}
           </div>
           <div className="mt-8 flex flex-col sm:flex-row gap-3">
@@ -141,8 +152,38 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Cities — light orientation strip */}
+      <section className="py-14 sm:py-16 bg-cream">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+            <SectionHeader
+              eyebrow="Cities"
+              title="Start with a place that fits"
+              description="Short orientation guides — pair with My Canada Plan to autofill city and province."
+            />
+            <Button href="/cities" variant="outline" className="min-h-11">
+              All cities
+            </Button>
+          </div>
+          <div className="flex gap-4 overflow-x-auto pt-2 pb-6 no-scrollbar -mx-4 px-4 snap-x snap-mandatory sm:snap-none">
+            {cities.slice(0, 6).map((c, i) => (
+              <Reveal key={c.slug} delay={i * 60} className="w-[250px] sm:w-[270px] shrink-0 snap-start">
+                <CityCard city={c} sizes="270px" />
+              </Reveal>
+            ))}
+          </div>
+          <p className="text-[11px] text-muted">
+            City photos via Wikimedia Commons —{" "}
+            <Link href="/cities/" className="underline hover:text-forest">
+              credits on the Cities page
+            </Link>
+            .
+          </p>
+        </div>
+      </section>
+
       {/* Tertiary — labelled sample marketplace / housing / jobs */}
-      <section className="py-16 sm:py-20 bg-cream">
+      <section className="py-16 sm:py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="Sample layouts · Demo honesty"
@@ -200,36 +241,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Cities — light orientation strip */}
-      <section className="py-14 sm:py-16 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
-            <SectionHeader
-              eyebrow="Cities"
-              title="Start with a place that fits"
-              description="Short orientation guides — pair with My Canada Plan to autofill city and province."
-            />
-            <Button href="/cities" variant="outline" className="min-h-11">
-              All cities
-            </Button>
-          </div>
-          <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar -mx-4 px-4">
-            {cities.slice(0, 6).map((c) => (
-              <div key={c.slug} className="w-[240px] shrink-0">
-                <CityCard city={c} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <FounderSection variant="teaser" />
       <TrustBanner />
 
       {/* Final CTA */}
       <section className="py-20 bg-cream">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-night/5 bg-white p-8 sm:p-12 lg:p-14 text-center max-w-3xl mx-auto shadow-sm">
+          <Reveal className="rounded-3xl border border-night/5 bg-white p-8 sm:p-12 lg:p-14 text-center max-w-3xl mx-auto shadow-sm">
             <Sparkles className="h-8 w-8 text-amber mx-auto mb-4" aria-hidden />
             <h2 className="font-display text-3xl sm:text-4xl font-semibold text-ink">
               Ready to get oriented?
@@ -252,7 +270,7 @@ export default function HomePage() {
               <Shield className="h-3.5 w-3.5" aria-hidden /> Early-stage product · Not government · Not a consultancy ·
               No guaranteed outcomes
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
     </>

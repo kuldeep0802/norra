@@ -70,7 +70,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-CA" className={`${dmSans.variable} ${fraunces.variable}`}>
+    <html lang="en-CA" className={`${dmSans.variable} ${fraunces.variable}`} suppressHydrationWarning>
+      <head>
+        {/* Enables progressive scroll-reveal styles only when JS runs (content stays visible without JS) */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
       <body className="min-h-screen flex flex-col antialiased">
         <a href="#main-content" className="skip-to-content">
           Skip to content

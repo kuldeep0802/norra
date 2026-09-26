@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { Reveal } from "./motion/Reveal";
 import {
   FileCheck,
   Briefcase,
@@ -52,19 +52,13 @@ export function NeedsGrid() {
           {serviceCategories.map((cat, i) => {
             const Icon = icons[cat.icon] || Home;
             return (
-              <motion.div
-                key={cat.slug}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ delay: i * 0.03, duration: 0.4 }}
-              >
+              <Reveal key={cat.slug} delay={(i % 4) * 50} className="h-full">
                 <Link
                   href={cat.href}
-                  className="flex flex-col h-full min-h-[7.5rem] sm:min-h-0 rounded-2xl border border-night/5 bg-cream p-4 sm:p-5 hover:bg-forest hover:text-cream hover:border-forest hover:shadow-lg transition-all duration-300 group touch-manipulation"
+                  className="flex flex-col h-full min-h-[7.5rem] sm:min-h-0 rounded-2xl border border-night/5 bg-cream p-4 sm:p-5 hover:bg-forest hover:text-cream hover:border-forest hover:shadow-lg motion-safe:hover:-translate-y-1 transition-all duration-300 group touch-manipulation"
                 >
                   <Icon
-                    className="h-7 w-7 text-forest group-hover:text-amber mb-3"
+                    className="h-7 w-7 text-forest group-hover:text-amber mb-3 transition-transform duration-300 motion-safe:group-hover:scale-110 motion-safe:group-hover:-rotate-6"
                     strokeWidth={1.5}
                   />
                   <h3 className="font-semibold text-sm sm:text-base leading-snug">{cat.shortTitle}</h3>
@@ -72,7 +66,7 @@ export function NeedsGrid() {
                     {cat.description}
                   </p>
                 </Link>
-              </motion.div>
+              </Reveal>
             );
           })}
         </div>

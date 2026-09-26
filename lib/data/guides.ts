@@ -1658,3 +1658,20 @@ export function filterGuides(query: string, topic: string = "all"): Guide[] {
     return terms.every((t) => corpus.includes(t));
   });
 }
+
+/** Words in a guide (title, summary, section headings, paragraphs, bullets, callouts). */
+export function guideWordCount(guide: Guide): number {
+  const chunks: string[] = [guide.title, guide.summary];
+  for (const s of guide.sections) {
+    chunks.push(s.heading);
+    if (s.paragraphs) chunks.push(...s.paragraphs);
+    if (s.bullets) chunks.push(...s.bullets);
+    if (s.callout?.text) chunks.push(s.callout.text.replace(/\]\([^)]*\)/g, "]"));
+  }
+  return chunks.join(" ").split(/\s+/).filter(Boolean).length;
+}
+
+/** Reading time computed from actual word count (~220 wpm), minimum 1 minute. */
+export function guideReadingMinutes(guide: Guide): number {
+  return Math.max(1, Math.round(guideWordCount(guide) / 220));
+}

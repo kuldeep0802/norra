@@ -973,3 +973,21 @@ export function buildPlanHref(opts: {
   const qs = params.toString();
   return qs ? `/plan/?${qs}` : "/plan/";
 }
+
+/**
+ * Honest site-derived count: unique checklist items My Canada Plan can generate
+ * across every stage, goal, and need combination (no user data involved).
+ */
+export function countAllPlanChecklistItems(): number {
+  const ids = new Set<string>();
+  for (const s of stageOptions) {
+    const items = buildPlanChecklist({
+      ...emptyPlanProfile,
+      stage: s.value,
+      goals: goalOptions.map((g) => g.value),
+      needs: [...planNeedOptions],
+    });
+    for (const item of items) ids.add(item.id.replace(/^plan-[a-z-]+?-(?=[a-z]+-\d)/, ""));
+  }
+  return ids.size;
+}

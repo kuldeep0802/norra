@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Clock, ExternalLink } from "lucide-react";
-import { Guide } from "@/lib/data/guides";
+import { Guide, guideReadingMinutes } from "@/lib/data/guides";
 import { Disclaimer } from "@/components/Disclaimer";
 import { Button } from "@/components/Button";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -96,7 +96,7 @@ export function GuideArticle({ guide }: { guide: Guide }) {
 
         <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-muted">
           <span className="inline-flex items-center gap-1">
-            <Clock className="h-3.5 w-3.5" /> ~{guide.readingMinutes} min read
+            <Clock className="h-3.5 w-3.5" /> ~{guideReadingMinutes(guide)} min read
           </span>
           <span>Updated {guide.updatedLabel}</span>
           <span>

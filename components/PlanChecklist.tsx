@@ -1,10 +1,55 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Check, ExternalLink, ListChecks, Sparkles } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Check, ExternalLink, ListChecks, PartyPopper, Sparkles } from "lucide-react";
+import { ProgressRing } from "./ProgressRing";
 import { ChecklistItem } from "@/lib/data/checklists";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+
+export const PLAN_PROGRESS_EVENT = "norra-plan-progress";
+export type PlanProgressDetail = { completed: number; total: number };
+
+const confettiColors = ["#D4A574", "#F7F3EC", "#C8D9D6", "#2D8A6E", "#E8C49A"];
+
+/** Lightweight CSS confetti burst (no library). Hidden entirely under prefers-reduced-motion. */
+function ConfettiBurst({ big }: { big: boolean }) {
+  const n = big ? 28 : 12;
+  const bits = Array.from({ length: n }, (_, i) => {
+    const angle = (i / n) * Math.PI * 2 + (i % 2 ? 0.2 : -0.1);
+    const dist = (big ? 90 : 52) + ((i * 37) % (big ? 70 : 30));
+    return {
+      dx: `${Math.cos(angle) * dist}px`,
+      dy: `${Math.sin(angle) * dist - (big ? 20 : 8)}px`,
+      rot: `${(i * 67) % 360}deg`,
+      color: confettiColors[i % confettiColors.length],
+      round: i % 3 === 0,
+    };
+  });
+  return (
+    <span aria-hidden className="pointer-events-none absolute left-1/2 top-1/2 z-10">
+      {bits.map((b, i) => (
+        <span
+          key={i}
+          className="norra-confetti-bit absolute block"
+          style={
+            {
+              width: b.round ? 7 : 5,
+              height: b.round ? 7 : 10,
+              borderRadius: b.round ? 9999 : 2,
+              background: b.color,
+              marginLeft: -3,
+              marginTop: -4,
+              "--dx": b.dx,
+              "--dy": b.dy,
+              "--rot": b.rot,
+            } as React.CSSProperties
+          }
+        />
+      ))}
+    </span>
+  );
+}
 
 export function PlanChecklist({
   items,
@@ -29,7 +74,57 @@ export function PlanChecklist({
     setHydrated(true);
   }, [storageKey]);
 
+  const [burst, setBurst] = useState<{ id: number; big: boolean } | null>(null);
+  const [toast, setToast] = useState<{ id: number; text: string } | null>(null);
+  const [popId, setPopId] = useState<string | null>(null);
+  const burstTimer = useRef<number | undefined>(undefined);
+  const toastTimer = useRef<number | undefined>(undefined);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    const completedNow = items.filter((i) => done[i.id]).length;
+    window.dispatchEvent(
+      new CustomEvent<PlanProgressDetail>(PLAN_PROGRESS_EVENT, {
+        detail: { completed: completedNow, total: items.length },
+      })
+    );
+  }, [done, items, hydrated]);
+
+  useEffect(
+    () => () => {
+      window.clearTimeout(burstTimer.current);
+      window.clearTimeout(toastTimer.current);
+    },
+    []
+  );
+
+  function celebrate(completedAfter: number) {
+    const total = items.length;
+    const all = completedAfter === total;
+    const half = completedAfter === Math.ceil(total / 2);
+    const text = all
+      ? "Every step ticked — plan complete! 🎉"
+      : completedAfter === 1
+        ? "First step done — nice start."
+        : half
+          ? `Halfway there — ${completedAfter} of ${total}.`
+          : `${completedAfter} of ${total} done.`;
+    const id = Date.now();
+    setBurst({ id, big: all || half });
+    setToast({ id, text });
+    window.clearTimeout(burstTimer.current);
+    window.clearTimeout(toastTimer.current);
+    burstTimer.current = window.setTimeout(() => setBurst(null), 1000);
+    toastTimer.current = window.setTimeout(() => setToast(null), 2600);
+  }
+
   function toggle(id: string) {
+    const wasDone = !!done[id];
+    if (!wasDone) {
+      const after = items.filter((i) => (i.id === id ? true : done[i.id])).length;
+      celebrate(after);
+      setPopId(id);
+    }
     setDone((prev) => {
       const next = { ...prev, [id]: !prev[id] };
       try {
@@ -78,23 +173,46 @@ export function PlanChecklist({
 
   return (
     <div>
-      <div className="mb-6 rounded-2xl bg-forest text-cream p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
+      <div
+        id="plan-checklist"
+        className="scroll-mt-24 mb-6 rounded-2xl bg-forest text-cream p-5 sm:p-6 flex items-center gap-5"
+      >
+        <div className="relative">
+          <ProgressRing value={pct} size={88} stroke={8}>
+            <span className="font-display text-lg font-semibold tabular-nums">{pct}%</span>
+          </ProgressRing>
+          {burst && <ConfettiBurst key={burst.id} big={burst.big} />}
+        </div>
+        <div className="flex-1 min-w-0">
           <p className="text-sky text-sm">Progress</p>
-          <p className="font-display text-2xl sm:text-3xl font-semibold mt-1">
+          <p className="font-display text-2xl sm:text-3xl font-semibold mt-0.5 tabular-nums">
             {completed} / {items.length} complete
           </p>
           <p className="mt-1 text-xs text-sky/90">
             Saved in this browser only (localStorage) — not synced to an account yet.
           </p>
-        </div>
-        <div className="w-full sm:w-48">
-          <div className="h-2 rounded-full bg-white/20 overflow-hidden">
-            <div className="h-full bg-amber transition-all duration-500" style={{ width: `${pct}%` }} />
-          </div>
-          <p className="text-xs text-sky mt-2 text-right">{pct}%</p>
+          <p className="h-5 mt-1.5 text-sm font-medium text-amber truncate" role="status" aria-live="polite">
+            {toast ? (
+              <span key={toast.id} className="norra-toast inline-flex items-center gap-1.5">
+                <PartyPopper className="h-4 w-4" aria-hidden />
+                {toast.text}
+              </span>
+            ) : null}
+          </p>
         </div>
       </div>
+
+      {hydrated && items.length > 0 && completed === items.length && (
+        <div className="mb-8 rounded-2xl border border-amber/50 bg-amber/15 px-4 py-4 sm:px-5 text-sm leading-relaxed">
+          <p className="font-semibold text-ink flex items-center gap-2">
+            <PartyPopper className="h-4 w-4 text-[#8A5A2B]" aria-hidden /> Every step on this checklist is ticked.
+          </p>
+          <p className="mt-1 text-muted">
+            Great work. Requirements change — re-check official sources before key deadlines, or edit your plan to add
+            new goals.
+          </p>
+        </div>
+      )}
 
       {hydrated && pct === 0 && (
         <div className="mb-8 rounded-2xl border border-forest/25 bg-sky/30 px-4 py-4 sm:px-5 text-sm text-ink leading-relaxed">
@@ -166,9 +284,11 @@ export function PlanChecklist({
                           className="mt-0.5 shrink-0 touch-manipulation min-h-11 min-w-11 -ml-1.5 -mt-1.5 flex items-center justify-center"
                         >
                           <span
+                            key={checked && popId === item.id ? "pop" : "idle"}
                             className={cn(
-                              "h-5 w-5 rounded-md border flex items-center justify-center",
-                              checked ? "bg-forest border-forest text-cream" : "border-muted/40 bg-white"
+                              "h-5 w-5 rounded-md border flex items-center justify-center transition-colors",
+                              checked ? "bg-forest border-forest text-cream" : "border-muted/40 bg-white",
+                              checked && popId === item.id && "norra-check-pop"
                             )}
                           >
                             {checked && <Check className="h-3.5 w-3.5" />}

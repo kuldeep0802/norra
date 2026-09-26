@@ -3,32 +3,13 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, BookOpen, Search, X } from "lucide-react";
-import { filterGuides, guides, hubTopicChips, type Guide } from "@/lib/data/guides";
+import { filterGuides, guides, hubTopicChips } from "@/lib/data/guides";
+import { GuideCard as VisualGuideCard } from "./GuideCard";
+
 import { buildPlanHref, hubTopicToPlanQuery } from "@/lib/data/checklists";
 
-function GuideCard({ g }: { g: Guide }) {
-  return (
-    <Link
-      href={`/resources/${g.slug}`}
-      className="group flex flex-col rounded-2xl border border-night/5 bg-white p-5 sm:p-6 hover:border-forest/30 hover:shadow-md transition-all touch-manipulation min-h-[11rem]"
-    >
-      <span className="text-xs font-semibold uppercase tracking-wide text-forest">{g.eyebrow}</span>
-      <h3 className="mt-2 font-display text-lg font-semibold text-ink group-hover:text-forest leading-snug">
-        {g.title}
-      </h3>
-      <p className="mt-2 text-sm text-muted leading-relaxed flex-1 line-clamp-3">{g.summary}</p>
-      <div className="mt-3 flex flex-wrap gap-1.5">
-        {g.topics.slice(0, 4).map((t) => (
-          <span key={t} className="text-[10px] uppercase tracking-wide rounded-full bg-sand px-2 py-0.5 text-muted">
-            {t}
-          </span>
-        ))}
-      </div>
-      <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-forest">
-        Read guide <ArrowRight className="h-3.5 w-3.5" />
-      </span>
-    </Link>
-  );
+function GuideCard({ g }: { g: (typeof guides)[number] }) {
+  return <VisualGuideCard guide={g} showTopics />;
 }
 
 export function GuideSearch() {

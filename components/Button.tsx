@@ -41,7 +41,7 @@ export function Button({
   disabled,
 }: Props) {
   const cls = cn(
-    "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2 focus-visible:ring-offset-cream disabled:opacity-50",
+    "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-200 motion-safe:hover:-translate-y-0.5 hover:shadow-[0_8px_20px_-10px_rgba(10,31,28,0.45)] active:translate-y-0 active:scale-[0.98] touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2 focus-visible:ring-offset-cream disabled:opacity-50",
     variants[variant],
     sizes[size],
     className

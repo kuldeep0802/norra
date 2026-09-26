@@ -5,6 +5,8 @@ export type City = {
   tagline: string;
   population: string;
   image: string;
+  /** Attribution for non-Unsplash images (e.g. Wikimedia Commons, CC BY) */
+  imageCredit?: { text: string; href: string };
   highlights: string[];
   housingNote: string;
   jobsNote: string;
@@ -23,7 +25,11 @@ export const cities: City[] = [
     province: "Ontario",
     tagline: "Canada's largest city — diverse, ambitious, and always in motion.",
     population: "3.0M+",
-    image: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Sunset_Toronto_Skyline_Panorama_Crop_from_Snake_Island.jpg/1280px-Sunset_Toronto_Skyline_Panorama_Crop_from_Snake_Island.jpg",
+    imageCredit: {
+      text: "Photo: Jchmrt, CC BY-SA 4.0, via Wikimedia Commons",
+      href: "https://commons.wikimedia.org/wiki/File:Sunset_Toronto_Skyline_Panorama_Crop_from_Snake_Island.jpg",
+    },
     highlights: ["Financial & tech hub", "World-class transit (TTC)", "Global food scene", "Strong newcomer networks"],
     housingNote: "Competitive rental market. Expect higher rents downtown and near subway lines. Consider Midtown, North York, Scarborough, or Etobicoke for value.",
     jobsNote: "Finance, tech, healthcare, education, and hospitality dominate. Many entry and mid-level roles for newcomers with Canadian experience strategies.",
@@ -49,7 +55,11 @@ export const cities: City[] = [
     province: "Ontario",
     tagline: "A vibrant GTA city with strong South Asian and newcomer communities.",
     population: "650K+",
-    image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Brampton_ON_Downtown_2022-01-30.jpg/1280px-Brampton_ON_Downtown_2022-01-30.jpg",
+    imageCredit: {
+      text: "Photo: Milan Suvajac, CC BY-SA 4.0, via Wikimedia Commons",
+      href: "https://commons.wikimedia.org/wiki/File:Brampton_ON_Downtown_2022-01-30.jpg",
+    },
     highlights: ["Family-friendly suburbs", "Growing job corridors", "GO Transit access", "Rich cultural communities"],
     housingNote: "More spacious housing than downtown Toronto at generally lower rents. Popular with families.",
     jobsNote: "Logistics, manufacturing, healthcare, retail, and airport-adjacent employers.",
@@ -73,7 +83,11 @@ export const cities: City[] = [
     province: "Ontario",
     tagline: "Corporate towers, lakefront parks, and a major airport gateway.",
     population: "720K+",
-    image: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=1200&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/1/15/Burnhamthorpe_Road_Mississauga_City_Centre.jpg",
+    imageCredit: {
+      text: "Photo: Transportfan70, CC0, via Wikimedia Commons",
+      href: "https://commons.wikimedia.org/wiki/File:Burnhamthorpe_Road_Mississauga_City_Centre.jpg",
+    },
     highlights: ["Pearson Airport hub", "Corporate headquarters", "Square One area", "Lakefront trails"],
     housingNote: "Condos near Square One and family homes in established neighbourhoods. Mid-range GTA pricing.",
     jobsNote: "Pharma, logistics, aviation, IT, and corporate offices.",
@@ -96,7 +110,11 @@ export const cities: City[] = [
     province: "Ontario",
     tagline: "North of Toronto — malls, industry, and growing subway access.",
     population: "330K+",
-    image: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1200&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Vaughan_Metropolitan_Centre_aerial_view_2022.jpg/1280px-Vaughan_Metropolitan_Centre_aerial_view_2022.jpg",
+    imageCredit: {
+      text: "Photo: Canmenwalker, CC BY 4.0, via Wikimedia Commons",
+      href: "https://commons.wikimedia.org/wiki/File:Vaughan_Metropolitan_Centre_aerial_view_2022.jpg",
+    },
     highlights: ["Subway extension", "Industrial parks", "Canada's Wonderland nearby", "Family suburbs"],
     housingNote: "Newer builds and townhomes; pricing reflects GTA demand.",
     jobsNote: "Manufacturing, warehousing, retail, and construction.",
@@ -116,7 +134,11 @@ export const cities: City[] = [
     province: "Ontario",
     tagline: "The capital — bilingual, green, and government-centred.",
     population: "1.0M+",
-    image: "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=1200&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Parliament_Hill_from_the_Ottawa_River.JPG/1280px-Parliament_Hill_from_the_Ottawa_River.JPG",
+    imageCredit: {
+      text: "Photo: \u00d3\u00f0inn, CC BY-SA 2.5 ca, via Wikimedia Commons",
+      href: "https://commons.wikimedia.org/wiki/File:Parliament_Hill_from_the_Ottawa_River.JPG",
+    },
     highlights: ["Federal government jobs", "Bilingual opportunities", "Tech corridor", "Parks & pathways"],
     housingNote: "More affordable than Toronto/Vancouver. Centretown, Glebe, Kanata, Orleans, and Barrhaven offer different lifestyles.",
     jobsNote: "Public service, tech, education, healthcare, and tourism.",
@@ -139,7 +161,11 @@ export const cities: City[] = [
     province: "Alberta",
     tagline: "Prairie energy meets mountain weekends.",
     population: "1.4M+",
-    image: "https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=1200&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Calgary_Skyline_from_Prince%27s_Island_Park.jpg/1280px-Calgary_Skyline_from_Prince%27s_Island_Park.jpg",
+    imageCredit: {
+      text: "Photo: Tamsintj, CC BY-SA 4.0, via Wikimedia Commons",
+      href: "https://commons.wikimedia.org/wiki/File:Calgary_Skyline_from_Prince%27s_Island_Park.jpg",
+    },
     highlights: ["Energy & tech", "Rockies nearby", "No provincial sales tax", "Growing startup scene"],
     housingNote: "Generally more affordable than Toronto/Vancouver. Suburbs and inner-city options.",
     jobsNote: "Energy, tech, construction, logistics, and professional services.",
@@ -159,7 +185,11 @@ export const cities: City[] = [
     province: "Alberta",
     tagline: "Festival city with a strong public sector and growing tech scene.",
     population: "1.0M+",
-    image: "https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=1200&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Edmonton_Skyline_%284232809768%29.jpg/1280px-Edmonton_Skyline_%284232809768%29.jpg",
+    imageCredit: {
+      text: "Photo: Heidi G, CC BY 2.0, via Wikimedia Commons",
+      href: "https://commons.wikimedia.org/wiki/File:Edmonton_Skyline_(4232809768).jpg",
+    },
     highlights: ["Government & education", "Affordable housing", "Festivals year-round", "River valley parks"],
     housingNote: "Among Canada's more affordable major cities for renters and buyers.",
     jobsNote: "Public sector, healthcare, education, energy services, and retail.",
@@ -179,7 +209,11 @@ export const cities: City[] = [
     province: "British Columbia",
     tagline: "Mountains, ocean, and one of Canada's most competitive housing markets.",
     population: "700K+ (metro 2.6M)",
-    image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1200&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Skyline_of_Vancouver%2C_BC.jpg/1280px-Skyline_of_Vancouver%2C_BC.jpg",
+    imageCredit: {
+      text: "Photo: Quintin Soloviev, CC BY 4.0, via Wikimedia Commons",
+      href: "https://commons.wikimedia.org/wiki/File:Skyline_of_Vancouver,_BC.jpg",
+    },
     highlights: ["Pacific gateway", "Film & tech", "Outdoor lifestyle", "Diverse communities"],
     housingNote: "High rents — consider Burnaby, Surrey, Richmond, New Westminster for alternatives.",
     jobsNote: "Tech, film, trade, tourism, healthcare, and education.",
@@ -202,7 +236,11 @@ export const cities: City[] = [
     province: "Quebec",
     tagline: "European flair, francophone culture, and creative energy.",
     population: "1.8M+",
-    image: "https://images.unsplash.com/photo-1519178614-68673b201f36?w=1200&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Montreal_-_QC_-_Skyline.jpg/1280px-Montreal_-_QC_-_Skyline.jpg",
+    imageCredit: {
+      text: "Photo: Taxiarchos228, CC BY 3.0, via Wikimedia Commons",
+      href: "https://commons.wikimedia.org/wiki/File:Montreal_-_QC_-_Skyline.jpg",
+    },
     highlights: ["Bilingual advantage", "Arts & startups", "Affordable relative to TO/Van", "Metro system"],
     housingNote: "Plateau, Mile End, Griffintown, and suburbs offer varied price points. French lease documents are common.",
     jobsNote: "AI, aerospace, gaming, education, and creative industries. French often required or preferred.",
@@ -226,7 +264,11 @@ export const cities: City[] = [
     province: "Manitoba",
     tagline: "Central Canada — welcoming, affordable, and community-focused.",
     population: "750K+",
-    image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Winnipeg_skyline_snowy.jpg/1280px-Winnipeg_skyline_snowy.jpg",
+    imageCredit: {
+      text: "Photo: Quintin Soloviev, CC0, via Wikimedia Commons",
+      href: "https://commons.wikimedia.org/wiki/File:Winnipeg_skyline_snowy.jpg",
+    },
     highlights: ["Affordable living", "PNP pathways history", "Cultural diversity", "Arts scene"],
     housingNote: "Among the more affordable major Canadian cities.",
     jobsNote: "Agriculture-related industry, healthcare, manufacturing, and public sector.",
@@ -246,7 +288,11 @@ export const cities: City[] = [
     province: "Nova Scotia",
     tagline: "Atlantic warmth — ocean air, universities, and a growing newcomer scene.",
     population: "440K+",
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Halifax_Waterfront_%2841039142235%29.jpg/1280px-Halifax_Waterfront_%2841039142235%29.jpg",
+    imageCredit: {
+      text: "Photo: daryl_mitchell, CC BY-SA 2.0, via Wikimedia Commons",
+      href: "https://commons.wikimedia.org/wiki/File:Halifax_Waterfront_(41039142235).jpg",
+    },
     highlights: ["Ocean lifestyle", "Universities", "Atlantic immigration programs", "Compact downtown"],
     housingNote: "Tightening market but still often below Toronto/Vancouver. Plan ahead for September student demand.",
     jobsNote: "Ocean industries, government, healthcare, education, and growing tech.",

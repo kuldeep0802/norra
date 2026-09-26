@@ -20,9 +20,24 @@ export default function CitiesPage() {
         </Disclaimer>
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {cities.map((c) => (
-            <CityCard key={c.slug} city={c} />
+            <CityCard key={c.slug} city={c} sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw" />
           ))}
         </div>
+        <p className="mt-8 text-xs text-muted">
+          Image credits:{" "}
+          {cities
+            .filter((c) => c.imageCredit)
+            .map((c, i, arr) => (
+              <span key={c.slug}>
+                {c.name} —{" "}
+                <a href={c.imageCredit!.href} target="_blank" rel="noopener noreferrer" className="underline hover:text-forest">
+                  {c.imageCredit!.text}
+                </a>
+                {i < arr.length - 1 ? "; " : ""}
+              </span>
+            ))}
+          .
+        </p>
       </div>
     </div>
   );

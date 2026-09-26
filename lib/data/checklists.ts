@@ -1,3 +1,9 @@
+import {
+  FEDERAL_HEALTH_OVERVIEW,
+  HEALTH_CHECKLIST_BASE_IDS,
+  resolveHealthLinksForCity,
+} from "./healthLinks";
+
 export type ChecklistItem = {
   id: string;
   label: string;
@@ -516,10 +522,33 @@ export function buildPlanChecklist(profile: PlanProfile): ChecklistItem[] {
     add(settlingItems.filter((i) => i.id === "set-2" || i.id === "set-5"));
   }
 
-  return items.map((item, i) => ({
-    ...item,
-    id: `plan-${profile.stage || "general"}-${item.id}`,
-  }));
+  const health = resolveHealthLinksForCity(profile.city);
+  const provincialOfficial = health.provincial
+    ? { href: health.provincial.href, label: `${health.provincial.planName} — official site` }
+    : { href: FEDERAL_HEALTH_OVERVIEW.href, label: FEDERAL_HEALTH_OVERVIEW.label };
+
+  return items.map((item) => {
+    const baseId = item.id;
+    const isHealthOfficial = (HEALTH_CHECKLIST_BASE_IDS as readonly string[]).includes(baseId);
+    const next: ChecklistItem = {
+      ...item,
+      id: `plan-${profile.stage || "general"}-${item.id}`,
+    };
+    if (isHealthOfficial) {
+      next.officialHref = provincialOfficial.href;
+      next.officialLabel = provincialOfficial.label;
+      if (health.provincial) {
+        next.description =
+          (item.description ? item.description + " " : "") +
+          `Suggested starting point for ${health.province}: ${health.provincial.planName}. Always verify on the official site.`;
+      } else {
+        next.description =
+          (item.description ? item.description + " " : "") +
+          "City unknown — use the national health guide and federal overview. Always verify on the official site.";
+      }
+    }
+    return next;
+  });
 }
 
 export type PlanRecommendation = {
@@ -572,12 +601,6 @@ export function getPlanRecommendations(profile: PlanProfile): PlanRecommendation
       href: "/resources/open-bank-account-newcomer",
       kind: "guide",
     });
-    push({
-      title: "Get a provincial health card",
-      description: "Orientation map to official OHIP, MSP, AHCIP, RAMQ and other government links — verify eligibility there.",
-      href: "/resources/get-health-card-canada",
-      kind: "guide",
-    });
   }
   if (
     profile.needs.includes("Banking & SIN") ||
@@ -600,11 +623,19 @@ export function getPlanRecommendations(profile: PlanProfile): PlanRecommendation
   if (
     profile.needs.includes("Healthcare registration") ||
     profile.goals.includes("settle") ||
-    profile.stage === "already-here"
+    profile.stage === "already-here" ||
+    profile.stage === "just-arrived" ||
+    profile.stage === "settling"
   ) {
+    const health = resolveHealthLinksForCity(profile.city);
+    const place = health.provincial
+      ? `${health.provincial.planName} (${health.province})`
+      : "your province or territory";
     push({
       title: "Get a provincial health card",
-      description: "Orientation map to official OHIP, MSP, AHCIP, RAMQ and other government links — verify eligibility there.",
+      description: health.provincial
+        ? `Norra guide plus official ${place} enrolment link on your plan. Always verify on the official site — no invented wait times.`
+        : "Orientation map to official provincial links. Pick a city in your plan for a matching official enrolment page. Always verify on the official site.",
       href: "/resources/get-health-card-canada",
       kind: "guide",
     });
@@ -669,10 +700,19 @@ export function getPlanRecommendations(profile: PlanProfile): PlanRecommendation
     });
   }
   if (profile.city && profile.city !== "Other / Not sure yet") {
+    const health = resolveHealthLinksForCity(profile.city);
     push({
       title: "Compare Canadian cities",
       description: "How to weigh cost, climate, jobs, and community fit.",
       href: "/resources/compare-canadian-cities",
+      kind: "guide",
+    });
+    push({
+      title: "Get a provincial health card",
+      description: health.provincial
+        ? `Your plan city maps to ${health.provincial.planName} (${health.province}). Open the official enrolment link on your plan dashboard — verify on the official site.`
+        : "Open the national health-card guide. Always verify on the official site.",
+      href: "/resources/get-health-card-canada",
       kind: "guide",
     });
   }

@@ -6,6 +6,7 @@ import { ArrowRight, BookOpen, MapPin, RefreshCw, Sparkles } from "lucide-react"
 import { SectionHeader } from "@/components/SectionHeader";
 import { Button } from "@/components/Button";
 import { PlanChecklist } from "@/components/PlanChecklist";
+import { PlanHealthLinks } from "@/components/PlanHealthLinks";
 import { DemoBanner } from "@/components/DemoBanner";
 import { Disclaimer } from "@/components/Disclaimer";
 import {
@@ -137,6 +138,8 @@ export default function PlanPage() {
               </button>
             </div>
           )}
+
+          <PlanHealthLinks city={profile.city} />
 
           <div className="mt-10">
             <h2 className="font-display text-xl sm:text-2xl font-semibold text-ink mb-4">

@@ -1,22 +1,32 @@
 import { SectionHeader } from "@/components/SectionHeader";
 import { Button } from "@/components/Button";
 import { DemoBanner } from "@/components/DemoBanner";
+import { PartnerInterestForm } from "@/components/PartnerInterestForm";
+import { founder } from "@/lib/data/founder";
 
-export const metadata = { title: "Partner" };
+export const metadata = {
+  title: "Partner — Provider interest",
+  description:
+    "Express interest in a future Norra marketplace. Early-stage interest list only — marketplace not live; no verification or acceptance claimed.",
+};
 
 export default function PartnerPage() {
   return (
-    <div className="py-16">
+    <div className="py-10 sm:py-16">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          eyebrow="Partners"
+          eyebrow="Partners · Early stage"
           title="Explore building with Norra"
           description="We're an early-stage product exploring how settlement agencies, schools, employers, housing operators, and licensed professionals might work with navigation tools like Norra."
         />
+
         <DemoBanner className="mt-8">
-          No active partnership program is live yet. Reach out if you&apos;d like to talk — conversations welcome;
-          we do not claim existing corporate partners.
+          <strong className="text-forest">Marketplace not live.</strong> There is no active partnership program,
+          no claimed partner logos, and no &ldquo;joined providers&rdquo; list. The form below is an{" "}
+          <strong className="text-forest">interest list only</strong> — it does not verify credentials, check
+          licences, or accept anyone onto a marketplace.
         </DemoBanner>
+
         <div className="mt-10 grid sm:grid-cols-2 gap-5">
           {[
             ["Licensed professionals", "Future: clearer booking tools and credential checks — not live yet."],
@@ -30,12 +40,27 @@ export default function PartnerPage() {
             </div>
           ))}
         </div>
+
+        <div id="interest" className="mt-12 scroll-mt-24">
+          <PartnerInterestForm />
+        </div>
+
         <p className="mt-8 text-muted text-sm leading-relaxed">
           Example pricing on sample booking cards (under $40) is illustrative only. We do not sell user data.
+          Prefer a short note without the form? Email{" "}
+          <a href={`mailto:${founder.email}`} className="text-forest font-medium hover:underline">
+            {founder.email}
+          </a>{" "}
+          or call {founder.phone}.
         </p>
-        <Button href="/contact" className="mt-6 min-h-11">
-          Contact the Founder
-        </Button>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Button href="/contact" className="min-h-11">
+            Contact the Founder
+          </Button>
+          <Button href="/professionals" variant="outline" className="min-h-11">
+            View sample marketplace
+          </Button>
+        </div>
       </div>
     </div>
   );

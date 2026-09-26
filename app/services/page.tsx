@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SectionHeader } from "@/components/SectionHeader";
 import { serviceCategories } from "@/lib/data/services";
 import { Disclaimer } from "@/components/Disclaimer";
+import { Button } from "@/components/Button";
 
 export const metadata = { title: "Services" };
 
@@ -30,6 +31,19 @@ export default function ServicesPage() {
               <p className="mt-4 text-sm font-medium text-forest">Explore →</p>
             </Link>
           ))}
+        </div>
+
+        <div className="mt-12 rounded-2xl border border-dashed border-forest/30 bg-sky/15 p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <p className="font-semibold text-ink">Providers: express interest</p>
+            <p className="mt-1 text-sm text-muted leading-relaxed max-w-xl">
+              Offer immigration, career, housing-adjacent, tutoring, or related help? Join the early interest list
+              for a future Norra marketplace — not live, not verified, not an acceptance.
+            </p>
+          </div>
+          <Button href="/partner#interest" variant="outline" className="shrink-0 min-h-11">
+            Providers: express interest
+          </Button>
         </div>
       </div>
     </div>

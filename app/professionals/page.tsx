@@ -87,6 +87,19 @@ export default function ProfessionalsPage() {
             Build My Canada Plan
           </Button>
         </div>
+
+        <div className="mt-6 rounded-2xl border border-dashed border-forest/30 bg-sky/15 p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <p className="font-semibold text-ink">Providers: express interest</p>
+            <p className="mt-1 text-sm text-muted leading-relaxed max-w-xl">
+              Legitimate providers can join an early-stage interest list for a future marketplace. Not live yet —
+              no verification or acceptance claimed.
+            </p>
+          </div>
+          <Button href="/partner#interest" variant="outline" className="shrink-0 min-h-11">
+            Providers: express interest
+          </Button>
+        </div>
       </div>
     </div>
   );

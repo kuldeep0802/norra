@@ -24,7 +24,6 @@ import {
 import { cities } from "@/lib/data/cities";
 
 export default function PlanPage() {
-  const [hydrated, setHydrated] = useState(false);
   const [step, setStep] = useState<"form" | "dashboard">("form");
   const [profile, setProfile] = useState<PlanProfile>(emptyPlanProfile);
 
@@ -34,7 +33,6 @@ export default function PlanPage() {
       setProfile(saved);
       setStep("dashboard");
     }
-    setHydrated(true);
   }, []);
 
   const items = useMemo(() => buildPlanChecklist(profile), [profile]);
@@ -73,16 +71,6 @@ export default function PlanPage() {
       /* ignore */
     }
     setStep("form");
-  }
-
-  if (!hydrated) {
-    return (
-      <div className="py-16">
-        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
-          <div className="h-40 rounded-2xl bg-sand animate-pulse" />
-        </div>
-      </div>
-    );
   }
 
   if (step === "dashboard") {

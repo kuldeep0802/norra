@@ -399,7 +399,7 @@ export const alreadyHereItems: ChecklistItem[] = [
     id: "here-5",
     label: "Organize taxes / benefits bookmarks for CRA when relevant",
     category: "Government",
-    href: "/government",
+    href: "/resources/newcomer-taxes-canada",
     officialHref: "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/newcomers-canada-immigrants.html",
     officialLabel: "CRA — Newcomers",
   },
@@ -719,13 +719,19 @@ export function getPlanRecommendations(profile: PlanProfile): PlanRecommendation
       kind: "guide",
     });
     push({
-      title: "Students overview",
-      description: "Orientation pointers for studying in Canada.",
+      title: "Students hub (guides first)",
+      description: "Knowledge Hub student guides + Plan Study CTA — sample marketplace chrome demoted.",
       href: "/students",
       kind: "service",
     });
   }
-  if (profile.needs.includes("Government benefits")) {
+  if (profile.needs.includes("Government benefits") || profile.stage === "already-here") {
+    push({
+      title: "Filing taxes as a newcomer (CRA orientation)",
+      description: "Get-ready map, My Account, benefits bookmarks, scam warnings — no invented brackets or refund amounts.",
+      href: "/resources/newcomer-taxes-canada",
+      kind: "guide",
+    });
     push({
       title: "Government & benefits map",
       description: "High-level CRA / Canada.ca starting points — no invented amounts. Verify eligibility on official sites.",
@@ -804,6 +810,9 @@ export const needQueryAliases: Record<string, (typeof planNeedOptions)[number]> 
   cities: "Learn the city",
   benefits: "Government benefits",
   government: "Government benefits",
+  taxes: "Government benefits",
+  tax: "Government benefits",
+  cra: "Government benefits",
   safety: "Find housing",
   scams: "Find housing",
   prearrival: "Airport & arrival",
@@ -822,8 +831,8 @@ export const hubTopicToPlanQuery: Record<
   "Pre-arrival": { need: "arrival", stage: "pre-arrival" },
   Arrival: { need: "arrival", stage: "just-arrived" },
   Student: { goal: "study", need: "school" },
-  /** Knowledge Hub “Government” guides currently centre on SIN → Banking & SIN */
-  Government: { need: "banking" },
+  /** Government guides: SIN + taxes/benefits orientation */
+  Government: { need: "benefits" },
   Cities: { need: "city" },
   /** Scam guide emphasises housing deposits & fake listings first */
   Safety: { need: "housing" },

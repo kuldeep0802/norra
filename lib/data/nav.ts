@@ -39,6 +39,7 @@ export const footerLinks = {
     { label: "Immigration", href: "/immigration" },
     { label: "Settlement", href: "/settlement" },
     { label: "Students", href: "/students" },
+    { label: "Newcomer taxes (CRA)", href: "/resources/newcomer-taxes-canada" },
     { label: "Government guides", href: "/government" },
   ],
   company: [

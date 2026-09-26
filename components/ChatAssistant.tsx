@@ -55,7 +55,7 @@ function profileContextLinks(profile: PlanProfile | null): { label: string; href
     links.push({ label: "First Canadian job", href: "/resources/first-canadian-job" });
   }
   if (profile.goals.includes("study")) {
-    links.push({ label: "Students overview", href: "/students" });
+    links.push({ label: "Students hub (guides)", href: "/students" });
   }
   if (profile.city && profile.city !== "Other / Not sure yet") {
     links.push({ label: "Compare cities", href: "/resources/compare-canadian-cities" });
@@ -168,11 +168,12 @@ function respond(input: string, profile: PlanProfile | null): Msg {
   if (/sin|tax|cra|ei\b|benefit|ohip|health card|government/.test(q)) {
     return withBias({
       role: "assistant",
-      text: "I can point to high-level government navigation pages and our SIN checklist. For official rules and applications, use Canada.ca or your provincial site — Nora does not file anything for you.",
+      text: "I can point to high-level government navigation, our SIN checklist, and CRA taxes orientation. For official rules, amounts, and applications, use Canada.ca / CRA — Nora does not invent brackets or refunds.",
       links: [
         { label: "Get a SIN checklist", href: "/resources/get-sin-canada" },
         { label: "Provincial health-card guide", href: "/resources/get-health-card-canada" },
         { label: "First week guide", href: "/resources/first-week-in-canada" },
+        { label: "Taxes orientation (CRA)", href: "/resources/newcomer-taxes-canada" },
         { label: "Government guides", href: "/government" },
         { label: "My Canada Plan", href: "/plan" },
       ],

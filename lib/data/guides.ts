@@ -576,6 +576,7 @@ export const guides: Guide[] = [
     relatedHrefs: [
       { label: "Open a bank account", href: "/resources/open-bank-account-newcomer" },
       { label: "Get a health card", href: "/resources/get-health-card-canada" },
+      { label: "Newcomer taxes (CRA)", href: "/resources/newcomer-taxes-canada" },
       { label: "First week in Canada", href: "/resources/first-week-in-canada" },
       { label: "Avoid newcomer scams", href: "/resources/avoid-newcomer-scams" },
       { label: "My Canada Plan", href: "/plan" },
@@ -699,6 +700,7 @@ export const guides: Guide[] = [
     relatedHrefs: [
       { label: "Get a SIN", href: "/resources/get-sin-canada" },
       { label: "Get a health card", href: "/resources/get-health-card-canada" },
+      { label: "Newcomer taxes (CRA)", href: "/resources/newcomer-taxes-canada" },
       { label: "First week in Canada", href: "/resources/first-week-in-canada" },
       { label: "Avoid newcomer scams", href: "/resources/avoid-newcomer-scams" },
       { label: "My Canada Plan", href: "/plan" },
@@ -974,6 +976,7 @@ export const guides: Guide[] = [
       { label: "Get a health card", href: "/resources/get-health-card-canada" },
       { label: "Avoid newcomer scams", href: "/resources/avoid-newcomer-scams" },
       { label: "Temporary accommodation", href: "/resources/temporary-accommodation" },
+      { label: "Newcomer taxes (CRA)", href: "/resources/newcomer-taxes-canada" },
       { label: "First week in Canada", href: "/resources/first-week-in-canada" },
     ],
     sections: [
@@ -1082,6 +1085,152 @@ export const guides: Guide[] = [
     ],
   },
 
+  {
+    slug: "newcomer-taxes-canada",
+    title: "Filing taxes in Canada as a newcomer (orientation)",
+    metaTitle: "Newcomer Taxes in Canada — CRA Orientation Guide",
+    metaDescription:
+      "Orientation for newcomers, students, and workers filing taxes in Canada: CRA starting points, get-ready steps, benefits bookmarks, My Account, and scam warnings — no invented brackets, credits, or refund amounts.",
+    eyebrow: "Government",
+    summary:
+      "A calm map of how newcomers usually approach Canadian personal taxes and CRA benefits pages — organization only. Eligibility, amounts, and deadlines come from CRA / Canada.ca, never from Norra.",
+    topics: [
+      "taxes",
+      "CRA",
+      "newcomer",
+      "students",
+      "workers",
+      "GST",
+      "benefits",
+      "My Account",
+      "SIN",
+      "filing",
+      "government",
+    ],
+    readingMinutes: 11,
+    updatedLabel: "Sep 2026",
+    datePublished: "2026-09-26",
+    dateModified: "2026-09-26",
+    planCtaHref: "/plan/?need=benefits",
+    relatedHrefs: [
+      { label: "My Canada Plan (Government benefits)", href: "/plan/?need=benefits" },
+      { label: "Government & benefits map", href: "/government" },
+      { label: "Get a SIN", href: "/resources/get-sin-canada" },
+      { label: "Open a bank account", href: "/resources/open-bank-account-newcomer" },
+      { label: "First week in Canada", href: "/resources/first-week-in-canada" },
+      { label: "International student first weeks", href: "/resources/first-weeks-international-student" },
+      { label: "Avoid newcomer scams", href: "/resources/avoid-newcomer-scams" },
+    ],
+    sections: [
+      {
+        heading: "What this guide is (and is not)",
+        paragraphs: [
+          "Canadian personal taxes and many federal benefits are administered by the Canada Revenue Agency (CRA). Newcomers, international students who work, and temporary workers often need a simple map of where to start — not a calculator of what they will get back.",
+          "Norra does not invent tax brackets, credit amounts, refund estimates, filing deadlines, or eligibility. Those change and depend on your residency status, income, and province or territory. Always verify on CRA / Canada.ca pages for the tax year that applies to you.",
+        ],
+        callout: {
+          kind: "verify",
+          text: "Official starting points: [Canada Revenue Agency](https://www.canada.ca/en/revenue-agency.html) · [CRA — Newcomers to Canada](https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/newcomers-canada-immigrants.html) · [Get ready to file a tax return](https://www.canada.ca/en/services/taxes/income-tax/personal-income-tax/get-ready-taxes.html)",
+        },
+      },
+      {
+        heading: "Why taxes show up on a newcomer checklist",
+        paragraphs: [
+          "Filing a return is how many people report income and how CRA learns enough to assess certain benefits and credits. Whether you must file, and for which years, depends on your situation — CRA explains this for newcomers and for people who leave or enter Canada.",
+          "Students and workers who earn Canadian employment income commonly encounter T4 slips, SIN usage for payroll, and questions about benefits. Treat social-media \"you will get X\" claims as unverified.",
+        ],
+        bullets: [
+          "Use CRA newcomers pages before assuming first-year rules from blogs",
+          "Keep pay stubs, T-slips, tuition receipts, and donation receipts organized (Document habits — not tax advice)",
+          "A Social Insurance Number is often part of payroll and tax filing workflows — see Norra's SIN guide and Service Canada",
+          "A Canadian bank account helps with direct deposit of refunds or benefits when CRA offers that — see banking orientation and CRA direct-deposit pages",
+        ],
+        callout: {
+          kind: "tip",
+          text: "In My Canada Plan, add the need \"Government benefits\" so the CRA / taxes checklist item appears. Cross-link Banking & SIN if you are still setting those up.",
+        },
+      },
+      {
+        heading: "Quick orientation checklist (verify every step on CRA)",
+        bullets: [
+          "Open the CRA newcomers page and read the sections that match your residency and arrival timing",
+          "Skim Canada.ca \"Get ready to file\" so you know what documents people commonly gather",
+          "Confirm you have (or are eligible to apply for) a SIN when work or filing requires one — Service Canada defines SIN rules",
+          "Bookmark CRA My Account information if you will manage filings or benefits online — create accounts only through official links",
+          "Review Canada.ca Benefits and CRA child-and-family benefit overviews if you may qualify — eligibility is decided by CRA, not Norra",
+          "Watch for CRA scam patterns: gift-card payments, crypto demands, and threats delivered only by text",
+        ],
+        callout: {
+          kind: "verify",
+          text: "Benefits overview: [Canada.ca — Benefits](https://www.canada.ca/en/services/benefits.html) · [CRA — Child and family benefits](https://www.canada.ca/en/revenue-agency/services/child-family-benefits.html) · [GST/HST credit](https://www.canada.ca/en/revenue-agency/services/child-family-benefits/goods-services-tax-harmonized-sales-tax-gst-hst-credit.html)",
+        },
+      },
+      {
+        heading: "Students and workers — same honesty rules",
+        paragraphs: [
+          "International students and temporary workers are not a single tax category. Residency for tax purposes, scholarship treatment, and work income rules are defined by CRA — and they interact with your immigration status in ways Norra will not summarize as advice.",
+          "If you work on or off campus, keep employer slips and confirm on IRCC what your permit allows. Tax filing does not replace immigration compliance.",
+        ],
+        callout: {
+          kind: "verify",
+          text: "International / non-resident tax topics hub: [CRA — International and non-residents](https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents.html). Study-permit work conditions: [Study in Canada — IRCC](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada.html).",
+        },
+      },
+      {
+        heading: "My Account, filing channels, and direct deposit",
+        paragraphs: [
+          "CRA publishes how individuals can register for My Account, file electronically (for example NETFILE where eligible), or send a paper return. Which channel fits you depends on CRA rules for that year — read the official pages rather than third-party ads.",
+          "Direct deposit is often how refunds and some benefits are paid when you set it up with CRA. That still requires accurate banking details you control — never share online-banking passwords with someone who claims to \"file for you faster.\"",
+        ],
+        bullets: [
+          "My Account (individuals): https://www.canada.ca/en/revenue-agency/services/e-services/digital-services-individuals/account-individuals.html",
+          "NETFILE overview: https://www.canada.ca/en/revenue-agency/services/e-services/digital-services-individuals/netfile-overview.html",
+          "Sending a tax return: https://www.canada.ca/en/revenue-agency/services/tax/individuals/topics/about-your-tax-return/tax-return/sending-a-tax-return.html",
+          "Direct deposit: https://www.canada.ca/en/revenue-agency/services/about-canada-revenue-agency-cra/direct-deposit.html",
+          "Deductions, credits, and expenses topics: https://www.canada.ca/en/revenue-agency/services/tax/individuals/topics/about-your-tax-return/tax-return/completing-a-tax-return/deductions-credits-expenses.html",
+        ],
+        callout: {
+          kind: "tip",
+          text: "Prefer typing canada.ca URLs yourself or using links from pages you already trust. Lookalike domains are a common fraud pattern.",
+        },
+      },
+      {
+        heading: "What Norra will not tell you",
+        bullets: [
+          "Your tax bracket, marginal rate, or \"average refund\"",
+          "That you \"will get\" a specific GST/HST credit, CCB payment, or rebate amount",
+          "Invented deadlines or \"file by this date or else\" claims copied from memory",
+          "Which commercial tax software is \"best\" or which accountant to hire",
+        ],
+        callout: {
+          kind: "warning",
+          text: "Anyone guaranteeing a refund size, demanding payment in gift cards, or asking you to install remote-access software to \"talk to CRA\" is a red flag. See CRA scams guidance and Norra's Avoid newcomer scams guide.",
+        },
+      },
+      {
+        heading: "Scam-aware habits around CRA",
+        paragraphs: [
+          "CRA publishes scam and fraud warnings. Impersonators often create urgency: arrest threats, suspended SIN stories, or pressure to pay immediately outside normal channels.",
+        ],
+        bullets: [
+          "CRA will not ask you to pay taxes with gift cards, crypto, or prepaid credit cards",
+          "Do not share My Account passwords or one-time codes from cold calls or texts",
+          "If unsure, hang up and open contact information from canada.ca yourself",
+          "Norra's sample marketplace tax-pro cards are demo layout only — not endorsed preparers",
+        ],
+        callout: {
+          kind: "verify",
+          text: "[CRA — Scams and fraud](https://www.canada.ca/en/revenue-agency/corporate/scams-fraud.html) · [CRA contact information](https://www.canada.ca/en/revenue-agency/corporate/contact-information.html)",
+        },
+      },
+      {
+        heading: "Put it on My Canada Plan",
+        paragraphs: [
+          "Add need \"Government benefits\" (and Banking & SIN if needed). The plan checklist includes a CRA / taxes bookmark item that links back here and to official newcomers pages. Tick items as you finish — progress stays in this browser until accounts exist.",
+        ],
+      },
+    ],
+  },
 
 ];
 
@@ -1133,6 +1282,7 @@ export const featuredGuideSlugs = [
   "get-sin-canada",
   "open-bank-account-newcomer",
   "get-health-card-canada",
+  "newcomer-taxes-canada",
   "avoid-newcomer-scams",
   "first-weeks-international-student",
   "first-week-in-canada",

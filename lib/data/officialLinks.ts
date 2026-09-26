@@ -44,6 +44,15 @@ export const OFFICIAL_CRA_BENEFITS = {
 export const NORRA_SIN_GUIDE_HREF = "/resources/get-sin-canada";
 export const NORRA_BANKING_GUIDE_HREF = "/resources/open-bank-account-newcomer";
 export const NORRA_GOVERNMENT_GUIDE_HREF = "/government";
+export const NORRA_TAXES_GUIDE_HREF = "/resources/newcomer-taxes-canada";
+export const OFFICIAL_GST_HST_CREDIT = {
+  label: "CRA — GST/HST credit",
+  href: "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/goods-services-tax-harmonized-sales-tax-gst-hst-credit.html",
+} as const;
+export const OFFICIAL_CRA_MY_ACCOUNT = {
+  label: "CRA — My Account for individuals",
+  href: "https://www.canada.ca/en/revenue-agency/services/e-services/digital-services-individuals/account-individuals.html",
+} as const;
 
 /** Checklist base ids that should get SIN officialHref */
 export const SIN_CHECKLIST_BASE_IDS = ["arr-7", "set-1"] as const;

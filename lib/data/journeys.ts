@@ -50,11 +50,12 @@ export const journeyStages: JourneyStage[] = [
     description: "International student life — school, housing, and work options.",
     icon: "GraduationCap",
     chips: [
-      { label: "Student hub", href: "/students" },
-      { label: "Housing near campus", href: "/housing" },
-      { label: "Part-time jobs", href: "/jobs" },
-      { label: "Study permit info", href: "/immigration" },
-      { label: "Banking setup", href: "/services/banking-finance" },
+      { label: "Student hub (guides)", href: "/students" },
+      { label: "Student first weeks", href: "/resources/first-weeks-international-student" },
+      { label: "Plan — Study", href: "/plan/?goal=study" },
+      { label: "Study permit (IRCC verify)", href: "/immigration" },
+      { label: "Housing (sample)", href: "/housing" },
+      { label: "Jobs (sample)", href: "/jobs" },
     ],
   },
   {
@@ -67,7 +68,8 @@ export const journeyStages: JourneyStage[] = [
       { label: "Career coaches", href: "/professionals" },
       { label: "Housing", href: "/housing" },
       { label: "Work permit pathways", href: "/immigration" },
-      { label: "Taxes & SIN", href: "/government" },
+      { label: "Taxes orientation", href: "/resources/newcomer-taxes-canada" },
+      { label: "SIN checklist", href: "/resources/get-sin-canada" },
     ],
   },
   {
@@ -78,6 +80,7 @@ export const journeyStages: JourneyStage[] = [
     chips: [
       { label: "Settlement guide", href: "/settlement" },
       { label: "My Canada Plan", href: "/plan" },
+      { label: "Taxes orientation", href: "/resources/newcomer-taxes-canada" },
       { label: "Government & benefits", href: "/government" },
       { label: "Healthcare", href: "/services/healthcare" },
       { label: "Local services", href: "/professionals" },
@@ -103,7 +106,8 @@ export const journeyStages: JourneyStage[] = [
     icon: "Award",
     chips: [
       { label: "Citizenship overview", href: "/immigration" },
-      { label: "Benefits & taxes", href: "/government" },
+      { label: "Taxes orientation", href: "/resources/newcomer-taxes-canada" },
+      { label: "Government map", href: "/government" },
       { label: "Career growth", href: "/jobs" },
       { label: "Settlement resources", href: "/settlement" },
       { label: "Community", href: "/cities" },

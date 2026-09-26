@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MapPin, Star, Languages } from "lucide-react";
+import { MapPin, Languages, ShieldCheck } from "lucide-react";
 import { getProviderById, providers } from "@/lib/data/providers";
 import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
@@ -34,7 +34,7 @@ export default async function ProviderDetailPage({ params }: { params: Promise<{
           / {p.name}
         </p>
         <DemoBanner emphasis className="mb-6">
-          This is a fictional sample profile. Ratings and reviews are invented for UI layout.
+          This is a fictional sample profile for UI layout only — not a real professional.
         </DemoBanner>
         <div className="rounded-3xl bg-white border border-night/5 overflow-hidden shadow-sm">
           <div className="p-8 sm:p-10 flex flex-col sm:flex-row gap-6">
@@ -50,9 +50,6 @@ export default async function ProviderDetailPage({ params }: { params: Promise<{
               <div className="mt-3 flex flex-wrap gap-4 text-sm text-muted">
                 <span className="inline-flex items-center gap-1">
                   <MapPin className="h-4 w-4" /> {p.city}, {p.province}
-                </span>
-                <span className="inline-flex items-center gap-1">
-                  <Star className="h-4 w-4 text-amber fill-amber" /> {p.rating} ({p.reviewCount} sample reviews)
                 </span>
                 <span className="inline-flex items-center gap-1">
                   <Languages className="h-4 w-4" /> {p.languages.join(", ")}
@@ -82,17 +79,34 @@ export default async function ProviderDetailPage({ params }: { params: Promise<{
               </ul>
             </div>
             <div>
-              <h2 className="font-semibold text-lg">Reviews (demo)</h2>
-              <div className="mt-4 space-y-4">
-                {p.reviews.map((r, i) => (
-                  <div key={i} className="rounded-xl bg-sand p-4">
-                    <p className="font-medium text-sm">
-                      {r.author} · {r.rating}★
-                    </p>
-                    <p className="mt-1 text-sm text-muted">{r.text}</p>
-                  </div>
-                ))}
-              </div>
+              <h2 className="font-semibold text-lg">Sample details</h2>
+              <dl className="mt-3 grid sm:grid-cols-3 gap-3 text-sm">
+                <div className="rounded-xl bg-sand p-4">
+                  <dt className="text-muted">Languages</dt>
+                  <dd className="mt-1 font-medium text-ink">{p.languages.join(", ")}</dd>
+                </div>
+                <div className="rounded-xl bg-sand p-4">
+                  <dt className="text-muted">City</dt>
+                  <dd className="mt-1 font-medium text-ink">
+                    {p.city}, {p.province}
+                  </dd>
+                </div>
+                <div className="rounded-xl bg-sand p-4">
+                  <dt className="text-muted">Example price</dt>
+                  <dd className="mt-1 font-medium text-ink">
+                    {formatCad(p.rateFrom)}/{p.rateUnit} <span className="text-muted font-normal">(example only)</span>
+                  </dd>
+                </div>
+              </dl>
+            </div>
+            <div className="rounded-xl border border-forest/15 bg-forest/5 p-4 text-sm text-muted leading-relaxed">
+              <p className="font-semibold text-ink flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4 text-forest" aria-hidden /> Before engaging any real professional
+              </p>
+              <p className="mt-1">
+                Check their registration yourself — e.g. the CICC registry for immigration consultants or your provincial
+                law society for lawyers. Norra does not vet, rate, or refer professionals.
+              </p>
             </div>
             <Disclaimer>
               Sample profile for layout only — not a real professional. Confirm real-world credentials independently before engaging anyone.

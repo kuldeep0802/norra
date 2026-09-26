@@ -33,7 +33,7 @@ export default function ProfessionalsPage() {
           description="Fictional profiles that show how a future marketplace could look. Not real professionals — bookings here do not create real appointments or charges."
         />
         <DemoBanner emphasis className="mt-8">
-          <strong>Sample content for layout only.</strong> Names, photos, ratings, reviews, licences, and
+          <strong>Sample content for layout only.</strong> Names, photos, licences, and
           availability are invented. Always verify real credentials yourself (e.g. CICC for RCICs, provincial law
           societies) before engaging anyone outside this demo.
         </DemoBanner>

@@ -191,7 +191,7 @@ export default function HomePage() {
             description="Fictional profiles and listings that show how future marketplace layouts could work. Not real professionals, rentals, or job openings — bookings do not create real appointments."
           />
           <DemoBanner className="mt-6 mb-10">
-            <strong className="text-forest">Sample content:</strong> Names, ratings, addresses, employers, and
+            <strong className="text-forest">Sample content:</strong> Names, addresses, employers, prices, and
             availability below are invented for UI layout only.
           </DemoBanner>
 

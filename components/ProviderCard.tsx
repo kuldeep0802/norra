@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { MapPin, Star, Languages } from "lucide-react";
+import { MapPin, Languages } from "lucide-react";
 import { Provider } from "@/lib/data/providers";
 import { Badge } from "./Badge";
 import { Button } from "./Button";
@@ -28,10 +28,6 @@ export function ProviderCard({ provider }: { provider: Provider }) {
           <span className="inline-flex items-center gap-1">
             <MapPin className="h-3.5 w-3.5" />
             {provider.city}, {provider.province}
-          </span>
-          <span className="inline-flex items-center gap-1" title="Sample rating for layout only">
-            <Star className="h-3.5 w-3.5 text-amber fill-amber" />
-            {provider.rating} ({provider.reviewCount}) · sample
           </span>
           <span className="inline-flex items-center gap-1">
             <Languages className="h-3.5 w-3.5" />

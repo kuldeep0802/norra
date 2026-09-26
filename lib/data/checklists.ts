@@ -318,6 +318,15 @@ export const studyItems: ChecklistItem[] = [
       "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation.html",
     officialLabel: "Work after graduation — IRCC",
   },
+  {
+    id: "stu-6",
+    label: "Near program end: confirm dates/docs with school + finishing checklist (not advice)",
+    category: "Study",
+    href: "/resources/finishing-your-program",
+    officialHref:
+      "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/get-documents.html",
+    officialLabel: "Get documents — IRCC (after graduation)",
+  },
 ];
 
 export const workItems: ChecklistItem[] = [
@@ -354,6 +363,12 @@ export const workItems: ChecklistItem[] = [
     officialHref:
       "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation.html",
     officialLabel: "Work after graduation — IRCC",
+  },
+  {
+    id: "wrk-6",
+    label: "Near program end: finishing-your-program orientation checklist",
+    category: "Work",
+    href: "/resources/finishing-your-program",
   },
 ];
 
@@ -728,6 +743,12 @@ export function getPlanRecommendations(profile: PlanProfile): PlanRecommendation
       kind: "guide",
     });
     push({
+      title: "Finishing your program checklist",
+      description: "If you are nearing program end: school docs, IRCC get-documents, then PGWP research — not advice.",
+      href: "/resources/finishing-your-program",
+      kind: "guide",
+    });
+    push({
       title: "Sample jobs layout",
       description: "Fictional employers for layout only.",
       href: "/jobs",
@@ -736,6 +757,12 @@ export function getPlanRecommendations(profile: PlanProfile): PlanRecommendation
     });
   }
   if (profile.goals.includes("study") || profile.needs.includes("School / kids")) {
+    push({
+      title: "Finishing your program checklist",
+      description: "School confirmation → IRCC get-documents → PGWP research → Plan Study/Work → SIN/banking/taxes if needed.",
+      href: "/resources/finishing-your-program",
+      kind: "guide",
+    });
     push({
       title: "First weeks as an international student",
       description: "Orientation, IRCC verify reminders, banking/SIN/health links, housing scam awareness.",
@@ -755,6 +782,20 @@ export function getPlanRecommendations(profile: PlanProfile): PlanRecommendation
       kind: "service",
     });
   }
+
+  // Near program-end stages with study/work goals — surface finishing checklist early
+  if (
+    (profile.stage === "settling" || profile.stage === "already-here") &&
+    (profile.goals.includes("study") || profile.goals.includes("work"))
+  ) {
+    push({
+      title: "Finishing your program checklist",
+      description: "Program-end orientation: confirm with school, verify IRCC docs pages, review PGWP guide, plan Study/Work goals.",
+      href: "/resources/finishing-your-program",
+      kind: "guide",
+    });
+  }
+
   if (profile.needs.includes("Government benefits") || profile.stage === "already-here") {
     push({
       title: "Filing taxes as a newcomer (CRA orientation)",

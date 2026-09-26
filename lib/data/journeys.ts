@@ -52,6 +52,7 @@ export const journeyStages: JourneyStage[] = [
     chips: [
       { label: "Student hub (guides)", href: "/students" },
       { label: "Student first weeks", href: "/resources/first-weeks-international-student" },
+      { label: "Finishing your program", href: "/resources/finishing-your-program" },
       { label: "PGWP orientation", href: "/resources/pgwp-post-graduation-work" },
       { label: "Plan — Study", href: "/plan/?goal=study" },
       { label: "Study permit (IRCC verify)", href: "/immigration" },
@@ -66,6 +67,7 @@ export const journeyStages: JourneyStage[] = [
     icon: "Briefcase",
     chips: [
       { label: "Job search", href: "/jobs" },
+      { label: "Finishing your program", href: "/resources/finishing-your-program" },
       { label: "PGWP orientation", href: "/resources/pgwp-post-graduation-work" },
       { label: "Career coaches", href: "/professionals" },
       { label: "Housing", href: "/housing" },

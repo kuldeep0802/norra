@@ -57,6 +57,7 @@ function profileContextLinks(profile: PlanProfile | null): { label: string; href
   }
   if (profile.goals.includes("study")) {
     links.push({ label: "Students hub (guides)", href: "/students" });
+    links.push({ label: "Finishing your program", href: "/resources/finishing-your-program" });
     links.push({ label: "PGWP orientation", href: "/resources/pgwp-post-graduation-work" });
   }
   if (profile.city && profile.city !== "Other / Not sure yet") {
@@ -107,6 +108,7 @@ function suggestionsFor(profile: PlanProfile | null): string[] {
   if (profile.goals.includes("work")) out.push("How do I write a Canadian resume?");
   if (profile.goals.includes("study")) {
     out.push("Where do I start as a student?");
+    out.push("I'm finishing my program");
     out.push("What is a PGWP?");
   }
   out.push("Show my Canada Plan");
@@ -123,12 +125,26 @@ function respond(input: string, profile: PlanProfile | null): Msg {
     links: uniqueLinks([...(msg.links || []), ...bias]).slice(0, 5),
   });
 
+  if (/finish(?:ing)?(?:\s+(?:your|my|the))?\s+program|program\s*end|nearing\s+(?:the\s+)?end|graduat(?:e|ing|ion)\b|end of (?:my |the )?program/.test(q)) {
+    return withBias({
+      role: "assistant",
+      text: "I can point you to Norra's finishing-your-program checklist (school confirmation → IRCC get-documents → PGWP research → Plan Study/Work). Nora does not assess eligibility, invent school document names, or quote processing times — verify on IRCC and with your school.",
+      links: [
+        { label: "Finishing your program checklist", href: "/resources/finishing-your-program" },
+        { label: "PGWP orientation", href: "/resources/pgwp-post-graduation-work" },
+        { label: "Students hub", href: "/students" },
+        { label: "My Canada Plan (Study)", href: "/plan/?goal=study" },
+        { label: "My Canada Plan (Work)", href: "/plan/?goal=work" },
+      ],
+    });
+  }
   if (/\bpgwp\b|post[- ]?grad(?:uation)?(?:\s+work)?|work after graduat|after[- ]graduation/.test(q)) {
     return withBias({
       role: "assistant",
       text: "I can point you to Norra's PGWP / post-graduation work orientation and IRCC pages to verify yourself. Nora does not assess eligibility, invent validity lengths, hour limits, or processing times, and is not immigration advice.",
       links: [
         { label: "PGWP orientation guide", href: "/resources/pgwp-post-graduation-work" },
+        { label: "Finishing your program", href: "/resources/finishing-your-program" },
         { label: "Students hub", href: "/students" },
         { label: "Immigration overview", href: "/immigration" },
         { label: "My Canada Plan (Work)", href: "/plan/?goal=work" },

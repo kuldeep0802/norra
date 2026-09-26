@@ -970,6 +970,7 @@ export const guides: Guide[] = [
     dateModified: "2026-09-26",
     planCtaHref: "/plan/?goal=study",
     relatedHrefs: [
+      { label: "Finishing your program checklist", href: "/resources/finishing-your-program" },
       { label: "My Canada Plan (Study)", href: "/plan/?goal=study" },
       { label: "Students hub", href: "/students" },
       { label: "Get a SIN", href: "/resources/get-sin-canada" },
@@ -1116,6 +1117,7 @@ export const guides: Guide[] = [
     dateModified: "2026-09-26",
     planCtaHref: "/plan/?goal=work",
     relatedHrefs: [
+      { label: "Finishing your program checklist", href: "/resources/finishing-your-program" },
       { label: "My Canada Plan (Work)", href: "/plan/?goal=work" },
       { label: "My Canada Plan (Study)", href: "/plan/?goal=study" },
       { label: "Students hub", href: "/students" },
@@ -1246,6 +1248,182 @@ export const guides: Guide[] = [
         heading: "Put this into My Canada Plan",
         paragraphs: [
           "Open My Canada Plan with goal Work (or Study if you are still enrolled), choose your stage, add your city, and tick IRCC-research and settlement items as you finish them. Progress stays in this browser until accounts exist.",
+        ],
+      },
+    ],
+  },
+
+
+  {
+    slug: "finishing-your-program",
+    title: "Finishing your program — orientation checklist for international students",
+    metaTitle: "Finishing Your Program Checklist — International Students",
+    metaDescription:
+      "Practical orientation checklist for international students nearing program end: confirm dates with your school, gather documents to verify on IRCC, review PGWP orientation, plan work/study goals, and SIN/banking/taxes if needed — not immigration advice.",
+    eyebrow: "Student",
+    summary:
+      "A calm end-of-program map: confirm dates and documents with your school, verify IRCC get-documents / study-permit / PGWP-apply pages yourself, then plan work or study goals and settlement basics — organization only, not immigration advice.",
+    topics: [
+      "student",
+      "international student",
+      "finish program",
+      "finishing",
+      "graduating",
+      "graduation",
+      "program end",
+      "program-end",
+      "completion",
+      "transcript",
+      "PGWP",
+      "IRCC",
+      "study permit",
+      "checklist",
+    ],
+    readingMinutes: 10,
+    updatedLabel: "Sep 2026",
+    datePublished: "2026-09-26",
+    dateModified: "2026-09-26",
+    planCtaHref: "/plan/?goal=study",
+    relatedHrefs: [
+      { label: "My Canada Plan (Study)", href: "/plan/?goal=study" },
+      { label: "My Canada Plan (Work)", href: "/plan/?goal=work" },
+      { label: "PGWP / post-grad work orientation", href: "/resources/pgwp-post-graduation-work" },
+      { label: "International student first weeks", href: "/resources/first-weeks-international-student" },
+      { label: "Students hub", href: "/students" },
+      { label: "Get a SIN", href: "/resources/get-sin-canada" },
+      { label: "Open a bank account", href: "/resources/open-bank-account-newcomer" },
+      { label: "Newcomer taxes (CRA)", href: "/resources/newcomer-taxes-canada" },
+      { label: "First Canadian job", href: "/resources/first-canadian-job" },
+      { label: "Jobs (sample layout)", href: "/jobs" },
+    ],
+    sections: [
+      {
+        heading: "What this checklist is (and is not)",
+        paragraphs: [
+          "Nearing the end of a Canadian program is a planning moment: confirm what your school will issue, organize documents, and research post-study options on official sources — without rushing into paid \"guarantees.\"",
+          "Norra organizes next steps. It does not assess whether you qualify for any permit, invent document names your school must issue, quote processing times, or replace IRCC or your international student office.",
+        ],
+        callout: {
+          kind: "verify",
+          text: "Status and post-graduation work rules live on IRCC. Start with [Study in Canada](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada.html) · [Study permits](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/study-permit.html) · [Work after graduation](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation.html) — then verify every claim that affects your file.",
+        },
+      },
+      {
+        heading: "Suggested sequence (organization habit, not advice)",
+        paragraphs: [
+          "Use this order as a personal workflow. Skip or reorder based on what your school and IRCC pages say for you — never based on social-media timelines.",
+        ],
+        bullets: [
+          "School confirmation — program end date and what completion letters / transcripts they issue",
+          "Gather documents — match IRCC's get-documents page to what you actually have (verify on Canada.ca)",
+          "Review PGWP orientation — Norra's IRCC-linked map, then live IRCC apply / eligibility pages yourself",
+          "Plan work or study goals — open My Canada Plan with Study and/or Work",
+          "SIN, banking, and taxes if needed — only when those steps apply to your situation; verify on Service Canada / FCAC / CRA",
+        ],
+        callout: {
+          kind: "tip",
+          text: "Tick items in [My Canada Plan](/plan/?goal=study) (add Work when employment is the focus) so this list does not live only in your head. Progress stays in this browser until accounts exist.",
+        },
+      },
+      {
+        heading: "1. Organize with your school first",
+        paragraphs: [
+          "Your designated learning institution (DLI) controls enrolment records and typically issues completion-related paperwork on its own schedule. Confirm facts with the international student office or registrar — do not invent form names from blogs.",
+        ],
+        bullets: [
+          "Confirm your program end / completion date in writing with the school (portal, advisor email, or official letter — whatever they use)",
+          "Ask what completion letters, transcripts, or other documents they issue for graduates or program completers — and typical timelines for each",
+          "Ask how to request those documents and where they appear (student portal, sealed transcript, advisor letter, etc.)",
+          "Keep passport, study-permit documents, and school letters organized (print + secure digital copies)",
+          "Note any address-update or enrolment-reporting steps your school mentions — then verify related IRCC instructions yourself",
+        ],
+        callout: {
+          kind: "warning",
+          text: "Norra will not invent official document titles beyond common \"confirm with your school\" framing. If someone sells a \"required letter template\" that your school never mentioned, pause and ask the school.",
+        },
+      },
+      {
+        heading: "2. Gather documents — verify on IRCC",
+        paragraphs: [
+          "When you research post-graduation work options, IRCC publishes a get-documents page that explains what they ask for in general terms. Your exact package depends on your situation — read the live page; do not copy a screenshot from a friend.",
+        ],
+        bullets: [
+          "[Get the documents you need (IRCC — after graduation)](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/get-documents.html)",
+          "[Study permits (IRCC)](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/study-permit.html)",
+          "[Study in Canada overview](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada.html)",
+          "Cross-check names and dates across passport, permit, and school records before you upload anything anywhere",
+        ],
+        callout: {
+          kind: "verify",
+          text: "Open IRCC only from canada.ca. Prefer typing the path or using bookmarks you created yourself — lookalike domains are a common fraud pattern.",
+        },
+      },
+      {
+        heading: "3. Review the PGWP / post-graduation work guide",
+        paragraphs: [
+          "After school paperwork is clearer, read Norra's PGWP orientation for a calm research map — then open IRCC's About, Eligibility, How to apply, and After you apply pages yourself. Norra does not decide if you qualify or for how long.",
+        ],
+        bullets: [
+          "[PGWP / post-graduation work orientation (Norra)](/resources/pgwp-post-graduation-work)",
+          "[Work after graduation (IRCC hub)](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation.html)",
+          "[About the PGWP](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/about.html)",
+          "[Eligibility](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/eligibility.html)",
+          "[How to apply](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/apply.html)",
+        ],
+        callout: {
+          kind: "verify",
+          text: "Processing times, fees, biometrics, and forms change. Never trust a third-party \"apply by this date\" claim — open the live IRCC page for the step you are on.",
+        },
+      },
+      {
+        heading: "4. Plan work and study goals in Norra",
+        paragraphs: [
+          "Whether you stay enrolled in further study, look for work, or both, put the intention into My Canada Plan so checklists and guide recommendations can lean that way.",
+        ],
+        bullets: [
+          "[My Canada Plan — Study](/plan/?goal=study) while school tasks still matter",
+          "[My Canada Plan — Work](/plan/?goal=work) when employment is the focus",
+          "[Finding your first Canadian job](/resources/first-canadian-job) — search habits; confirm authorization on IRCC",
+          "[Jobs (sample layout)](/jobs) — fictional employers for UI only, labelled as sample",
+          "[International student first weeks](/resources/first-weeks-international-student) if you are restarting campus routines after a break or new program",
+        ],
+        callout: {
+          kind: "tip",
+          text: "You can hold both Study and Work goals on one plan. Needs like Banking & SIN and Government benefits pull the matching settlement items.",
+        },
+      },
+      {
+        heading: "5. SIN, banking, and taxes — if needed",
+        paragraphs: [
+          "If you will work or file Canadian taxes, everyday settlement systems matter. Eligibility and exact steps are defined by Service Canada, your bank, and CRA — not by Norra.",
+        ],
+        bullets: [
+          "[Get a SIN in Canada](/resources/get-sin-canada) — Service Canada navigation; verify eligibility there",
+          "[Open a bank account as a newcomer](/resources/open-bank-account-newcomer) — FCAC-linked orientation",
+          "[Filing taxes as a newcomer (CRA)](/resources/newcomer-taxes-canada) — no invented brackets or refund amounts",
+        ],
+        callout: {
+          kind: "tip",
+          text: "Skip what does not apply yet. Bookmark the guides so you are not inventing steps under deadline pressure later.",
+        },
+      },
+      {
+        heading: "What Norra will never tell you",
+        bullets: [
+          "That you \"will get\" a PGWP or any other permit, or for how many months",
+          "Invented school document names beyond asking your school what they issue",
+          "Processing times, fees, or eligibility shortcuts copied from memory or social media",
+          "Which paid consultant to hire, or that a sample marketplace profile is a real booking",
+        ],
+        callout: {
+          kind: "warning",
+          text: "Anyone guaranteeing approval, selling \"priority processing\" outside IRCC, or asking for gift cards / crypto is a red flag. See [avoid newcomer scams](/resources/avoid-newcomer-scams) and open IRCC contact pages yourself from canada.ca.",
+        },
+      },
+      {
+        heading: "Put this into My Canada Plan",
+        paragraphs: [
+          "Open My Canada Plan with goal Study and/or Work, choose a stage that matches where you are (for example Settling in or Already living in Canada), add your city, and tick school-confirmation, IRCC-research, and settlement items as you finish them.",
         ],
       },
     ],
@@ -1450,6 +1628,7 @@ export const featuredGuideSlugs = [
   "open-bank-account-newcomer",
   "get-health-card-canada",
   "newcomer-taxes-canada",
+  "finishing-your-program",
   "pgwp-post-graduation-work",
   "avoid-newcomer-scams",
   "first-weeks-international-student",

@@ -7,30 +7,37 @@ import { cn } from "@/lib/utils";
 
 const items = [
   { label: "Home", href: "/", icon: Home },
-  { label: "Services", href: "/services", icon: LayoutGrid },
+  { label: "Needs", href: "/#needs", icon: LayoutGrid },
   { label: "Plan", href: "/plan", icon: Map },
   { label: "Bookings", href: "/dashboard", icon: Calendar },
-  { label: "Account", href: "/dashboard#account", icon: User },
+  { label: "About", href: "/about", icon: User },
 ];
 
 export function MobileBottomNav() {
   const pathname = usePathname();
   return (
-    <nav className="md:hidden fixed bottom-0 inset-x-0 z-50 border-t border-night/10 bg-cream/95 backdrop-blur-xl pb-[env(safe-area-inset-bottom)]">
-      <div className="flex justify-around items-center h-16 px-1">
+    <nav
+      className="md:hidden fixed bottom-0 inset-x-0 z-50 border-t border-night/10 bg-cream/95 backdrop-blur-xl pb-[env(safe-area-inset-bottom)]"
+      aria-label="Mobile"
+    >
+      <div className="flex justify-around items-stretch h-[4.25rem] px-1">
         {items.map(({ label, href, icon: Icon }) => {
-          const active = href === "/" ? pathname === "/" : pathname.startsWith(href.split("#")[0]);
+          const pathOnly = href.split("#")[0] || "/";
+          const active =
+            href === "/"
+              ? pathname === "/"
+              : pathOnly !== "/" && pathname.startsWith(pathOnly);
           return (
             <Link
               key={label}
               href={href}
               className={cn(
-                "flex flex-col items-center gap-0.5 px-2 py-1 rounded-xl min-w-[3.5rem]",
+                "flex flex-1 flex-col items-center justify-center gap-0.5 px-1 py-2 min-h-11 touch-manipulation",
                 active ? "text-forest" : "text-muted"
               )}
             >
               <Icon className="h-5 w-5" strokeWidth={active ? 2 : 1.5} />
-              <span className="text-[10px] font-medium">{label}</span>
+              <span className="text-[10px] font-medium leading-tight">{label}</span>
             </Link>
           );
         })}

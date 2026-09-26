@@ -6,7 +6,7 @@ export default function PrivacyPage() {
   return (
     <div className="py-16">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 space-y-6 text-muted leading-relaxed">
-        <SectionHeader eyebrow="Legal" title="Privacy" description="How we think about your data on this demo product." />
+        <SectionHeader eyebrow="Legal" title="Privacy" description="How we think about your data on this early-stage product." />
         <p>
           <strong className="text-ink">Summary:</strong> This Norra website is a demonstration. We do not operate
           production user accounts, payment processing, or sensitive document storage here.
@@ -27,7 +27,7 @@ export default function PrivacyPage() {
           A production Norra would use encrypted storage, clear retention windows, user export/delete controls, and
           minimal data collection needed to deliver bookings and plans.
         </p>
-        <p className="text-sm">Questions: privacy@norra.demo (placeholder).</p>
+        <p className="text-sm">Questions: kuldeepkushawaha@gmail.com (Founder).</p>
       </div>
     </div>
   );

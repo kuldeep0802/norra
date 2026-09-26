@@ -18,7 +18,7 @@ export const founder = {
   /** Initials used for the photo placeholder */
   initials: "KK",
   mission:
-    "Norra exists because navigating life in Canada should not feel like a maze of scattered tabs, unclear advice, and high-stakes guesswork. I built this platform to give people a clear, trustworthy place to orient — whatever stage they are at.",
+    "Norra exists because navigating life in Canada should not feel like a maze of scattered tabs, unclear advice, and high-stakes guesswork. I am building Norra to give people a clear place to orient and organize — whatever stage they are at.",
   vision:
     "The vision is simple: make life in Canada easier to navigate — from the first visa question to settling into a neighbourhood, finding work, and handling the everyday systems that make Canada feel like home.",
 } as const;

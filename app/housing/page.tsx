@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { PropertyCard } from "@/components/PropertyCard";
 import { Disclaimer } from "@/components/Disclaimer";
+import { DemoBanner } from "@/components/DemoBanner";
 import { properties } from "@/lib/data/properties";
 import { Button } from "@/components/Button";
 
@@ -33,13 +34,17 @@ export default function HousingPage() {
     <div className="py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          eyebrow="Housing"
-          title="Find a place to land"
-          description="Demo properties across Canadian cities. Verified badges are part of the demo UI — always meet landlords safely."
+          eyebrow="Housing · Sample"
+          title="Sample listings (for layout only)"
+          description="Fictional properties to demonstrate filters and cards. Norra does not list real rentals on this early-stage site."
         />
-        <Disclaimer variant="warning" className="mt-8">
+        <DemoBanner emphasis className="mt-8">
+          <strong>Sample content:</strong> These are not real listings, landlords, or available units. Use real
+          platforms carefully and stay scam-aware.
+        </DemoBanner>
+        <Disclaimer variant="warning" className="mt-4">
           Anti-scam tip: Never send deposits via wire/crypto to someone you haven&apos;t met. Prefer official
-          viewing, written leases, and known platforms. Report suspicious listings via{" "}
+          viewing, written leases, and known platforms. See{" "}
           <a href="/safety" className="underline font-medium">
             Safety
           </a>
@@ -52,7 +57,7 @@ export default function HousingPage() {
             <select
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              className="mt-1 w-full rounded-xl border border-night/10 bg-cream px-3 py-2"
+              className="mt-1 w-full rounded-xl border border-night/10 bg-cream px-3 py-2.5 min-h-11"
             >
               {cities.map((c) => (
                 <option key={c}>{c}</option>
@@ -76,7 +81,7 @@ export default function HousingPage() {
             <select
               value={type}
               onChange={(e) => setType(e.target.value)}
-              className="mt-1 w-full rounded-xl border border-night/10 bg-cream px-3 py-2"
+              className="mt-1 w-full rounded-xl border border-night/10 bg-cream px-3 py-2.5 min-h-11"
             >
               <option>All</option>
               <option value="private">Private</option>
@@ -84,17 +89,17 @@ export default function HousingPage() {
               <option value="family">Family-friendly</option>
             </select>
           </label>
-          <label className="flex items-center gap-2 text-sm mt-6">
-            <input type="checkbox" checked={furnished} onChange={(e) => setFurnished(e.target.checked)} className="accent-forest" />
+          <label className="flex items-center gap-2 text-sm mt-6 min-h-11">
+            <input type="checkbox" checked={furnished} onChange={(e) => setFurnished(e.target.checked)} className="accent-forest h-4 w-4" />
             Furnished
           </label>
-          <label className="flex items-center gap-2 text-sm mt-6">
-            <input type="checkbox" checked={nearTransit} onChange={(e) => setNearTransit(e.target.checked)} className="accent-forest" />
+          <label className="flex items-center gap-2 text-sm mt-6 min-h-11">
+            <input type="checkbox" checked={nearTransit} onChange={(e) => setNearTransit(e.target.checked)} className="accent-forest h-4 w-4" />
             Near transit
           </label>
         </div>
 
-        <p className="mt-6 text-sm text-muted">{filtered.length} demo listings</p>
+        <p className="mt-6 text-sm text-muted">{filtered.length} sample listings</p>
         <div className="mt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((p) => (
             <PropertyCard key={p.id} property={p} />
@@ -102,12 +107,16 @@ export default function HousingPage() {
         </div>
         {filtered.length === 0 && (
           <div className="text-center py-16 text-muted">
-            <p>No listings match — try widening filters.</p>
-            <Button className="mt-4" variant="outline" onClick={() => { setCity("All"); setBudget(5000); setFurnished(false); setNearTransit(false); setType("All"); }}>
+            <p>No sample listings match — try widening filters.</p>
+            <Button className="mt-4 min-h-11" variant="outline" onClick={() => { setCity("All"); setBudget(5000); setFurnished(false); setNearTransit(false); setType("All"); }}>
               Reset filters
             </Button>
           </div>
         )}
+        <div className="mt-12 flex flex-wrap gap-3">
+          <Button href="/plan" className="min-h-11">Add housing to My Canada Plan</Button>
+          <Button href="/safety" variant="outline" className="min-h-11">Safety tips</Button>
+        </div>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import { Provider } from "@/lib/data/providers";
 import { Button } from "./Button";
 import { formatCad } from "@/lib/utils";
 import { cn } from "@/lib/utils";
+import { DemoBanner } from "./DemoBanner";
 
 const times = ["9:00 AM", "10:30 AM", "1:00 PM", "3:30 PM", "5:00 PM"];
 
@@ -58,7 +59,13 @@ export function BookingWizard({ provider }: { provider: Provider }) {
 
   return (
     <div className="rounded-2xl bg-white border border-night/5 shadow-sm overflow-hidden">
-      <div className="flex border-b border-night/5 overflow-x-auto no-scrollbar">
+      <div className="px-4 pt-4 sm:px-6 sm:pt-6">
+        <DemoBanner emphasis>
+          <strong>Demo booking only.</strong> No payment is processed and no real appointment is created. Example
+          rates under $40 are illustrative.
+        </DemoBanner>
+      </div>
+      <div className="flex border-b border-night/5 overflow-x-auto no-scrollbar mt-4">
         {steps.map((s, i) => (
           <div
             key={s}
@@ -88,7 +95,7 @@ export function BookingWizard({ provider }: { provider: Provider }) {
               >
                 <p className="font-medium">{s}</p>
                 <p className="text-sm text-muted mt-1">
-                  From {formatCad(price)}/{provider.rateUnit}
+                  Example from {formatCad(price)}/{provider.rateUnit}
                 </p>
               </button>
             ))}

@@ -6,7 +6,7 @@ export const siteConfig = {
   name: "Norra",
   tagline: "Navigate life in Canada",
   description:
-    "From visas and work to housing, settlement, and everyday life — guidance and help wherever you are in your Canadian journey. A Canadian assistance and navigation platform.",
+    "Norra is an early-stage Canadian navigation and organization tool — checklists, guides, and next steps for visas, housing, work, arrival, and everyday life. Not immigration advice. Not a government service.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://kuldeep0802.github.io/norra",
   locale: "en_CA",
 };

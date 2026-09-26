@@ -11,7 +11,7 @@ export function PropertyCard({ property }: { property: Property }) {
       href="/housing"
       className="group block rounded-2xl overflow-hidden bg-white border border-night/5 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
     >
-      <div className="relative aspect-[4/3] overflow-hidden">
+      <div className="relative aspect-[4/3] overflow-hidden bg-sand">
         <Image
           src={property.image}
           alt={property.title}
@@ -20,16 +20,9 @@ export function PropertyCard({ property }: { property: Property }) {
           sizes="(max-width:768px) 100vw, 33vw"
         />
         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
-          {property.verified && (
-            <Badge variant="verified" icon="verified">
-              Verified
-            </Badge>
-          )}
-          {property.demo && (
-            <Badge variant="demo" icon="demo">
-              Demo listing
-            </Badge>
-          )}
+          <Badge variant="demo" icon="demo">
+            Sample (layout only)
+          </Badge>
         </div>
       </div>
       <div className="p-5">

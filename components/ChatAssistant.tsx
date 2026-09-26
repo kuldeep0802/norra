@@ -22,7 +22,7 @@ function respond(input: string): Msg {
   if (/visa|permit|immigration|pgwp|express entry|pr\b|citizenship|study permit|work permit/.test(q)) {
     return {
       role: "assistant",
-      text: "I can help you explore immigration topics with checklists and overviews. Important: Norra is not a law firm or immigration consultancy. For eligibility, filings, or legal advice, connect with an authorized RCIC or immigration lawyer. I won't invent policies or guarantee outcomes.",
+      text: "I can help you explore immigration topics with checklists and overviews. Important: Norra is not a law firm or immigration consultancy. For eligibility, filings, or legal advice, connect with an authorized RCIC or immigration lawyer (independently — sample marketplace profiles are fictional). I won't invent policies or guarantee outcomes.",
       links: [
         { label: "Immigration guides", href: "/immigration" },
         { label: "Authorized professionals", href: "/professionals" },
@@ -33,7 +33,7 @@ function respond(input: string): Msg {
   if (/housing|rent|apartment|lease|room/.test(q)) {
     return {
       role: "assistant",
-      text: "I can show you demo housing listings and anti-scam tips. Always verify landlords in person or via trusted channels — never wire deposits to strangers.",
+      text: "I can show you demo housing listings and anti-scam tips. Always verify landlords carefully — never wire deposits to strangers. Sample housing on Norra is fictional.",
       links: [
         { label: "Browse housing", href: "/housing" },
         { label: "Safety tips", href: "/safety" },

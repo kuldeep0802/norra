@@ -1,5 +1,6 @@
 import { SectionHeader } from "@/components/SectionHeader";
 import { Button } from "@/components/Button";
+import { DemoBanner } from "@/components/DemoBanner";
 
 export const metadata = { title: "Partner" };
 
@@ -9,15 +10,19 @@ export default function PartnerPage() {
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow="Partners"
-          title="Build with Norra"
-          description="We work with settlement agencies, schools, employers, housing operators, and licensed professionals."
+          title="Explore building with Norra"
+          description="We're an early-stage product exploring how settlement agencies, schools, employers, housing operators, and licensed professionals might work with navigation tools like Norra."
         />
+        <DemoBanner className="mt-8">
+          No active partnership program is live yet. Reach out if you&apos;d like to talk — conversations welcome;
+          we do not claim existing corporate partners.
+        </DemoBanner>
         <div className="mt-10 grid sm:grid-cols-2 gap-5">
           {[
-            ["Licensed professionals", "Join the marketplace with clear verification and booking tools."],
-            ["Settlement organizations", "Refer clients to navigation tools and arrival packages."],
-            ["Schools & employers", "Offer structured onboarding support for newcomers."],
-            ["Housing partners", "List inventory with scam-aware workflows."],
+            ["Licensed professionals", "Future: clearer booking tools and credential checks — not live yet."],
+            ["Settlement organizations", "Future: refer clients to navigation tools and arrival checklists."],
+            ["Schools & employers", "Future: structured onboarding support for newcomers."],
+            ["Housing partners", "Future: inventory with scam-aware workflows."],
           ].map(([t, d]) => (
             <div key={t} className="rounded-2xl bg-white border border-night/5 p-6">
               <h3 className="font-semibold">{t}</h3>
@@ -26,10 +31,10 @@ export default function PartnerPage() {
           ))}
         </div>
         <p className="mt-8 text-muted text-sm leading-relaxed">
-          Revenue model: nominal booking fees (under $40), provider subscriptions, and packages — not selling user data.
+          Example pricing on sample booking cards (under $40) is illustrative only. We do not sell user data.
         </p>
-        <Button href="/contact" className="mt-6">
-          Contact partnerships
+        <Button href="/contact" className="mt-6 min-h-11">
+          Contact the Founder
         </Button>
       </div>
     </div>

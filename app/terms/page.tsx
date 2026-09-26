@@ -6,7 +6,7 @@ export default function TermsPage() {
   return (
     <div className="py-16">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 space-y-6 text-muted leading-relaxed text-sm">
-        <SectionHeader eyebrow="Legal" title="Terms of use" description="Demo terms for the Norra prototype website." />
+        <SectionHeader eyebrow="Legal" title="Terms of use" description="Terms for this early-stage Norra website." />
         <p>
           By using this site you acknowledge it is a product demonstration. Content is illustrative. Listings,
           providers, bookings, and payments are simulated.
@@ -27,7 +27,7 @@ export default function TermsPage() {
           To the fullest extent permitted by law, Norra is provided &quot;as is&quot; without warranties regarding
           accuracy or fitness for a particular purpose.
         </p>
-        <p>Contact: legal@norra.demo (placeholder).</p>
+        <p>Contact: kuldeepkushawaha@gmail.com (Founder).</p>
       </div>
     </div>
   );

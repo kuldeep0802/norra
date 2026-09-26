@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { ProviderCard } from "@/components/ProviderCard";
 import { Disclaimer } from "@/components/Disclaimer";
+import { DemoBanner } from "@/components/DemoBanner";
+import { Button } from "@/components/Button";
 import { providers, providerCategories } from "@/lib/data/providers";
 
 export default function ProfessionalsPage() {
@@ -24,35 +26,34 @@ export default function ProfessionalsPage() {
     <div className="py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          eyebrow="Marketplace"
-          title="Find trusted help"
-          description="Book demo providers across immigration, career, settlement, tax, airport, tutoring, and more. Session and booking fees stay under $40."
+          eyebrow="Marketplace · Sample"
+          title="Sample provider profiles"
+          description="Fictional profiles that show how a future marketplace could look. Not real professionals — bookings here do not create real appointments or charges."
         />
-        <Disclaimer className="mt-8">
-          All providers on this demo site are fictional and labelled accordingly. Always independently verify
-          licences (e.g. CICC for RCICs, provincial law societies) before engaging real professionals.
+        <DemoBanner emphasis className="mt-8">
+          <strong>Sample content for layout only.</strong> Names, photos, ratings, reviews, licences, and
+          availability are invented. Always verify real credentials yourself (e.g. CICC for RCICs, provincial law
+          societies) before engaging anyone outside this demo.
+        </DemoBanner>
+        <Disclaimer className="mt-4">
+          Example rates under $40 on these cards are illustrative demo pricing, not live offers.
         </Disclaimer>
 
         <div id="verification" className="mt-8 rounded-2xl bg-sand p-6">
-          <h3 className="font-semibold text-forest">How verification works (demo)</h3>
+          <h3 className="font-semibold text-forest">About “verification” (future)</h3>
           <p className="mt-2 text-sm text-muted leading-relaxed">
-            In production, Norra would check identity, credentials, and standing with relevant regulators where
-            applicable. In this prototype, badges like &quot;Demo verified&quot; illustrate the UI only — they do
-            not mean a real credential check occurred.
+            In a future product, Norra may check identity and credentials with relevant regulators where
+            applicable. This early-stage site does <strong className="text-ink">not</strong> verify anyone. Sample
+            profiles are labelled clearly so they are never mistaken for real providers.
           </p>
-        </div>
-
-        <div className="mt-4 rounded-2xl border border-forest/15 bg-cream px-6 py-4 text-sm text-muted">
-          <strong className="text-forest">Pricing:</strong> Norra keeps marketplace fees nominal — every demo
-          booking and session stays <strong className="text-ink">under $40</strong>. Housing rents and
-          employer salaries shown elsewhere are market figures, not platform fees.
         </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="rounded-xl border border-night/10 bg-white px-4 py-2.5 text-sm"
+            className="rounded-xl border border-night/10 bg-white px-4 py-2.5 text-sm min-h-11"
+            aria-label="Filter by category"
           >
             <option>All</option>
             {providerCategories.map((c) => (
@@ -62,7 +63,8 @@ export default function ProfessionalsPage() {
           <select
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            className="rounded-xl border border-night/10 bg-white px-4 py-2.5 text-sm"
+            className="rounded-xl border border-night/10 bg-white px-4 py-2.5 text-sm min-h-11"
+            aria-label="Filter by city"
           >
             {cities.map((c) => (
               <option key={c}>{c}</option>
@@ -74,6 +76,16 @@ export default function ProfessionalsPage() {
           {filtered.map((p) => (
             <ProviderCard key={p.id} provider={p} />
           ))}
+        </div>
+
+        <div className="mt-12 rounded-2xl border border-night/5 bg-white p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <p className="text-sm text-muted leading-relaxed max-w-xl">
+            Looking for a real next step today? Build My Canada Plan or browse guides — those tools work without the
+            sample marketplace.
+          </p>
+          <Button href="/plan" className="shrink-0 min-h-11">
+            Build My Canada Plan
+          </Button>
         </div>
       </div>
     </div>

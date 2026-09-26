@@ -4,6 +4,7 @@ import { useState } from "react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Button } from "@/components/Button";
 import { PlanChecklist } from "@/components/PlanChecklist";
+import { DemoBanner } from "@/components/DemoBanner";
 import { beforeYouArriveItems, arrivalItems, planNeedOptions, statusOptions } from "@/lib/data/checklists";
 import { cities } from "@/lib/data/cities";
 
@@ -37,6 +38,9 @@ export default function PlanPage() {
             title={`Your plan for ${city || "Canada"}`}
             description={`Status: ${status || "Not specified"} · Arrival: ${arrival || "TBD"} · ${family}`}
           />
+          <DemoBanner className="mt-6">
+            Progress saves in this browser (localStorage). No Norra account is required in this early version.
+          </DemoBanner>
           {goals && <p className="mt-4 text-muted italic">&ldquo;{goals}&rdquo;</p>}
           {needs.length > 0 && (
             <p className="mt-2 text-sm text-muted">Focus: {needs.join(" · ")}</p>
@@ -44,9 +48,14 @@ export default function PlanPage() {
           <div className="mt-10">
             <PlanChecklist items={items} storageKey="norra-canada-plan" />
           </div>
-          <Button variant="outline" className="mt-8" onClick={() => setStep("form")}>
-            Edit plan details
-          </Button>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button variant="outline" className="min-h-11" onClick={() => setStep("form")}>
+              Edit plan details
+            </Button>
+            <Button href="/#needs" variant="outline" className="min-h-11">
+              What do you need help with?
+            </Button>
+          </div>
         </div>
       </div>
     );
@@ -56,10 +65,14 @@ export default function PlanPage() {
     <div className="py-16">
       <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          eyebrow="My Canada Plan"
-          title="Build your personalized checklist"
-          description="A few details unlock a living plan you can track as you go."
+          eyebrow="Central product · My Canada Plan"
+          title="Build My Canada Plan"
+          description="A few details unlock a living checklist you can track as you go — documents, housing, work, and everyday setup."
         />
+        <DemoBanner className="mt-8">
+          <strong>Real functionality:</strong> this planner works in your browser. It is not immigration advice and
+          does not file applications.
+        </DemoBanner>
         <form
           className="mt-10 space-y-6 rounded-2xl bg-white border border-night/5 p-6 sm:p-8 shadow-sm"
           onSubmit={(e) => {
@@ -73,7 +86,7 @@ export default function PlanPage() {
               required
               value={status}
               onChange={(e) => setStatus(e.target.value)}
-              className="mt-1 w-full rounded-xl border border-night/10 bg-cream px-4 py-2.5"
+              className="mt-1 w-full rounded-xl border border-night/10 bg-cream px-4 py-3 min-h-11"
             >
               <option value="">Select status…</option>
               {statusOptions.map((s) => (
@@ -87,7 +100,7 @@ export default function PlanPage() {
               required
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              className="mt-1 w-full rounded-xl border border-night/10 bg-cream px-4 py-2.5"
+              className="mt-1 w-full rounded-xl border border-night/10 bg-cream px-4 py-3 min-h-11"
             >
               <option value="">Select city…</option>
               {cities.map((c) => (
@@ -102,7 +115,7 @@ export default function PlanPage() {
               type="date"
               value={arrival}
               onChange={(e) => setArrival(e.target.value)}
-              className="mt-1 w-full rounded-xl border border-night/10 bg-cream px-4 py-2.5"
+              className="mt-1 w-full rounded-xl border border-night/10 bg-cream px-4 py-3 min-h-11"
             />
           </label>
           <label className="block">
@@ -110,7 +123,7 @@ export default function PlanPage() {
             <select
               value={family}
               onChange={(e) => setFamily(e.target.value)}
-              className="mt-1 w-full rounded-xl border border-night/10 bg-cream px-4 py-2.5"
+              className="mt-1 w-full rounded-xl border border-night/10 bg-cream px-4 py-3 min-h-11"
             >
               <option>Just me</option>
               <option>Me + partner</option>
@@ -126,7 +139,7 @@ export default function PlanPage() {
                   key={n}
                   type="button"
                   onClick={() => toggleNeed(n)}
-                  className={`rounded-full px-3 py-1.5 text-sm border transition-colors ${
+                  className={`rounded-full px-3 py-2 text-sm border transition-colors min-h-11 touch-manipulation ${
                     needs.includes(n)
                       ? "bg-forest text-cream border-forest"
                       : "border-night/10 hover:border-forest"
@@ -147,8 +160,8 @@ export default function PlanPage() {
               className="mt-1 w-full rounded-xl border border-night/10 bg-cream px-4 py-2.5"
             />
           </label>
-          <Button type="submit" size="lg" className="w-full">
-            Generate my plan
+          <Button type="submit" size="lg" className="w-full min-h-12">
+            Build My Canada Plan
           </Button>
         </form>
       </div>

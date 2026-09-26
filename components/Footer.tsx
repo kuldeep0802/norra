@@ -11,7 +11,7 @@ export function Footer() {
           <div className="lg:col-span-2">
             <Logo light />
             <p className="mt-4 text-sky max-w-sm leading-relaxed">
-              Navigate life in Canada. Guidance and help wherever you are in your Canadian journey.
+              Early-stage navigation and organization tools for life in Canada — guides, checklists, and next steps.
             </p>
             <div className="mt-6 space-y-1.5 text-sm text-sky">
               <p>
@@ -31,7 +31,7 @@ export function Footer() {
               </p>
             </div>
             <p className="mt-6 text-xs text-sky/70 max-w-md leading-relaxed">
-              Norra is an assistance & navigation platform — not a law firm, immigration consultancy,
+              Norra is an early-stage assistance and navigation product — not a law firm, immigration consultancy,
               medical provider, financial institution, or government organization. No outcomes are guaranteed.
             </p>
           </div>
@@ -46,7 +46,7 @@ export function Footer() {
               <h3 className="text-sm font-semibold text-amber mb-4">{title}</h3>
               <ul className="space-y-2.5">
                 {links.map((l) => (
-                  <li key={l.href}>
+                  <li key={l.href + l.label}>
                     <Link href={l.href} className="text-sm text-sky hover:text-cream transition-colors">
                       {l.label}
                     </Link>
@@ -57,7 +57,7 @@ export function Footer() {
           ))}
         </div>
         <div className="mt-14 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between gap-4 text-xs text-sky/60">
-          <p>© {new Date().getFullYear()} Norra Technologies Inc. All rights reserved. Demo product.</p>
+          <p>© {new Date().getFullYear()} Norra · Early-stage product. All rights reserved.</p>
           <p>Pronounced NOR-uh · Built for newcomers and anyone navigating Canada.</p>
         </div>
       </div>

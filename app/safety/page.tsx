@@ -41,8 +41,11 @@ export default function SafetyPage() {
           <div className="rounded-2xl bg-white border border-night/5 p-6">
             <h2 className="font-semibold text-ink text-lg">Report a concern</h2>
             <p className="mt-2 text-sm">
-              Email <a href="mailto:safety@norra.demo" className="text-forest underline">safety@norra.demo</a> (demo
-              address) with listing IDs or screenshots. In production this would route to a trust & safety team.
+              Email the Founder at{" "}
+              <a href="mailto:kuldeepkushawaha@gmail.com" className="text-forest underline">
+                kuldeepkushawaha@gmail.com
+              </a>{" "}
+              with listing IDs or screenshots. There is no dedicated trust team yet — this is an early-stage product.
             </p>
           </div>
         </div>

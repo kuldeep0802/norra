@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
+import { DemoBanner } from "@/components/DemoBanner";
 import { properties } from "@/lib/data/properties";
 import { jobs } from "@/lib/data/jobs";
 import {
@@ -33,10 +34,13 @@ export default function DashboardPage() {
     <div className="py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          eyebrow="Account"
-          title="Welcome back, Alex"
-          description="Demo dashboard populated with sample plan progress, bookings, and saved items."
+          eyebrow="Account · Sample"
+          title="Sample dashboard (Alex)"
+          description="Demo UI with sample plan progress, bookings, and saved items — not a real user account."
         />
+        <DemoBanner emphasis className="mt-8">
+          This dashboard is sample content for layout only. Bookings shown are fictional.
+        </DemoBanner>
 
         <div className="mt-10 grid lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">

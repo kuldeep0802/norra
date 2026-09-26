@@ -1,5 +1,6 @@
 export const mainNav = [
   { label: "Home", href: "/" },
+  { label: "My Canada Plan", href: "/plan" },
   { label: "Services", href: "/services" },
   { label: "Immigration", href: "/immigration" },
   { label: "Jobs", href: "/jobs" },
@@ -7,7 +8,7 @@ export const mainNav = [
   { label: "Settlement", href: "/settlement" },
   { label: "Resources", href: "/resources" },
   { label: "Cities", href: "/cities" },
-  { label: "Professionals", href: "/professionals" },
+  { label: "Marketplace", href: "/professionals" },
   { label: "About", href: "/about" },
 ];
 
@@ -21,12 +22,12 @@ export const mobileBottomNav = [
 
 export const footerLinks = {
   product: [
-    { label: "Services", href: "/services" },
     { label: "My Canada Plan", href: "/plan" },
+    { label: "Services", href: "/services" },
     { label: "Nora Assistant", href: "/assistant" },
-    { label: "Professionals", href: "/professionals" },
-    { label: "Housing", href: "/housing" },
-    { label: "Jobs", href: "/jobs" },
+    { label: "Marketplace (sample)", href: "/professionals" },
+    { label: "Housing (sample)", href: "/housing" },
+    { label: "Jobs (sample)", href: "/jobs" },
   ],
   journey: [
     { label: "Before you arrive", href: "/before-you-arrive" },

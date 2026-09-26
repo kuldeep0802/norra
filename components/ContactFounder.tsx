@@ -112,8 +112,9 @@ export function ContactFounder() {
           className="rounded-2xl bg-white border border-night/5 p-6 sm:p-8 shadow-sm space-y-4"
           noValidate={false}
         >
-          <p className="text-sm text-muted">
-            Send a message to the Founder. Form UI only for now — wire to your email API when ready.
+          <p className="text-sm text-muted rounded-xl bg-amber/15 border border-amber/30 px-3 py-2.5">
+            <strong className="text-ink">Demo form — does not send.</strong> Use Email or Call above for a real
+            message to the Founder. This form is UI-only until an email service is connected.
           </p>
           <label className="block text-sm">
             <span className="font-medium text-ink">Full Name</span>
@@ -160,7 +161,7 @@ export function ContactFounder() {
             />
           </label>
           <Button type="submit" className="w-full sm:w-auto" size="lg">
-            Send Message
+            Preview message (demo)
           </Button>
         </form>
       )}

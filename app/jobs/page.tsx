@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { JobCard } from "@/components/JobCard";
 import { Disclaimer } from "@/components/Disclaimer";
+import { DemoBanner } from "@/components/DemoBanner";
 import { Button } from "@/components/Button";
 import { jobs } from "@/lib/data/jobs";
 
@@ -32,12 +33,15 @@ export default function JobsPage() {
     <div className="py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          eyebrow="Jobs & career"
-          title="Explore work in Canada"
-          description="Demo listings use fictional companies and always carry a Demo listing badge. We never claim these employers are verified."
+          eyebrow="Jobs · Sample"
+          title="Sample job cards (fictional employers)"
+          description="Demo listings from made-up companies — clearly labelled. We never claim these employers or openings are real."
         />
-        <Disclaimer className="mt-8">
-          Career tools on Norra are educational. For regulated professions, confirm licensing with the appropriate
+        <DemoBanner emphasis className="mt-8">
+          <strong>Sample content for layout only.</strong> Company names ending in “(Demo Co.)” are fictional.
+        </DemoBanner>
+        <Disclaimer className="mt-4">
+          Career guides on Norra are educational. For regulated professions, confirm licensing with the appropriate
           provincial body.
         </Disclaimer>
 
@@ -46,21 +50,21 @@ export default function JobsPage() {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search roles or skills…"
-            className="rounded-xl border border-night/10 bg-cream px-4 py-2.5 text-sm lg:col-span-1"
+            className="rounded-xl border border-night/10 bg-cream px-4 py-2.5 text-sm min-h-11 lg:col-span-1"
           />
-          <select value={city} onChange={(e) => setCity(e.target.value)} className="rounded-xl border border-night/10 bg-cream px-3 py-2.5 text-sm">
+          <select value={city} onChange={(e) => setCity(e.target.value)} className="rounded-xl border border-night/10 bg-cream px-3 py-2.5 text-sm min-h-11">
             {cities.map((c) => (
               <option key={c}>{c}</option>
             ))}
           </select>
-          <select value={type} onChange={(e) => setType(e.target.value)} className="rounded-xl border border-night/10 bg-cream px-3 py-2.5 text-sm">
+          <select value={type} onChange={(e) => setType(e.target.value)} className="rounded-xl border border-night/10 bg-cream px-3 py-2.5 text-sm min-h-11">
             <option>All</option>
             <option>Full-time</option>
             <option>Part-time</option>
             <option>Contract</option>
             <option>Internship</option>
           </select>
-          <select value={exp} onChange={(e) => setExp(e.target.value)} className="rounded-xl border border-night/10 bg-cream px-3 py-2.5 text-sm">
+          <select value={exp} onChange={(e) => setExp(e.target.value)} className="rounded-xl border border-night/10 bg-cream px-3 py-2.5 text-sm min-h-11">
             <option>All</option>
             <option>Entry</option>
             <option>Mid</option>
@@ -70,18 +74,15 @@ export default function JobsPage() {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          <Button href="/professionals" variant="outline" size="sm">
-            Resume review
+          <Button href="/plan" variant="outline" size="sm" className="min-h-11">
+            Add career goals to My Canada Plan
           </Button>
-          <Button href="/professionals" variant="outline" size="sm">
-            LinkedIn help
-          </Button>
-          <Button href="/professionals" variant="outline" size="sm">
-            Interview prep
+          <Button href="/professionals" variant="outline" size="sm" className="min-h-11">
+            Sample career coaches
           </Button>
         </div>
 
-        <p className="mt-8 text-sm text-muted">{filtered.length} demo jobs</p>
+        <p className="mt-8 text-sm text-muted">{filtered.length} sample jobs</p>
         <div className="mt-4 grid lg:grid-cols-2 gap-4">
           {filtered.map((j) => (
             <JobCard key={j.id} job={j} />

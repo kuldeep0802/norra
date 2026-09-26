@@ -13,7 +13,7 @@ export type Provider = {
   rateUnit: "hour" | "session" | "package";
   rating: number;
   reviewCount: number;
-  verification: "Demo verified" | "Demo pending" | "Demo listing";
+  verification: "Sample profile";
   availability: string;
   demo: true;
   bio: string;
@@ -51,7 +51,7 @@ export const providers: Provider[] = [
     rateUnit: "session",
     rating: 4.9,
     reviewCount: 48,
-    verification: "Demo verified",
+    verification: "Sample profile",
     availability: "Next available: Tue",
     demo: true,
     bio: "Demo profile — Amrita helps newcomers organize application documents and understand process steps. For regulated advice, confirm current RCIC status on the official College of Immigration and Citizenship Consultants registry. Norra does not provide immigration advice.",
@@ -75,7 +75,7 @@ export const providers: Provider[] = [
     rateUnit: "hour",
     rating: 4.8,
     reviewCount: 72,
-    verification: "Demo verified",
+    verification: "Sample profile",
     availability: "Next available: Tomorrow",
     demo: true,
     bio: "Demo profile — Marcus specializes in translating international experience into Canadian hiring language. Not a recruiter; coaching only.",
@@ -98,7 +98,7 @@ export const providers: Provider[] = [
     rateUnit: "session",
     rating: 4.7,
     reviewCount: 35,
-    verification: "Demo verified",
+    verification: "Sample profile",
     availability: "Next available: Thu",
     demo: true,
     bio: "Demo profile — Sofia helps families navigate their first weeks in Quebec. Not a government employee; not immigration advice.",
@@ -114,14 +114,14 @@ export const providers: Provider[] = [
     city: "Calgary",
     province: "AB",
     photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80",
-    description: "Newcomer tax filing education and personal tax prep. Licensed professional — demo listing.",
+    description: "Newcomer tax filing education and personal tax prep. Sample profile for layout only — not a real CPA listing.",
     services: ["Personal tax return", "Newcomer tax orientation", "GST/HST credit questions"],
     languages: ["English"],
     rateFrom: 39,
     rateUnit: "package",
     rating: 4.9,
     reviewCount: 61,
-    verification: "Demo verified",
+    verification: "Sample profile",
     availability: "Booking for tax season",
     demo: true,
     bio: "Demo profile — Daniel provides licensed tax services. Confirm credentials independently. Norra is not a financial institution.",
@@ -144,7 +144,7 @@ export const providers: Provider[] = [
     rateUnit: "session",
     rating: 4.8,
     reviewCount: 94,
-    verification: "Demo verified",
+    verification: "Sample profile",
     availability: "Most flights covered",
     demo: true,
     bio: "Demo profile — Emily's team meets arrivals at Pearson and Billy Bishop. Meet-and-greet style service for stress-free first hours.",
@@ -167,7 +167,7 @@ export const providers: Provider[] = [
     rateUnit: "hour",
     rating: 4.6,
     reviewCount: 28,
-    verification: "Demo listing",
+    verification: "Sample profile",
     availability: "Weekends open",
     demo: true,
     bio: "Demo profile — Raj helps newcomers feel confident on move-in day. Not a landlord or real estate agent.",
@@ -190,7 +190,7 @@ export const providers: Provider[] = [
     rateUnit: "hour",
     rating: 4.9,
     reviewCount: 41,
-    verification: "Demo verified",
+    verification: "Sample profile",
     availability: "Consultations by appointment",
     demo: true,
     bio: "Demo profile — Isabelle is shown as a demo immigration lawyer. Always verify Law Society membership. Norra is not a law firm.",
@@ -213,7 +213,7 @@ export const providers: Provider[] = [
     rateUnit: "hour",
     rating: 4.8,
     reviewCount: 56,
-    verification: "Demo verified",
+    verification: "Sample profile",
     availability: "Evenings & weekends",
     demo: true,
     bio: "Demo profile — Noah tutors online and in-person across Edmonton.",

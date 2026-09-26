@@ -1,6 +1,7 @@
 import { SectionHeader } from "@/components/SectionHeader";
 import { ChatAssistant } from "@/components/ChatAssistant";
 import { Disclaimer } from "@/components/Disclaimer";
+import { DemoBanner } from "@/components/DemoBanner";
 
 export const metadata = { title: "Nora Assistant" };
 
@@ -14,9 +15,13 @@ export default function AssistantPage() {
           description="Rule-based demo assistant that routes you to services, checklists, and professionals. Not a substitute for licensed advice."
           align="center"
         />
-        <Disclaimer className="mt-8">
+        <DemoBanner emphasis className="mt-8">
+          <strong>Demo assistant:</strong> Nora is a rule-based guide in this early product — not AI advice and not
+          a substitute for licensed professionals.
+        </DemoBanner>
+        <Disclaimer className="mt-4">
           Nora does not invent eligibility rules or policies. For immigration, legal, health, or finance topics,
-          she will point you toward authorized professionals and official sources.
+          she points you toward official sources and reminds you to seek authorized help independently.
         </Disclaimer>
         <div className="mt-10">
           <ChatAssistant />

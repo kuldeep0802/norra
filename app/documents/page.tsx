@@ -1,6 +1,7 @@
 import { SectionHeader } from "@/components/SectionHeader";
 import { Disclaimer } from "@/components/Disclaimer";
 import { Badge } from "@/components/Badge";
+import { DemoBanner } from "@/components/DemoBanner";
 import { FileText, Lock, Upload } from "lucide-react";
 
 export const metadata = { title: "Documents" };
@@ -21,7 +22,10 @@ export default function DocumentsPage() {
           title="Keep your paperwork oriented"
           description="A secure-looking organizer UI for planning — this demo does not upload or store sensitive files."
         />
-        <Disclaimer variant="warning" className="mt-8">
+        <DemoBanner emphasis className="mt-8">
+          Document folders below are sample UI. Upload is disabled — do not paste real passport or SIN data here.
+        </DemoBanner>
+        <Disclaimer variant="warning" className="mt-4">
           <strong>Privacy:</strong> Do not upload real passports, SIN numbers, or financial documents here. This
           is a UI prototype. In a production product, documents would use encrypted storage with clear retention
           controls — and you would always keep master copies offline.

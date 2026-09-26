@@ -11,7 +11,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ providerId: string }> }) {
   const { providerId } = await params;
   const p = getProviderById(providerId);
-  return { title: p ? `Book ${p.name}` : "Book" };
+  return { title: p ? `Demo book · ${p.name}` : "Demo book" };
 }
 
 export default async function BookPage({ params }: { params: Promise<{ providerId: string }> }) {
@@ -28,7 +28,7 @@ export default async function BookPage({ params }: { params: Promise<{ providerI
           </Link>{" "}
           / Book
         </p>
-        <h1 className="font-display text-3xl font-semibold mb-2">Book with {provider.name}</h1>
+        <h1 className="font-display text-3xl font-semibold mb-2">Demo book — {provider.name}</h1>
         <p className="text-muted mb-6">{provider.title} · {provider.city}</p>
         <Disclaimer className="mb-8">
           Demo booking flow only — no real payment or appointment is created.

@@ -20,7 +20,7 @@ export function JobCard({ job }: { job: Job }) {
       <div className="flex items-start justify-between gap-3">
         <div>
           <Badge variant="demo" icon="demo" className="mb-3">
-            Demo listing
+            Sample (layout only)
           </Badge>
           <h3 className="font-semibold text-lg text-ink group-hover:text-forest transition-colors">
             {job.title}

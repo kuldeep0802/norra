@@ -41,7 +41,7 @@ export function Button({
   disabled,
 }: Props) {
   const cls = cn(
-    "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest/40 disabled:opacity-50",
+    "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest focus-visible:ring-offset-2 focus-visible:ring-offset-cream disabled:opacity-50",
     variants[variant],
     sizes[size],
     className

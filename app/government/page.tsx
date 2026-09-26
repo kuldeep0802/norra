@@ -6,7 +6,7 @@ export const metadata = { title: "Government & Benefits" };
 
 const topics = [
   { title: "Social Insurance Number (SIN)", body: "Required for work and many benefits. Apply through Service Canada when eligible. Bring identity and status documents.", official: "https://www.canada.ca/en/employment-social-development/services/sin.html" },
-  { title: "CRA & personal taxes", body: "Most residents file annually. Newcomers often have special first-year considerations — a licensed tax pro can help.", official: "https://www.canada.ca/en/revenue-agency.html" },
+  { title: "CRA & personal taxes", body: "Most residents file annually. Newcomers often have special first-year considerations — verify on CRA newcomers pages; a licensed tax pro can help. Norra does not invent amounts or deadlines.", official: "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/newcomers-canada-immigrants.html" },
   { title: "GST/HST credit", body: "A tax-free quarterly payment for those who qualify. Usually requires filing a return.", official: "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/goods-services-harmonized-sales-tax-credit.html" },
   { title: "Canada Child Benefit (CCB)", body: "Monthly support for eligible families with children. Apply via CRA processes.", official: "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/canada-child-benefit-overview.html" },
   { title: "Employment Insurance (EI)", body: "Income support in specific job-loss or leave situations if you qualify. Check official eligibility tools.", official: "https://www.canada.ca/en/services/benefits/ei.html" },

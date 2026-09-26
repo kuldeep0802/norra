@@ -5,7 +5,9 @@ import {
 } from "./healthLinks";
 import {
   BANKING_CHECKLIST_BASE_IDS,
+  CRA_CHECKLIST_BASE_IDS,
   OFFICIAL_BANKING,
+  OFFICIAL_CRA_NEWCOMERS,
   OFFICIAL_SIN,
   SIN_CHECKLIST_BASE_IDS,
 } from "./officialLinks";
@@ -398,8 +400,8 @@ export const alreadyHereItems: ChecklistItem[] = [
     label: "Organize taxes / benefits bookmarks for CRA when relevant",
     category: "Government",
     href: "/government",
-    officialHref: "https://www.canada.ca/en/revenue-agency.html",
-    officialLabel: "CRA",
+    officialHref: "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/newcomers-canada-immigrants.html",
+    officialLabel: "CRA — Newcomers",
   },
 ];
 
@@ -536,6 +538,9 @@ export function buildPlanChecklist(profile: PlanProfile): ChecklistItem[] {
   if (profile.needs.includes("Healthcare registration")) {
     add(settlingItems.filter((i) => i.id === "set-2" || i.id === "set-5"));
   }
+  if (profile.needs.includes("Government benefits")) {
+    add(alreadyHereItems.filter((i) => i.id === "here-5"));
+  }
 
   const health = resolveHealthLinksForPlan(profile.city, profile.province);
   const provincialOfficial = health.provincial
@@ -547,6 +552,7 @@ export function buildPlanChecklist(profile: PlanProfile): ChecklistItem[] {
     const isHealthOfficial = (HEALTH_CHECKLIST_BASE_IDS as readonly string[]).includes(baseId);
     const isSinOfficial = (SIN_CHECKLIST_BASE_IDS as readonly string[]).includes(baseId);
     const isBankingOfficial = (BANKING_CHECKLIST_BASE_IDS as readonly string[]).includes(baseId);
+    const isCraOfficial = (CRA_CHECKLIST_BASE_IDS as readonly string[]).includes(baseId);
     const next: ChecklistItem = {
       ...item,
       id: `plan-${profile.stage || "general"}-${item.id}`,
@@ -571,6 +577,10 @@ export function buildPlanChecklist(profile: PlanProfile): ChecklistItem[] {
     if (isBankingOfficial) {
       next.officialHref = OFFICIAL_BANKING.href;
       next.officialLabel = OFFICIAL_BANKING.label;
+    }
+    if (isCraOfficial) {
+      next.officialHref = OFFICIAL_CRA_NEWCOMERS.href;
+      next.officialLabel = OFFICIAL_CRA_NEWCOMERS.label;
     }
     return next;
   });
@@ -706,6 +716,14 @@ export function getPlanRecommendations(profile: PlanProfile): PlanRecommendation
       title: "Students overview",
       description: "Orientation pointers for studying in Canada.",
       href: "/students",
+      kind: "service",
+    });
+  }
+  if (profile.needs.includes("Government benefits")) {
+    push({
+      title: "Government & benefits map",
+      description: "High-level CRA / Canada.ca starting points — no invented amounts. Verify eligibility on official sites.",
+      href: "/government",
       kind: "service",
     });
   }

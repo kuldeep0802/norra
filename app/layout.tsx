@@ -72,9 +72,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-CA" className={`${dmSans.variable} ${fraunces.variable}`}>
       <body className="min-h-screen flex flex-col antialiased">
+        <a href="#main-content" className="skip-to-content">
+          Skip to content
+        </a>
         <SiteJsonLd />
         <Nav />
-        <main className="flex-1 pb-20 md:pb-0">{children}</main>
+        <main id="main-content" tabIndex={-1} className="flex-1 pb-20 md:pb-0 outline-none">
+          {children}
+        </main>
         <Footer />
         <MobileBottomNav />
       </body>

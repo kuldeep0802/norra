@@ -206,7 +206,7 @@ export function PlanChecklist({
                                 className="inline-flex items-center gap-1 text-xs text-muted font-medium hover:text-forest hover:underline min-h-9"
                               >
                                 {item.officialLabel || "Official source"}
-                                <ExternalLink className="h-3 w-3" />
+                                <ExternalLink className="h-3 w-3" aria-hidden />
                               </a>
                             )}
                           </div>

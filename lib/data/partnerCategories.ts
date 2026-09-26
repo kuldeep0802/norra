@@ -141,6 +141,57 @@ export const partnerCategoryLandings: PartnerCategoryLanding[] = [
       { label: "Government navigation", href: "/government" },
     ],
   },
+
+  {
+    slug: "housing-adjacent",
+    formCategory: "Housing-adjacent",
+    title: "Housing-adjacent support",
+    metaDescription:
+      "Early-stage interest page for housing-adjacent providers exploring a future Norra marketplace. Not live — not verified. No fake listings.",
+    eyebrow: "Future category · Housing",
+    summary:
+      "Finding a first place to stay is a high-stress newcomer moment — and a common scam vector. Norra may one day surface housing-adjacent supports (orientation, temporary stays facilitators, tenant-education partners) in a marketplace. Today this page is an interest funnel only. No live inventory, no verified landlords, no fake listings.",
+    futureMightOffer: [
+      "Discovery of housing orientation and tenant-education supports by city",
+      "Scam-aware hand-offs from temporary accommodation and lease guides",
+      "Clear separation between sample UI listings and any future real inventory",
+    ],
+    whoThisIsFor: [
+      "Housing orientation facilitators, tenant educators, and newcomer lodging navigators",
+      "Operators exploring honest marketplace participation later — not claiming inventory today",
+      "Not for posting unverified rentals or collecting deposits through Norra",
+    ],
+    relatedGuides: [
+      { label: "Temporary accommodation (scam-aware)", href: "/resources/temporary-accommodation" },
+      { label: "Sample housing layout", href: "/housing" },
+      { label: "My Canada Plan", href: "/plan" },
+    ],
+  },
+  {
+    slug: "healthcare-navigation",
+    formCategory: "Healthcare navigation",
+    title: "Healthcare navigation support",
+    metaDescription:
+      "Early-stage interest page for healthcare navigators exploring a future Norra marketplace. Not live — not verified. Not medical advice.",
+    eyebrow: "Future category · Healthcare",
+    summary:
+      "Registering for provincial health coverage and finding a clinic is confusing for many newcomers. A future Norra marketplace might help people discover healthcare navigators — orientation only, never medical advice. The marketplace is not live; nobody here is verified; Norra is not a medical provider.",
+    futureMightOffer: [
+      "Discovery of healthcare orientation navigators by province and language",
+      "Warm links from My Canada Plan health-card checklists into optional booking",
+      "Hard disclaimers: always verify enrolment on official provincial sites",
+    ],
+    whoThisIsFor: [
+      "Healthcare navigators and clinic orientation facilitators serving newcomers",
+      "Community health educators who already point people to official enrolment pages",
+      "Not for diagnosing, prescribing, or claiming wait times or eligibility",
+    ],
+    relatedGuides: [
+      { label: "Get a provincial health card", href: "/resources/get-health-card-canada" },
+      { label: "My Canada Plan", href: "/plan" },
+      { label: "Settlement overview", href: "/settlement" },
+    ],
+  },
 ];
 
 export function getPartnerCategoryBySlug(slug: string): PartnerCategoryLanding | undefined {

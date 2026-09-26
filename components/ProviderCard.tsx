@@ -15,7 +15,7 @@ export function ProviderCard({ provider }: { provider: Provider }) {
       </div>
       <div className="p-6 flex gap-4 pt-12 sm:pt-6">
         <div className="relative h-16 w-16 rounded-2xl overflow-hidden shrink-0 bg-sand">
-          <Image src={provider.photo} alt="" fill className="object-cover" sizes="64px" />
+          <Image src={provider.photo} alt={`Sample photo of ${provider.name}`} fill className="object-cover" sizes="64px" loading="lazy" />
         </div>
         <div className="min-w-0 flex-1">
           <h3 className="font-semibold text-ink truncate">{provider.name}</h3>

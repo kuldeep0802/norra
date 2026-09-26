@@ -44,14 +44,14 @@ export function Nav() {
               className="inline-flex items-center gap-1.5 min-h-11 px-3 py-2 text-sm font-medium text-muted hover:text-forest hover:bg-sand rounded-full transition-colors"
               aria-label="Search Knowledge Hub"
             >
-              <Search className="h-4 w-4" />
+              <Search className="h-4 w-4" aria-hidden />
               <span className="hidden lg:inline">Search guides</span>
             </Link>
             <Link
               href="/assistant"
               className="inline-flex items-center gap-1.5 min-h-11 px-3 py-2 text-sm font-medium text-forest hover:bg-sand rounded-full transition-colors"
             >
-              <Sparkles className="h-4 w-4" />
+              <Sparkles className="h-4 w-4" aria-hidden />
               Nora
             </Link>
             <Button href="/#needs" variant="outline" size="sm" className="min-h-11">
@@ -67,16 +67,20 @@ export function Nav() {
             className="xl:hidden p-2.5 min-h-11 min-w-11 rounded-xl hover:bg-sand text-ink inline-flex items-center justify-center"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
+            aria-controls="mobile-nav-drawer"
             aria-label={open ? "Close menu" : "Open menu"}
           >
-            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {open ? <X className="h-6 w-6" aria-hidden /> : <Menu className="h-6 w-6" aria-hidden />}
           </button>
         </div>
       </div>
 
       {open && (
-        <div className="xl:hidden border-t border-night/5 bg-cream max-h-[calc(100dvh-4rem)] overflow-y-auto">
-          <div className="mx-auto max-w-7xl px-4 py-4 space-y-1 pb-8">
+        <div
+          id="mobile-nav-drawer"
+          className="xl:hidden border-t border-night/5 bg-cream max-h-[calc(100dvh-4rem)] overflow-y-auto"
+        >
+          <nav className="mx-auto max-w-7xl px-4 py-4 space-y-1 pb-8" aria-label="Mobile primary">
             {mainNav.map((item) => (
               <Link
                 key={item.href}
@@ -103,7 +107,7 @@ export function Nav() {
                 Build My Canada Plan
               </Button>
             </div>
-          </div>
+          </nav>
         </div>
       )}
     </header>

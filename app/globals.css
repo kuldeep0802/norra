@@ -38,6 +38,30 @@ h1, h2, h3, .font-display {
   color: #F7F3EC;
 }
 
+/* Visible keyboard focus — real a11y, not theatre */
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 2px solid var(--color-forest);
+  outline-offset: 2px;
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--color-forest);
+  outline-offset: 2px;
+}
+
+/* Skip link lands above sticky header */
+#main-content:target,
+#main-content:focus {
+  scroll-margin-top: 5rem;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -58,4 +82,26 @@ h1, h2, h3, .font-display {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Skip to content — visible only on keyboard focus */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 0.65rem 1rem;
+  border-radius: 9999px;
+  background: var(--color-forest);
+  color: var(--color-cream);
+  font-size: 0.875rem;
+  font-weight: 500;
+  box-shadow: 0 4px 14px rgba(10, 31, 28, 0.25);
+}
+.skip-to-content:focus,
+.skip-to-content:focus-visible {
+  left: 1rem;
+  top: 1rem;
+  outline: 2px solid var(--color-cream);
+  outline-offset: 2px;
 }

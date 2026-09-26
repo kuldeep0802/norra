@@ -33,7 +33,11 @@ export default function PlanPage() {
   useEffect(() => {
     const saved = loadPlanProfile();
     if (saved?.stage) {
-      setProfile(saved);
+      // Backfill province from city map when a known city was saved without province
+      const known = cities.find((c) => c.name === saved.city);
+      const next = known && !saved.province ? { ...saved, province: known.province } : saved;
+      setProfile(next);
+      if (known && !saved.province) savePlanProfile(next);
       setStep("dashboard");
     }
   }, []);
@@ -155,7 +159,7 @@ export default function PlanPage() {
 
           <PlanHealthLinks city={profile.city} province={profile.province} />
 
-          <PlanOfficialLinks />
+          <PlanOfficialLinks needs={profile.needs} />
 
           <div className="mt-10">
             <h2 className="font-display text-xl sm:text-2xl font-semibold text-ink mb-4">
@@ -288,7 +292,7 @@ export default function PlanPage() {
 
           <label className="block">
             <span className="text-sm font-medium flex items-center gap-1.5">
-              <MapPin className="h-3.5 w-3.5" /> City (or preference)
+              <MapPin className="h-3.5 w-3.5" aria-hidden /> City (or preference)
             </span>
             <select
               required
@@ -299,8 +303,8 @@ export default function PlanPage() {
                 setProfile((p) => ({
                   ...p,
                   city,
-                  // Clear province when a known city is chosen (province comes from city map)
-                  province: known ? "" : p.province,
+                  // Known city → auto-fill province from city map; Other keeps/enables manual province
+                  province: known ? known.province : city === "Other / Not sure yet" ? p.province : "",
                 }));
               }}
               className="mt-1.5 w-full rounded-xl border border-night/10 bg-cream px-4 py-3 min-h-12 text-base"
@@ -314,6 +318,20 @@ export default function PlanPage() {
               <option value="Other / Not sure yet">Other / Not sure yet</option>
             </select>
           </label>
+
+          {profile.city && profile.city !== "Other / Not sure yet" && profile.province ? (
+            <div className="rounded-xl border border-forest/20 bg-forest/5 px-4 py-3">
+              <p className="text-xs font-semibold uppercase tracking-wide text-muted">Province / Territory</p>
+              <p className="mt-1.5">
+                <span className="inline-flex items-center rounded-full bg-forest text-cream text-sm font-medium px-3 py-1.5">
+                  {profile.province}
+                </span>
+              </p>
+              <p className="mt-2 text-xs text-muted leading-relaxed">
+                Auto-filled from your city. Choose &ldquo;Other / Not sure yet&rdquo; above to set province manually.
+              </p>
+            </div>
+          ) : null}
 
           {(!profile.city || profile.city === "Other / Not sure yet") && (
             <label className="block">
@@ -370,6 +388,7 @@ export default function PlanPage() {
                   key={g.value}
                   type="button"
                   onClick={() => toggleGoal(g.value)}
+                  aria-pressed={profile.goals.includes(g.value)}
                   className={`rounded-full px-4 py-2.5 text-sm border transition-colors min-h-11 touch-manipulation ${
                     profile.goals.includes(g.value)
                       ? "bg-forest text-cream border-forest"
@@ -390,6 +409,7 @@ export default function PlanPage() {
                   key={n}
                   type="button"
                   onClick={() => toggleNeed(n)}
+                  aria-pressed={profile.needs.includes(n)}
                   className={`rounded-full px-3 py-2 text-sm border transition-colors min-h-11 touch-manipulation ${
                     profile.needs.includes(n)
                       ? "bg-night text-cream border-night"

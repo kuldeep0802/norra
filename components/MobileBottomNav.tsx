@@ -31,12 +31,13 @@ export function MobileBottomNav() {
             <Link
               key={label}
               href={href}
+              aria-current={active ? "page" : undefined}
               className={cn(
                 "flex flex-1 flex-col items-center justify-center gap-0.5 px-1 py-2 min-h-11 touch-manipulation",
                 active ? "text-forest" : "text-muted"
               )}
             >
-              <Icon className="h-5 w-5" strokeWidth={active ? 2 : 1.5} />
+              <Icon className="h-5 w-5" strokeWidth={active ? 2 : 1.5} aria-hidden />
               <span className="text-[10px] font-medium leading-tight">{label}</span>
             </Link>
           );

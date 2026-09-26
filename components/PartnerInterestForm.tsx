@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { Mail, Save, Trash2 } from "lucide-react";
+import { Download, Mail, Save, Trash2 } from "lucide-react";
 import { founder } from "@/lib/data/founder";
 import { cities } from "@/lib/data/cities";
 import { Button } from "./Button";
@@ -60,6 +60,22 @@ function saveDrafts(drafts: PartnerInterestDraft[]) {
   }
 }
 
+function csvEscape(value: string): string {
+  const v = value ?? "";
+  if (/[",\n\r]/.test(v)) return `"${v.replace(/"/g, '""')}"`;
+  return v;
+}
+
+function draftsToCsv(drafts: PartnerInterestDraft[]): string {
+  const header = ["savedAt", "name", "email", "category", "cityProvince", "website", "note"];
+  const rows = drafts.map((d) =>
+    [d.savedAt || "", d.name, d.email, d.category, d.cityProvince, d.website, d.note]
+      .map((cell) => csvEscape(String(cell)))
+      .join(",")
+  );
+  return [header.join(","), ...rows].join("\n");
+}
+
 function buildMailto(draft: PartnerInterestDraft): string {
   const subject = `[Norra provider interest] ${draft.category || "General"} — ${draft.name}`;
   const body = [
@@ -86,6 +102,7 @@ function buildMailto(draft: PartnerInterestDraft): string {
  * Honest early-stage provider interest form.
  * Primary path: mailto to founder with structured subject/body.
  * Optional: save draft to localStorage (does not auto-submit to a server).
+ * Founder helper: download local drafts as CSV (browser-only).
  */
 export function PartnerInterestForm() {
   const [form, setForm] = useState<PartnerInterestDraft>(emptyDraft);
@@ -127,6 +144,28 @@ export function PartnerInterestForm() {
     saveDrafts([]);
     setDraftCount(0);
     setFeedback("Local drafts cleared on this device.");
+  }
+
+  function onDownloadCsv() {
+    const drafts = loadDrafts();
+    if (drafts.length === 0) {
+      setFeedback("No local drafts to download.");
+      return;
+    }
+    const csv = draftsToCsv(drafts);
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    const stamp = new Date().toISOString().slice(0, 10);
+    a.href = url;
+    a.download = `norra-partner-interest-drafts-${stamp}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    setFeedback(
+      "Downloaded local drafts CSV on this device only — still no server. For the Founder to review interest drafts saved in this browser."
+    );
   }
 
   function onEmailFounder(e: FormEvent) {
@@ -251,7 +290,7 @@ export function PartnerInterestForm() {
 
         <div className="flex flex-col sm:flex-row flex-wrap gap-3 pt-1">
           <Button type="submit" size="lg" className="min-h-12 w-full sm:w-auto justify-center">
-            <Mail className="h-4 w-4" />
+            <Mail className="h-4 w-4" aria-hidden />
             Email interest to Founder
           </Button>
           <button
@@ -259,31 +298,50 @@ export function PartnerInterestForm() {
             onClick={onSaveDraft}
             className="inline-flex items-center justify-center gap-2 rounded-full border border-night/15 bg-cream px-5 py-3 text-sm font-medium text-ink min-h-12 touch-manipulation hover:border-forest/40"
           >
-            <Save className="h-4 w-4" />
+            <Save className="h-4 w-4" aria-hidden />
             Save draft locally
           </button>
         </div>
       </form>
 
       {feedback && (
-        <p className="text-sm text-muted leading-relaxed rounded-xl border border-night/10 bg-sand px-3 py-2.5">
+        <p
+          className="text-sm text-muted leading-relaxed rounded-xl border border-night/10 bg-sand px-3 py-2.5"
+          role="status"
+        >
           {feedback}
         </p>
       )}
 
       {draftCount > 0 && (
-        <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted pt-1 border-t border-night/5">
-          <span>
-            {draftCount} local draft{draftCount === 1 ? "" : "s"} on this device (localStorage only)
-          </span>
-          <button
-            type="button"
-            onClick={onClearDrafts}
-            className="inline-flex items-center gap-1 text-muted hover:text-forest min-h-9 touch-manipulation"
-          >
-            <Trash2 className="h-3.5 w-3.5" />
-            Clear local drafts
-          </button>
+        <div className="space-y-3 pt-1 border-t border-night/5">
+          <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted">
+            <span>
+              {draftCount} local draft{draftCount === 1 ? "" : "s"} on this device (localStorage only)
+            </span>
+            <button
+              type="button"
+              onClick={onClearDrafts}
+              className="inline-flex items-center gap-1 text-muted hover:text-forest min-h-9 touch-manipulation"
+            >
+              <Trash2 className="h-3.5 w-3.5" aria-hidden />
+              Clear local drafts
+            </button>
+          </div>
+          <div className="rounded-xl border border-dashed border-forest/30 bg-forest/5 px-3 py-3">
+            <p className="text-xs text-muted leading-relaxed mb-2">
+              <strong className="text-ink">Founder tool · local only:</strong> download interest drafts saved in{" "}
+              <em>this</em> browser as CSV. Still no server — nothing is uploaded.
+            </p>
+            <button
+              type="button"
+              onClick={onDownloadCsv}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-forest text-cream px-4 py-2.5 text-sm font-medium min-h-11 touch-manipulation hover:opacity-95"
+            >
+              <Download className="h-4 w-4" aria-hidden />
+              Download drafts CSV
+            </button>
+          </div>
         </div>
       )}
     </div>

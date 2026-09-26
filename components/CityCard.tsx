@@ -14,6 +14,7 @@ export function CityCard({ city }: { city: City }) {
         fill
         className="object-cover group-hover:scale-105 transition-transform duration-500"
         sizes="220px"
+        loading="lazy"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-night/90 via-night/30 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 p-5">

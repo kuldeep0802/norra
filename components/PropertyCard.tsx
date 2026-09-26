@@ -18,6 +18,7 @@ export function PropertyCard({ property }: { property: Property }) {
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
           sizes="(max-width:768px) 100vw, 33vw"
+          loading="lazy"
         />
         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
           <Badge variant="demo" icon="demo">

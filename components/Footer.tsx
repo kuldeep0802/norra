@@ -30,7 +30,7 @@ export function Footer() {
                 </a>
               </p>
             </div>
-            <p className="mt-6 text-xs text-sky/70 max-w-md leading-relaxed">
+            <p className="mt-6 text-xs text-sky/80 max-w-md leading-relaxed">
               Norra is an early-stage assistance and navigation product — not a law firm, immigration consultancy,
               medical provider, financial institution, or government organization. No outcomes are guaranteed.
             </p>
@@ -56,7 +56,7 @@ export function Footer() {
             </div>
           ))}
         </div>
-        <div className="mt-14 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between gap-4 text-xs text-sky/60">
+        <div className="mt-14 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between gap-4 text-xs text-sky/80">
           <p>© {new Date().getFullYear()} Norra · Early-stage product. All rights reserved.</p>
           <p>Pronounced NOR-uh · Built for newcomers and anyone navigating Canada.</p>
         </div>

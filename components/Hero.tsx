@@ -27,7 +27,7 @@ export function Hero() {
           className="max-w-3xl"
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 backdrop-blur px-3.5 py-1.5 text-sm text-cream mb-5 sm:mb-6">
-            <Compass className="h-4 w-4 text-amber" />
+            <Compass className="h-4 w-4 text-amber" aria-hidden />
             Early-stage · Built in Canada
           </div>
           <h1 className="font-display text-[2rem] leading-[1.15] sm:text-5xl lg:text-6xl xl:text-[4rem] font-semibold text-cream tracking-tight">
@@ -42,9 +42,9 @@ export function Hero() {
               What do you need help with?
             </Button>
             <Button href="/plan" size="lg" variant="amber" className="min-h-12 w-full sm:w-auto justify-center">
-              <Map className="h-4 w-4" />
+              <Map className="h-4 w-4" aria-hidden />
               Build My Canada Plan
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-4 w-4" aria-hidden />
             </Button>
           </div>
           <p className="mt-6 sm:mt-8 text-xs text-sky/70 max-w-lg leading-relaxed">

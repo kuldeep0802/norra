@@ -798,6 +798,9 @@ export const needQueryAliases: Record<string, (typeof planNeedOptions)[number]> 
   cities: "Learn the city",
   benefits: "Government benefits",
   government: "Government benefits",
+  safety: "Find housing",
+  scams: "Find housing",
+  prearrival: "Airport & arrival",
 };
 
 /** Map Knowledge Hub topic chip ids → plan query (need and/or goal) */
@@ -809,11 +812,14 @@ export const hubTopicToPlanQuery: Record<
   Health: { need: "health" },
   Banking: { need: "banking" },
   Work: { need: "job", goal: "work" },
+  /** Pre-landing docs/lodging → Airport & arrival need */
   "Pre-arrival": { need: "arrival" },
   Arrival: { need: "arrival" },
-  Government: { need: "government" },
+  /** Knowledge Hub “Government” guides currently centre on SIN → Banking & SIN */
+  Government: { need: "banking" },
   Cities: { need: "city" },
-  Safety: {},
+  /** Scam guide emphasises housing deposits & fake listings first */
+  Safety: { need: "housing" },
 };
 
 export function resolveNeedFromQuery(raw: string | null): string | null {

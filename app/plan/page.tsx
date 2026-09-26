@@ -28,6 +28,11 @@ import {
 } from "@/lib/data/checklists";
 import { cities } from "@/lib/data/cities";
 import { PROVINCE_TERRITORY_OPTIONS } from "@/lib/data/healthLinks";
+import {
+  clearCitySwitchDismissals,
+  dismissCitySwitch,
+  isCitySwitchDismissed,
+} from "@/lib/planTransfer";
 
 export default function PlanPage() {
   const [step, setStep] = useState<"form" | "dashboard">("form");
@@ -98,11 +103,13 @@ export default function PlanPage() {
         next = { ...next, city: resolvedCity.name, province: resolvedCity.province };
         notes.push(`Prefilling ${resolvedCity.name}, ${resolvedCity.province}`);
       } else if (next.city !== resolvedCity.name) {
-        setCitySwitchOffer({
-          name: resolvedCity.name,
-          province: resolvedCity.province,
-          slug: resolvedCity.slug,
-        });
+        if (!isCitySwitchDismissed(resolvedCity.slug, next.city)) {
+          setCitySwitchOffer({
+            name: resolvedCity.name,
+            province: resolvedCity.province,
+            slug: resolvedCity.slug,
+          });
+        }
       } else if (!next.province) {
         next = { ...next, province: resolvedCity.province };
       }
@@ -166,9 +173,17 @@ export default function PlanPage() {
     } catch {
       /* ignore */
     }
+    clearCitySwitchDismissals();
     setCitySwitchOffer(null);
     setQueryNote(null);
     setStep("form");
+  }
+
+  function dismissCitySwitchOffer() {
+    if (citySwitchOffer) {
+      dismissCitySwitch(citySwitchOffer.slug, profile.city || "");
+    }
+    setCitySwitchOffer(null);
   }
 
   function acceptCitySwitch() {
@@ -239,7 +254,7 @@ export default function PlanPage() {
                     {profile.province ? `, ${profile.province}` : ""}
                   </span>
                   . Update to {citySwitchOffer.name}, {citySwitchOffer.province}? Checklist ticks stay on this
-                  device.
+                  device. Dismiss remembers this city pair until you reset or change your plan city.
                 </p>
               </div>
               <div className="flex flex-wrap gap-2 shrink-0">
@@ -252,7 +267,7 @@ export default function PlanPage() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setCitySwitchOffer(null)}
+                  onClick={dismissCitySwitchOffer}
                   className="inline-flex items-center justify-center gap-1 rounded-full border border-night/15 px-3 py-2.5 text-xs font-medium text-muted min-h-11 touch-manipulation"
                   aria-label="Dismiss city switch suggestion"
                 >
@@ -456,7 +471,7 @@ export default function PlanPage() {
               </button>
               <button
                 type="button"
-                onClick={() => setCitySwitchOffer(null)}
+                onClick={dismissCitySwitchOffer}
                 className="inline-flex items-center justify-center rounded-full border border-night/15 px-3 py-2.5 text-xs font-medium text-muted min-h-11 touch-manipulation"
               >
                 Dismiss

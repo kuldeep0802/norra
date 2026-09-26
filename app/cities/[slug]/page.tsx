@@ -10,6 +10,7 @@ import { JobCard } from "@/components/JobCard";
 import { ProviderCard } from "@/components/ProviderCard";
 import { Button } from "@/components/Button";
 import { Disclaimer } from "@/components/Disclaimer";
+import { CityPlanStickyCta } from "@/components/CityPlanStickyCta";
 
 export function generateStaticParams() {
   return cities.map((c) => ({ slug: c.slug }));
@@ -32,6 +33,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
 
   return (
     <div>
+      <CityPlanStickyCta cityName={city.name} citySlug={city.slug} />
       <section className="relative h-[42vh] min-h-[280px] bg-night">
         <Image src={city.image} alt={city.name} fill className="object-cover opacity-70" priority sizes="100vw" />
         <div className="absolute inset-0 bg-gradient-to-t from-night via-night/40 to-transparent" />

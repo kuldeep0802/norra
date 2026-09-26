@@ -309,6 +309,15 @@ export const studyItems: ChecklistItem[] = [
     category: "Study",
     href: "/students",
   },
+  {
+    id: "stu-5",
+    label: "Bookmark IRCC post-graduation work / PGWP pages to verify later (not advice)",
+    category: "Study",
+    href: "/resources/pgwp-post-graduation-work",
+    officialHref:
+      "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation.html",
+    officialLabel: "Work after graduation — IRCC",
+  },
 ];
 
 export const workItems: ChecklistItem[] = [
@@ -336,6 +345,15 @@ export const workItems: ChecklistItem[] = [
     label: "Set up Job Bank / LinkedIn alerts (use official & reputable sites)",
     category: "Work",
     href: "/jobs",
+  },
+  {
+    id: "wrk-5",
+    label: "If finishing a Canadian program, research PGWP on IRCC (verify yourself)",
+    category: "Work",
+    href: "/resources/pgwp-post-graduation-work",
+    officialHref:
+      "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation.html",
+    officialLabel: "Work after graduation — IRCC",
   },
 ];
 
@@ -704,6 +722,12 @@ export function getPlanRecommendations(profile: PlanProfile): PlanRecommendation
       kind: "guide",
     });
     push({
+      title: "PGWP / post-graduation work orientation",
+      description: "IRCC-linked research map if you studied in Canada — verify eligibility on Canada.ca.",
+      href: "/resources/pgwp-post-graduation-work",
+      kind: "guide",
+    });
+    push({
       title: "Sample jobs layout",
       description: "Fictional employers for layout only.",
       href: "/jobs",
@@ -716,6 +740,12 @@ export function getPlanRecommendations(profile: PlanProfile): PlanRecommendation
       title: "First weeks as an international student",
       description: "Orientation, IRCC verify reminders, banking/SIN/health links, housing scam awareness.",
       href: "/resources/first-weeks-international-student",
+      kind: "guide",
+    });
+    push({
+      title: "PGWP / post-graduation work orientation",
+      description: "IRCC-linked research map for work after a Canadian program — no invented eligibility or timelines.",
+      href: "/resources/pgwp-post-graduation-work",
       kind: "guide",
     });
     push({

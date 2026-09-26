@@ -358,6 +358,7 @@ export const guides: Guide[] = [
     dateModified: "2026-09-26",
     relatedHrefs: [
       { label: "Canadian resume guide", href: "/resources/canadian-resume" },
+      { label: "PGWP / post-grad work orientation", href: "/resources/pgwp-post-graduation-work" },
       { label: "Jobs (sample layout)", href: "/jobs" },
       { label: "My Canada Plan", href: "/plan" },
       { label: "Avoid scams", href: "/resources/avoid-newcomer-scams" },
@@ -977,6 +978,7 @@ export const guides: Guide[] = [
       { label: "Avoid newcomer scams", href: "/resources/avoid-newcomer-scams" },
       { label: "Temporary accommodation", href: "/resources/temporary-accommodation" },
       { label: "Newcomer taxes (CRA)", href: "/resources/newcomer-taxes-canada" },
+      { label: "PGWP / post-grad work orientation", href: "/resources/pgwp-post-graduation-work" },
       { label: "First week in Canada", href: "/resources/first-week-in-canada" },
     ],
     sections: [
@@ -1085,6 +1087,170 @@ export const guides: Guide[] = [
     ],
   },
 
+
+  {
+    slug: "pgwp-post-graduation-work",
+    title: "Post-graduation work (PGWP) orientation for international students",
+    metaTitle: "PGWP / Post-Graduation Work Orientation — IRCC-Linked Guide",
+    metaDescription:
+      "Orientation for international students researching post-graduation work options in Canada: verified IRCC starting points, research habits, settlement cross-links — no invented eligibility, validity lengths, or processing times.",
+    eyebrow: "Work",
+    summary:
+      "A calm map for students researching work after a Canadian program: official IRCC Post-Graduation Work Permit pages to verify yourself, what Norra will never invent, and links to SIN, banking, taxes, jobs (sample), and My Canada Plan with Study or Work goals.",
+    topics: [
+      "student",
+      "work",
+      "PGWP",
+      "post-graduation",
+      "work permit",
+      "international student",
+      "IRCC",
+      "graduation",
+      "career",
+      "SIN",
+      "taxes",
+    ],
+    readingMinutes: 11,
+    updatedLabel: "Sep 2026",
+    datePublished: "2026-09-26",
+    dateModified: "2026-09-26",
+    planCtaHref: "/plan/?goal=work",
+    relatedHrefs: [
+      { label: "My Canada Plan (Work)", href: "/plan/?goal=work" },
+      { label: "My Canada Plan (Study)", href: "/plan/?goal=study" },
+      { label: "Students hub", href: "/students" },
+      { label: "International student first weeks", href: "/resources/first-weeks-international-student" },
+      { label: "First week in Canada", href: "/resources/first-week-in-canada" },
+      { label: "Get a SIN", href: "/resources/get-sin-canada" },
+      { label: "Open a bank account", href: "/resources/open-bank-account-newcomer" },
+      { label: "Newcomer taxes (CRA)", href: "/resources/newcomer-taxes-canada" },
+      { label: "First Canadian job", href: "/resources/first-canadian-job" },
+      { label: "Jobs (sample layout)", href: "/jobs" },
+    ],
+    sections: [
+      {
+        heading: "What this guide is (and is not)",
+        paragraphs: [
+          "Many international students eventually ask whether they can work in Canada after finishing a program — often under the label Post-Graduation Work Permit (PGWP). That question is normal. Answering it for your case is not Norra's job.",
+          "This page is orientation only: where to read on Immigration, Refugees and Citizenship Canada (IRCC), how to research without copying social-media claims, and which Norra settlement guides pair with a post-study work transition. It is not immigration advice, not a prediction that you will qualify, and not a substitute for IRCC or an authorized representative.",
+        ],
+        callout: {
+          kind: "verify",
+          text: "Start on IRCC and follow the pages that match your situation: [Work after graduation (IRCC)](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation.html) · [About the PGWP](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/about.html) · [Eligibility](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/eligibility.html) · [How to apply](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/apply.html).",
+        },
+      },
+      {
+        heading: "What people usually mean by \"PGWP\"",
+        paragraphs: [
+          "In everyday conversation, \"PGWP\" usually refers to a post-graduation work authorization pathway described on IRCC's Study in Canada pages. Exact names, forms, and rules live on Canada.ca — not in blog roundups or WhatsApp forwards.",
+          "Norra will not invent whether your school, program length, study-permit history, or graduation timing makes you eligible. Those facts are defined by IRCC for your situation and can change.",
+        ],
+        bullets: [
+          "Treat \"everyone gets X years\" claims as unverified until you read IRCC yourself",
+          "School international-student advisors can help you navigate documents — they still do not replace IRCC's published rules",
+          "Work while you are still a student (on/off campus, co-op) is a different IRCC topic from work after graduation — do not mix the two from memory",
+        ],
+        callout: {
+          kind: "tip",
+          text: "While studying, bookmark IRCC's work-while-studying hub separately: [Work while studying](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work.html). After graduation topics sit under [Work after graduation](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation.html).",
+        },
+      },
+      {
+        heading: "Official IRCC starting points (verified links)",
+        paragraphs: [
+          "Open these on canada.ca yourself. Prefer typing the path or using links from pages you already trust. Lookalike domains are a common fraud pattern.",
+        ],
+        bullets: [
+          "[Work after graduation (hub)](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation.html)",
+          "[About the post-graduation work permit](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/about.html)",
+          "[Who can apply / eligibility](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/eligibility.html)",
+          "[How to apply](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/apply.html)",
+          "[Get the documents you need](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/get-documents.html)",
+          "[After you apply](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/after-you-apply.html)",
+          "[Study in Canada (overview)](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada.html)",
+          "[Work in Canada (overview)](https://www.canada.ca/en/immigration-refugees-citizenship/services/work-canada.html)",
+          "[Designated learning institutions (DLI) list](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/study-permit/prepare/designated-learning-institutions-list.html)",
+          "[IRCC secure account](https://www.canada.ca/en/immigration-refugees-citizenship/services/application/account.html) · [Check application status](https://www.canada.ca/en/immigration-refugees-citizenship/services/application/check-status.html)",
+        ],
+        callout: {
+          kind: "verify",
+          text: "Processing times, fees, biometrics, and required forms are published by IRCC and change. Never trust a screenshot of an old timeline — open the live Canada.ca page for the step you are on.",
+        },
+      },
+      {
+        heading: "A calm research workflow (no invented rules)",
+        paragraphs: [
+          "Use this as a personal organization habit — not as a guarantee of outcome.",
+        ],
+        bullets: [
+          "Read IRCC About + Eligibility pages before you spend money on \"PGWP packages\" from strangers",
+          "Write down questions for your school's international student office (document wording, letter of completion timing) — then verify any status claim on IRCC",
+          "Keep copies of study-permit documents, transcripts, and completion letters organized; IRCC's get-documents page explains what they ask for in general terms",
+          "If you use an IRCC account, open it only from official links — never from a cold email or text",
+          "For case-specific advice, independently hire an authorized immigration representative — sample marketplace cards on Norra are fictional UI, not referrals",
+        ],
+        callout: {
+          kind: "warning",
+          text: "Anyone guaranteeing approval, selling \"priority processing\" outside IRCC, or asking you to pay with gift cards or crypto is a red flag. See Norra's [avoid newcomer scams](/resources/avoid-newcomer-scams) guide and IRCC contact pages you open yourself from canada.ca.",
+        },
+      },
+      {
+        heading: "While you are still studying — do not confuse pathways",
+        paragraphs: [
+          "On-campus work, off-campus work, and co-op / internship permits are separate IRCC topics from post-graduation work. Conditions on your study permit matter — Norra will not tell you that you \"can work N hours.\"",
+        ],
+        bullets: [
+          "[Work on campus](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/work-on-campus.html)",
+          "[Work off campus](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/work-off-campus.html)",
+          "[Work as a co-op student or intern](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/intern.html)",
+          "Cross-read Norra's [first weeks as an international student](/resources/first-weeks-international-student) for arrival and orientation habits",
+        ],
+        callout: {
+          kind: "verify",
+          text: "Hour limits, employer rules, and full-time study requirements — if any apply to you — are stated by IRCC for your situation. Check IRCC; do not rely on Norra or social media for a number.",
+        },
+      },
+      {
+        heading: "Settlement stack after (or while) you research work options",
+        paragraphs: [
+          "If you become eligible to work and choose to work, everyday Canada setup still matters: SIN when Service Canada says you qualify, a bank account, tax bookmarks, and scam-aware job search. Those are separate checklists.",
+        ],
+        bullets: [
+          "[Get a SIN in Canada](/resources/get-sin-canada) — Service Canada navigation; verify eligibility there",
+          "[Open a bank account as a newcomer](/resources/open-bank-account-newcomer) — FCAC-linked orientation",
+          "[Filing taxes as a newcomer (CRA)](/resources/newcomer-taxes-canada) — no invented refunds or GST amounts",
+          "[Finding your first Canadian job](/resources/first-canadian-job) — search habits; confirm authorization on IRCC",
+          "[Canadian resume guide](/resources/canadian-resume) — format orientation, not a guarantee",
+          "[Jobs (sample layout)](/jobs) — fictional employers for UI only, labelled as sample",
+        ],
+        callout: {
+          kind: "tip",
+          text: "In My Canada Plan, add goal Study while you are enrolled, and/or goal Work when you are focusing on employment. Needs like Banking & SIN and Government benefits pull the matching checklist items.",
+        },
+      },
+      {
+        heading: "What Norra will never tell you",
+        bullets: [
+          "That you \"will get\" a PGWP, or for how many months or years",
+          "Invented eligibility shortcuts (\"any diploma counts\", \"just wait N days\")",
+          "Hour limits, salary rules, or employer restrictions copied from memory",
+          "Processing times, fees, or \"apply by this date\" claims not taken from the live IRCC page you open",
+          "Which consultant to hire, or that a sample marketplace profile is a real booking",
+        ],
+        callout: {
+          kind: "warning",
+          text: "Norra is early-stage navigation software. It is not IRCC, not a law firm, and not an RCIC. For decisions about your status, use Canada.ca and independently verified authorized help.",
+        },
+      },
+      {
+        heading: "Put this into My Canada Plan",
+        paragraphs: [
+          "Open My Canada Plan with goal Work (or Study if you are still enrolled), choose your stage, add your city, and tick IRCC-research and settlement items as you finish them. Progress stays in this browser until accounts exist.",
+        ],
+      },
+    ],
+  },
+
   {
     slug: "newcomer-taxes-canada",
     title: "Filing taxes in Canada as a newcomer (orientation)",
@@ -1119,6 +1285,7 @@ export const guides: Guide[] = [
       { label: "Open a bank account", href: "/resources/open-bank-account-newcomer" },
       { label: "First week in Canada", href: "/resources/first-week-in-canada" },
       { label: "International student first weeks", href: "/resources/first-weeks-international-student" },
+      { label: "PGWP / post-grad work orientation", href: "/resources/pgwp-post-graduation-work" },
       { label: "Avoid newcomer scams", href: "/resources/avoid-newcomer-scams" },
     ],
     sections: [
@@ -1283,6 +1450,7 @@ export const featuredGuideSlugs = [
   "open-bank-account-newcomer",
   "get-health-card-canada",
   "newcomer-taxes-canada",
+  "pgwp-post-graduation-work",
   "avoid-newcomer-scams",
   "first-weeks-international-student",
   "first-week-in-canada",
@@ -1299,7 +1467,11 @@ export function filterGuides(query: string, topic: string = "all"): Guide[] {
   const byTopic =
     !topicNorm || topicNorm.toLowerCase() === "all"
       ? guides
-      : guides.filter((g) => g.eyebrow.toLowerCase() === topicNorm.toLowerCase());
+      : guides.filter((g) => {
+          const want = topicNorm.toLowerCase();
+          if (g.eyebrow.toLowerCase() === want) return true;
+          return g.topics.some((t) => t.toLowerCase() === want);
+        });
   if (!q) return byTopic;
   const terms = q.split(/\s+/).filter(Boolean);
   return byTopic.filter((g) => {

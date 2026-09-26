@@ -54,6 +54,30 @@ export const OFFICIAL_CRA_MY_ACCOUNT = {
   href: "https://www.canada.ca/en/revenue-agency/services/e-services/digital-services-individuals/account-individuals.html",
 } as const;
 
+
+/** IRCC — post-graduation work / PGWP — URLs verified live (curl) Sep 2026. No invented eligibility. */
+export const OFFICIAL_PGWP_HUB = {
+  label: "IRCC — Work after graduation",
+  href: "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation.html",
+} as const;
+
+export const OFFICIAL_PGWP_ABOUT = {
+  label: "IRCC — About the post-graduation work permit",
+  href: "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/about.html",
+} as const;
+
+export const OFFICIAL_PGWP_ELIGIBILITY = {
+  label: "IRCC — PGWP eligibility",
+  href: "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/eligibility.html",
+} as const;
+
+export const OFFICIAL_PGWP_APPLY = {
+  label: "IRCC — How to apply for a PGWP",
+  href: "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/work/after-graduation/apply.html",
+} as const;
+
+export const NORRA_PGWP_GUIDE_HREF = "/resources/pgwp-post-graduation-work";
+
 /** Checklist base ids that should get SIN officialHref */
 export const SIN_CHECKLIST_BASE_IDS = ["arr-7", "set-1"] as const;
 

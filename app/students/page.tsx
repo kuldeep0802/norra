@@ -11,7 +11,7 @@ import { getGuide } from "@/lib/data/guides";
 export const metadata: Metadata = {
   title: "International Students — Guides & Study Plan",
   description:
-    "Guide-first orientation for international students in Canada: first weeks, Knowledge Hub student guides, SIN, banking, health cards, housing scam awareness, and My Canada Plan with goal Study. Early-stage Norra — not immigration advice.",
+    "Guide-first orientation for international students in Canada: first weeks, PGWP / post-grad work research map, Knowledge Hub student guides, SIN, banking, health cards, housing scam awareness, and My Canada Plan with Study or Work goals. Early-stage Norra — not immigration advice.",
   alternates: { canonical: "/students/" },
   openGraph: {
     title: `International Students · ${siteConfig.name}`,
@@ -25,6 +25,10 @@ const studentGuides = [
   {
     slug: "first-weeks-international-student",
     blurb: "School check-in, IRCC verify reminders, banking/SIN/health links, housing scam awareness.",
+  },
+  {
+    slug: "pgwp-post-graduation-work",
+    blurb: "IRCC-linked orientation for researching post-graduation work / PGWP — no invented eligibility or timelines.",
   },
   {
     slug: "first-week-in-canada",
@@ -72,6 +76,7 @@ const sampleChrome = [
 
 export default function StudentsPage() {
   const featured = getGuide("first-weeks-international-student");
+  const featuredPgwp = getGuide("pgwp-post-graduation-work");
 
   return (
     <div>
@@ -144,6 +149,23 @@ export default function StudentsPage() {
               </Button>
               <Button href="/plan/?goal=study" variant="outline" className="min-h-12">
                 Open Plan with Study goal
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {featuredPgwp && (
+          <div className="rounded-2xl border border-forest/15 bg-white p-6 sm:p-8">
+            <p className="text-xs font-semibold uppercase tracking-wide text-forest">Also featured · Work after study</p>
+            <h2 className="mt-2 font-display text-xl sm:text-2xl font-semibold text-ink">{featuredPgwp.title}</h2>
+            <p className="mt-2 text-muted leading-relaxed">{featuredPgwp.summary}</p>
+            <div className="mt-5 flex flex-col sm:flex-row gap-3">
+              <Button href={`/resources/${featuredPgwp.slug}`} className="min-h-12">
+                Read PGWP orientation
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+              <Button href="/plan/?goal=work" variant="outline" className="min-h-12">
+                Open Plan with Work goal
               </Button>
             </div>
           </div>
@@ -245,6 +267,10 @@ export default function StudentsPage() {
           {" · "}
           <Link href="/resources/newcomer-taxes-canada" className="text-forest hover:underline">
             Newcomer taxes orientation
+          </Link>
+          {" · "}
+          <Link href="/resources/pgwp-post-graduation-work" className="text-forest hover:underline">
+            PGWP / post-grad work
           </Link>
           {" · "}
           <Link href="/safety" className="text-forest hover:underline">

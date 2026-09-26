@@ -6,8 +6,8 @@ import Link from "next/link";
 export const metadata = { title: "Immigration & Status" };
 
 const pathways = [
-  { title: "Study permit", desc: "Document checklists and prep tips for studying at a Canadian DLI." },
-  { title: "Work permit & PGWP", desc: "High-level maps of common work authorization routes." },
+  { title: "Study permit", desc: "Document checklists and prep tips for studying at a Canadian DLI.", href: "/students" },
+  { title: "Work permit & PGWP", desc: "Orientation to IRCC post-graduation work pages — verify eligibility yourself.", href: "/resources/pgwp-post-graduation-work" },
   { title: "Visitor / TRV / eTA", desc: "Travel document orientation for short stays." },
   { title: "Extensions & restoration", desc: "Timeline awareness and document organization." },
   { title: "Express Entry overview", desc: "Federal skilled pathways at a glance — not a CRS calculator promise." },
@@ -37,12 +37,40 @@ export default function ImmigrationPage() {
         </Disclaimer>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {pathways.map((p) => (
-            <div key={p.title} className="rounded-2xl bg-white border border-night/5 p-5">
-              <h3 className="font-semibold">{p.title}</h3>
-              <p className="mt-2 text-sm text-muted">{p.desc}</p>
-            </div>
-          ))}
+          {pathways.map((p) => {
+            const body = (
+              <>
+                <h3 className="font-semibold">{p.title}</h3>
+                <p className="mt-2 text-sm text-muted">{p.desc}</p>
+              </>
+            );
+            const cls = "rounded-2xl bg-white border border-night/5 p-5 block hover:border-forest/30 hover:shadow-sm transition-all";
+            if ("href" in p && p.href) {
+              return (
+                <Link key={p.title} href={p.href} className={cls}>
+                  {body}
+                </Link>
+              );
+            }
+            return (
+              <div key={p.title} className={cls}>
+                {body}
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="rounded-2xl border border-forest/20 bg-sand/60 p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-forest">Knowledge Hub</p>
+            <h3 className="mt-1 font-display text-xl font-semibold text-ink">PGWP / post-graduation work orientation</h3>
+            <p className="mt-1 text-sm text-muted max-w-xl">
+              Verified IRCC starting points for researching work after a Canadian program — no invented eligibility, validity lengths, or processing times.
+            </p>
+          </div>
+          <Button href="/resources/pgwp-post-graduation-work" className="min-h-11 shrink-0">
+            Read the guide
+          </Button>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">

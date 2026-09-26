@@ -53,9 +53,11 @@ function profileContextLinks(profile: PlanProfile | null): { label: string; href
   if (profile.goals.includes("work")) {
     links.push({ label: "Canadian resume", href: "/resources/canadian-resume" });
     links.push({ label: "First Canadian job", href: "/resources/first-canadian-job" });
+    links.push({ label: "PGWP / post-grad work", href: "/resources/pgwp-post-graduation-work" });
   }
   if (profile.goals.includes("study")) {
     links.push({ label: "Students hub (guides)", href: "/students" });
+    links.push({ label: "PGWP orientation", href: "/resources/pgwp-post-graduation-work" });
   }
   if (profile.city && profile.city !== "Other / Not sure yet") {
     links.push({ label: "Compare cities", href: "/resources/compare-canadian-cities" });
@@ -103,7 +105,10 @@ function suggestionsFor(profile: PlanProfile | null): string[] {
   }
   if (profile.goals.includes("housing")) out.push("Help me find temporary housing");
   if (profile.goals.includes("work")) out.push("How do I write a Canadian resume?");
-  if (profile.goals.includes("study")) out.push("Where do I start as a student?");
+  if (profile.goals.includes("study")) {
+    out.push("Where do I start as a student?");
+    out.push("What is a PGWP?");
+  }
   out.push("Show my Canada Plan");
   out.push("Avoid newcomer scams");
   return [...new Set(out)].slice(0, 6);
@@ -118,12 +123,25 @@ function respond(input: string, profile: PlanProfile | null): Msg {
     links: uniqueLinks([...(msg.links || []), ...bias]).slice(0, 5),
   });
 
-  if (/visa|permit|immigration|pgwp|express entry|pr\b|citizenship|study permit|work permit/.test(q)) {
+  if (/\bpgwp\b|post[- ]?grad(?:uation)?(?:\s+work)?|work after graduat|after[- ]graduation/.test(q)) {
+    return withBias({
+      role: "assistant",
+      text: "I can point you to Norra's PGWP / post-graduation work orientation and IRCC pages to verify yourself. Nora does not assess eligibility, invent validity lengths, hour limits, or processing times, and is not immigration advice.",
+      links: [
+        { label: "PGWP orientation guide", href: "/resources/pgwp-post-graduation-work" },
+        { label: "Students hub", href: "/students" },
+        { label: "Immigration overview", href: "/immigration" },
+        { label: "My Canada Plan (Work)", href: "/plan/?goal=work" },
+      ],
+    });
+  }
+  if (/visa|permit|immigration|express entry|pr\b|citizenship|study permit|work permit/.test(q)) {
     return withBias({
       role: "assistant",
       text: "I can point you to immigration overviews and checklists. Important: Nora is not a lawyer or RCIC and does not give immigration advice. For eligibility, filings, or legal questions, use IRCC and independently verify authorized professionals. Sample marketplace profiles on Norra are fictional.",
       links: [
         { label: "Immigration guides", href: "/immigration" },
+        { label: "PGWP orientation", href: "/resources/pgwp-post-graduation-work" },
         { label: "Prepare before landing", href: "/resources/prepare-before-landing" },
         { label: "Document organizer", href: "/documents" },
       ],

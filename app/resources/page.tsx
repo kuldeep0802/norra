@@ -65,7 +65,7 @@ export default function ResourcesPage() {
           <SectionHeader
             eyebrow="Knowledge Hub"
             title="Guides that make Canada easier to navigate"
-            description="Long-form, human-first articles for real newcomer moments — before landing, first week, international students, SIN, health cards, banking, CRA taxes, housing, work, cities, and staying scam-aware. Search and topic chips filter in your browser — no account required."
+            description="Long-form, human-first articles for real newcomer moments — before landing, first week, international students, PGWP / post-grad work, SIN, health cards, banking, CRA taxes, housing, work, cities, and staying scam-aware. Search and topic chips filter in your browser — no account required."
           />
           <Disclaimer className="mt-8">
             Guides are for organization and orientation. They are not immigration or legal advice. Prefer primary

@@ -288,7 +288,7 @@ export const studyItems: ChecklistItem[] = [
     id: "stu-1",
     label: "Confirm program start date, orientation, and campus address",
     category: "Study",
-    href: "/students",
+    href: "/resources/first-weeks-international-student",
   },
   {
     id: "stu-2",
@@ -713,6 +713,12 @@ export function getPlanRecommendations(profile: PlanProfile): PlanRecommendation
   }
   if (profile.goals.includes("study") || profile.needs.includes("School / kids")) {
     push({
+      title: "First weeks as an international student",
+      description: "Orientation, IRCC verify reminders, banking/SIN/health links, housing scam awareness.",
+      href: "/resources/first-weeks-international-student",
+      kind: "guide",
+    });
+    push({
       title: "Students overview",
       description: "Orientation pointers for studying in Canada.",
       href: "/students",
@@ -806,15 +812,16 @@ export const needQueryAliases: Record<string, (typeof planNeedOptions)[number]> 
 /** Map Knowledge Hub topic chip ids → plan query (need and/or goal) */
 export const hubTopicToPlanQuery: Record<
   string,
-  { need?: string; goal?: PlanGoal }
+  { need?: string; goal?: PlanGoal; stage?: PlanStage }
 > = {
   Housing: { need: "housing", goal: "housing" },
   Health: { need: "health" },
   Banking: { need: "banking" },
   Work: { need: "job", goal: "work" },
-  /** Pre-landing docs/lodging → Airport & arrival need */
-  "Pre-arrival": { need: "arrival" },
-  Arrival: { need: "arrival" },
+  /** Pre-landing docs/lodging → stage + Airport & arrival need */
+  "Pre-arrival": { need: "arrival", stage: "pre-arrival" },
+  Arrival: { need: "arrival", stage: "just-arrived" },
+  Student: { goal: "study", need: "school" },
   /** Knowledge Hub “Government” guides currently centre on SIN → Banking & SIN */
   Government: { need: "banking" },
   Cities: { need: "city" },
@@ -840,16 +847,49 @@ export function resolveGoalFromQuery(raw: string | null): PlanGoal | null {
   return match ? match.value : null;
 }
 
+/** Aliases for ?stage= query params → PlanStage */
+const stageQueryAliases: Record<string, PlanStage> = {
+  planning: "planning",
+  research: "planning",
+  researching: "planning",
+  "pre-arrival": "pre-arrival",
+  prearrival: "pre-arrival",
+  "pre_arrival": "pre-arrival",
+  approved: "pre-arrival",
+  travel: "pre-arrival",
+  "just-arrived": "just-arrived",
+  justarrived: "just-arrived",
+  landed: "just-arrived",
+  arrival: "just-arrived",
+  settling: "settling",
+  settle: "settling",
+  "already-here": "already-here",
+  alreadyhere: "already-here",
+  living: "already-here",
+};
+
+export function resolveStageFromQuery(raw: string | null): PlanStage | null {
+  if (!raw) return null;
+  const lower = raw.trim().toLowerCase().replace(/\s+/g, "-");
+  if (stageQueryAliases[lower]) return stageQueryAliases[lower];
+  const match = stageOptions.find(
+    (s) => s.value === lower || s.label.toLowerCase() === raw.trim().toLowerCase()
+  );
+  return match ? match.value : null;
+}
+
 /** Build /plan/?… query from city slug and optional need/goal aliases */
 export function buildPlanHref(opts: {
   citySlug?: string;
   need?: string;
   goal?: PlanGoal | string;
+  stage?: PlanStage | string;
 }): string {
   const params = new URLSearchParams();
   if (opts.citySlug) params.set("city", opts.citySlug);
   if (opts.need) params.set("need", opts.need);
   if (opts.goal) params.set("goal", String(opts.goal));
+  if (opts.stage) params.set("stage", String(opts.stage));
   const qs = params.toString();
   return qs ? `/plan/?${qs}` : "/plan/";
 }

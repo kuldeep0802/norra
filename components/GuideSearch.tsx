@@ -206,9 +206,19 @@ export function GuideSearch() {
                 Build My Canada Plan
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              {hasTopic && (hubTopicToPlanQuery[topic]?.need || hubTopicToPlanQuery[topic]?.goal) ? (
+              {hasTopic &&
+              (hubTopicToPlanQuery[topic]?.need ||
+                hubTopicToPlanQuery[topic]?.goal ||
+                hubTopicToPlanQuery[topic]?.stage) ? (
                 <p className="text-xs text-muted">
                   Opens Plan with
+                  {hubTopicToPlanQuery[topic]?.stage
+                    ? ` stage “${hubTopicToPlanQuery[topic].stage}”`
+                    : ""}
+                  {hubTopicToPlanQuery[topic]?.stage &&
+                  (hubTopicToPlanQuery[topic]?.need || hubTopicToPlanQuery[topic]?.goal)
+                    ? " ·"
+                    : ""}
                   {hubTopicToPlanQuery[topic]?.need ? ` need “${hubTopicToPlanQuery[topic].need}”` : ""}
                   {hubTopicToPlanQuery[topic]?.need && hubTopicToPlanQuery[topic]?.goal ? " ·" : ""}
                   {hubTopicToPlanQuery[topic]?.goal ? ` goal “${hubTopicToPlanQuery[topic].goal}”` : ""}{" "}

@@ -23,6 +23,7 @@ import {
   planNeedOptions,
   resolveGoalFromQuery,
   resolveNeedFromQuery,
+  resolveStageFromQuery,
   savePlanProfile,
   stageOptions,
 } from "@/lib/data/checklists";
@@ -51,6 +52,7 @@ export default function PlanPage() {
     const provinceParam = params.get("province")?.trim() || "";
     const needFromQuery = resolveNeedFromQuery(params.get("need"));
     const goalFromQuery = resolveGoalFromQuery(params.get("goal"));
+    const stageFromQuery = resolveStageFromQuery(params.get("stage"));
 
     const resolvedCity = cityParam
       ? cities.find((c) => c.slug === cityParam.toLowerCase()) ||
@@ -127,13 +129,17 @@ export default function PlanPage() {
       next = { ...next, goals: [...next.goals, goalFromQuery] };
       notes.push(`Added goal: ${goalFromQuery}`);
     }
+    if (stageFromQuery && (profileEmpty || !next.stage)) {
+      next = { ...next, stage: stageFromQuery };
+      notes.push(`Set stage: ${stageFromQuery}`);
+    }
 
     setProfile(next);
     if (next.stage) {
       savePlanProfile(next);
       setStep("dashboard");
     }
-    if (notes.length && (profileEmpty || needFromQuery || goalFromQuery)) {
+    if (notes.length && (profileEmpty || needFromQuery || goalFromQuery || stageFromQuery)) {
       setQueryNote(notes.join(" · "));
     }
   }, []);

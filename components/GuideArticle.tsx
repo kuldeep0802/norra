@@ -162,7 +162,7 @@ export function GuideArticle({ guide }: { guide: Guide }) {
           <p className="mt-2 text-sky text-sm sm:text-base leading-relaxed">
             Turn reading into a checklist you can tick on this device — stage-aware and saved locally.
           </p>
-          <Button href="/plan" variant="amber" className="mt-5 min-h-12">
+          <Button href={guide.planCtaHref || "/plan"} variant="amber" className="mt-5 min-h-12">
             Build My Canada Plan
             <ArrowRight className="h-4 w-4" />
           </Button>

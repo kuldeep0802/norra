@@ -34,6 +34,7 @@ export const footerLinks = {
     { label: "Before you arrive", href: "/before-you-arrive" },
     { label: "Prepare before landing", href: "/resources/prepare-before-landing" },
     { label: "First week in Canada", href: "/resources/first-week-in-canada" },
+    { label: "International student first weeks", href: "/resources/first-weeks-international-student" },
     { label: "Arrival services", href: "/arrival" },
     { label: "Immigration", href: "/immigration" },
     { label: "Settlement", href: "/settlement" },

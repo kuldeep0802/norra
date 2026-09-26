@@ -20,6 +20,8 @@ export type Guide = {
   datePublished: string;
   dateModified: string;
   relatedHrefs: { label: string; href: string }[];
+  /** Optional Plan deep-link for article CTA (e.g. /plan/?goal=study) */
+  planCtaHref?: string;
   sections: GuideSection[];
 };
 
@@ -38,8 +40,9 @@ export const guides: Guide[] = [
     updatedLabel: "Sep 2026",
     datePublished: "2026-09-26",
     dateModified: "2026-09-26",
+    planCtaHref: "/plan/?stage=pre-arrival",
     relatedHrefs: [
-      { label: "My Canada Plan", href: "/plan" },
+      { label: "My Canada Plan (pre-arrival)", href: "/plan/?stage=pre-arrival" },
       { label: "Before you arrive checklist", href: "/before-you-arrive" },
       { label: "First week guide", href: "/resources/first-week-in-canada" },
       { label: "Open a bank account", href: "/resources/open-bank-account-newcomer" },
@@ -935,6 +938,151 @@ export const guides: Guide[] = [
     ],
   },
 
+  {
+    slug: "first-weeks-international-student",
+    title: "First weeks as an international student in Canada",
+    metaTitle: "First Weeks as an International Student in Canada",
+    metaDescription:
+      "Orientation for international students' first weeks in Canada: school check-in, study-permit reminders to verify on IRCC, banking, SIN, health coverage, housing scam awareness — organization only, not immigration advice.",
+    eyebrow: "Student",
+    summary:
+      "A calm first-weeks map for international students: orientation, school portals, status reminders to verify on IRCC, banking/SIN/health cross-links, and housing scam awareness — then turn it into My Canada Plan with a Study goal.",
+    topics: [
+      "student",
+      "international student",
+      "study permit",
+      "orientation",
+      "campus",
+      "housing",
+      "scams",
+      "SIN",
+      "banking",
+      "health",
+      "IRCC",
+      "first weeks",
+    ],
+    readingMinutes: 12,
+    updatedLabel: "Sep 2026",
+    datePublished: "2026-09-26",
+    dateModified: "2026-09-26",
+    planCtaHref: "/plan/?goal=study",
+    relatedHrefs: [
+      { label: "My Canada Plan (Study)", href: "/plan/?goal=study" },
+      { label: "Students hub", href: "/students" },
+      { label: "Get a SIN", href: "/resources/get-sin-canada" },
+      { label: "Open a bank account", href: "/resources/open-bank-account-newcomer" },
+      { label: "Get a health card", href: "/resources/get-health-card-canada" },
+      { label: "Avoid newcomer scams", href: "/resources/avoid-newcomer-scams" },
+      { label: "Temporary accommodation", href: "/resources/temporary-accommodation" },
+      { label: "First week in Canada", href: "/resources/first-week-in-canada" },
+    ],
+    sections: [
+      {
+        heading: "What this guide is (and is not)",
+        paragraphs: [
+          "Your first weeks as an international student are about getting stable: a place to sleep, a working phone number, school orientation completed, and a clear list of status and settlement tasks to verify on official sources.",
+          "Norra organizes next steps. It does not assess your study-permit eligibility, interpret permit conditions for your case, or replace IRCC or your school's international student office.",
+        ],
+        callout: {
+          kind: "verify",
+          text: "Study permits, work conditions, and entry rules change. Confirm everything that affects your status on [Study in Canada — IRCC](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada.html) and with your designated learning institution (DLI).",
+        },
+      },
+      {
+        heading: "Before or right after you land",
+        bullets: [
+          "Keep passport, letter of acceptance, and study-permit / visa / eTA documents reachable (print + phone)",
+          "Confirm temporary lodging address and check-in instructions offline",
+          "Know how you will get from the airport to that address — and a backup plan",
+          "Activate SIM / eSIM so maps, school email, and two-factor codes work",
+          "Save your school's international student office contacts and after-hours emergency numbers",
+        ],
+        callout: {
+          kind: "tip",
+          text: "Cross-read Norra's [first week in Canada](/resources/first-week-in-canada) guide for general arrival habits (SIM, transit, essentials) that apply whether or not you are a student.",
+        },
+      },
+      {
+        heading: "School orientation and portals",
+        paragraphs: [
+          "Most schools run international-student orientation, immigration advising hours, and housing or health-insurance briefings. Treat those sessions as primary — they know your campus rules.",
+        ],
+        bullets: [
+          "Complete online pre-arrival or orientation modules your school requires",
+          "Activate student email, learning portal, and tuition / fee payment access",
+          "Confirm campus map, transit pass options, and student ID pickup",
+          "Ask where health insurance for international students is explained (school plan vs provincial coverage)",
+          "Note any mandatory address updates or IRCC reporting tools your school mentions — then verify steps on IRCC, not on random blogs",
+        ],
+      },
+      {
+        heading: "Study-permit reminders — verify on IRCC (no advice)",
+        paragraphs: [
+          "Permit conditions (including whether and how you may work on or off campus) are set by IRCC for your situation. Norra will not tell you that you \"can\" or \"cannot\" work a certain number of hours.",
+          "Use this as a reminder list of topics to look up — not as a decision for your case.",
+        ],
+        bullets: [
+          "Read the conditions printed on your permit and any accompanying IRCC letters",
+          "Open IRCC's Study in Canada pages for current rules on studying, working, and changing schools",
+          "Ask your school's international student advisors how they recommend documenting enrolment and address changes",
+          "Do not rely on social-media summaries of \"hours you can work\" — rules change and exceptions exist",
+        ],
+        callout: {
+          kind: "verify",
+          text: "Start here and follow links that match your situation: [Study in Canada (IRCC)](https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada.html). For regulated advice about your file, consult an authorized representative independently — Norra is not one.",
+        },
+      },
+      {
+        heading: "Banking, SIN, and health — use the deep guides",
+        paragraphs: [
+          "Students often open a bank account in week one, apply for a Social Insurance Number when eligible (especially if working), and sort health coverage (school plan and/or provincial card). Those topics are large enough that Norra keeps dedicated guides — open them instead of reinventing the steps here.",
+        ],
+        bullets: [
+          "[Open a bank account as a newcomer](/resources/open-bank-account-newcomer) — ID habits, questions to ask, scam-aware tips (FCAC-linked orientation)",
+          "[Get a SIN in Canada](/resources/get-sin-canada) — Service Canada navigation and phishing warnings; verify eligibility there",
+          "[Get a provincial health card](/resources/get-health-card-canada) — map to official provincial enrolment pages; waiting periods vary — never invent them",
+        ],
+        callout: {
+          kind: "tip",
+          text: "In My Canada Plan, add goal Study (and needs like Banking & SIN or Healthcare registration) so checklist items for school, money, and health appear together.",
+        },
+      },
+      {
+        heading: "Housing for students — scam awareness first",
+        paragraphs: [
+          "Campus residence, homestay, shared rentals, and off-campus leases each have trade-offs. Whatever you choose, treat deposits and \"pay before you see the unit\" pressure as high-risk — especially from abroad or in your first days.",
+        ],
+        bullets: [
+          "Prefer school residence waitlists or housing offices when available",
+          "View units in person or via a trusted proxy before wiring large deposits",
+          "Never pay with gift cards, crypto, or irreversible transfers to someone you have not verified",
+          "Read [temporary accommodation](/resources/temporary-accommodation) and [avoid newcomer scams](/resources/avoid-newcomer-scams) before sending money",
+          "Norra's housing cards are sample layout only — not real inventory",
+        ],
+        callout: {
+          kind: "warning",
+          text: "A \"perfect\" cheap room near campus that demands a deposit today without a viewing is a classic scam pattern. Slow down; verify the landlord or listing through your school housing board when possible.",
+        },
+      },
+      {
+        heading: "A simple first-weeks rhythm",
+        bullets: [
+          "Days 1–3: sleep, phone service, groceries, school check-in / orientation start",
+          "Days 3–10: banking when ready, SIN appointment or application if eligible, confirm health coverage path",
+          "Week 2+: longer housing search if needed, transit routine, meet international-student peers, keep IRCC bookmarks handy",
+          "Ongoing: tick items in My Canada Plan so nothing important lives only in your head",
+        ],
+      },
+      {
+        heading: "Put this into My Canada Plan",
+        paragraphs: [
+          "Open My Canada Plan with goal Study preselected, choose your stage (for example Just landed or Settling in), add your city, and tick orientation, banking, SIN, and housing items as you finish them. Progress stays in this browser until accounts exist.",
+        ],
+      },
+    ],
+  },
+
+
 ];
 
 export function getGuide(slug: string): Guide | undefined {
@@ -969,6 +1117,7 @@ export const hubTopicChips: { id: string; label: string }[] = [
   { id: "all", label: "All" },
   { id: "Pre-arrival", label: "Pre-arrival" },
   { id: "Arrival", label: "Arrival" },
+  { id: "Student", label: "Student" },
   { id: "Government", label: "Government" },
   { id: "Health", label: "Health" },
   { id: "Banking", label: "Banking" },
@@ -977,6 +1126,22 @@ export const hubTopicChips: { id: string; label: string }[] = [
   { id: "Cities", label: "Cities" },
   { id: "Safety", label: "Safety" },
 ];
+
+
+/** Curated homepage / hub featured slugs (order matters) */
+export const featuredGuideSlugs = [
+  "get-sin-canada",
+  "open-bank-account-newcomer",
+  "get-health-card-canada",
+  "avoid-newcomer-scams",
+  "first-weeks-international-student",
+  "first-week-in-canada",
+] as const;
+
+export function getFeaturedGuides(): Guide[] {
+  const bySlug = new Map(guides.map((g) => [g.slug, g]));
+  return featuredGuideSlugs.map((s) => bySlug.get(s)).filter(Boolean) as Guide[];
+}
 
 export function filterGuides(query: string, topic: string = "all"): Guide[] {
   const q = query.trim().toLowerCase();

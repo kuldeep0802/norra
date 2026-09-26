@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://norra.example/sitemap.xml
+Sitemap: https://kuldeep0802.github.io/norra/sitemap.xml

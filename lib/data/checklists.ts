@@ -117,7 +117,7 @@ export const beforeYouArriveItems: ChecklistItem[] = [
     id: "bya-8",
     label: "Research Canadian SIM / eSIM options",
     category: "Connectivity",
-    href: "/services/sim-internet",
+    href: "/resources/canadian-phone-sim-esim",
   },
   {
     id: "bya-9",
@@ -176,7 +176,7 @@ export const arrivalItems: ChecklistItem[] = [
     id: "arr-3",
     label: "Get a local SIM / eSIM and confirm data works",
     category: "Connectivity",
-    href: "/services/sim-internet",
+    href: "/resources/canadian-phone-sim-esim",
   },
   {
     id: "arr-4",
@@ -647,6 +647,14 @@ export function getPlanRecommendations(profile: PlanProfile): PlanRecommendation
       title: "Open a bank account as a newcomer",
       description: "Skim before you land so week-one account opening feels familiar.",
       href: "/resources/open-bank-account-newcomer",
+      kind: "guide",
+    });
+  }
+  if (profile.stage === "pre-arrival" || profile.stage === "just-arrived") {
+    push({
+      title: "Get a Canadian phone number (SIM / eSIM)",
+      description: "Day-one connectivity orientation — prepaid vs postpaid, eSIM habits, CRTC rights. No carrier rankings.",
+      href: "/resources/canadian-phone-sim-esim",
       kind: "guide",
     });
   }

@@ -40,7 +40,7 @@ export const stagePreviews: StagePreview[] = [
       { title: "Apply for your SIN", detail: "Through Service Canada — needed to work and file taxes." },
       { title: "Open a bank account", detail: "Compare newcomer packages and monthly fees first." },
     ],
-    guideSlugs: ["first-week-in-canada", "get-sin-canada"],
+    guideSlugs: ["canadian-phone-sim-esim", "first-week-in-canada"],
     planHref: "/plan/?stage=just-arrived",
   },
   {

@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, BookOpen, Map, Calendar, User } from "lucide-react";
+import { Home, BookOpen, Map, MapPinned, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const items = [
   { label: "Home", href: "/", icon: Home },
   { label: "Guides", href: "/resources", icon: BookOpen },
   { label: "Plan", href: "/plan", icon: Map },
-  { label: "Bookings", href: "/dashboard", icon: Calendar },
+  { label: "Cities", href: "/cities", icon: MapPinned },
   { label: "About", href: "/about", icon: User },
 ];
 

@@ -152,9 +152,10 @@ export const serviceCategories: ServiceCategory[] = [
     color: "amber",
     href: "/services/sim-internet",
     services: [
-      { name: "Airport / day-one SIM", description: "Options for arriving travellers.", href: "/arrival" },
-      { name: "Plan comparison tips", description: "What to look for in Canadian mobile plans." },
-      { name: "Home internet setup", description: "Typical providers and install timelines." },
+      { name: "Canadian phone / SIM / eSIM guide", description: "Day-one orientation: prepaid vs postpaid, eSIM, what to compare, CRTC rights — no carrier rankings.", href: "/resources/canadian-phone-sim-esim" },
+      { name: "First week checklist", description: "Phone service sits beside banking, SIN, and lodging in week one.", href: "/resources/first-week-in-canada" },
+      { name: "My Canada Plan", description: "Tick connectivity items for your stage — saves in this browser.", href: "/plan/?stage=just-arrived" },
+      { name: "Arrival services", description: "Airport pickup and first-day logistics (sample bookings labelled).", href: "/arrival" },
     ],
   },
   {

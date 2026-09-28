@@ -45,6 +45,7 @@ export const guides: Guide[] = [
       { label: "My Canada Plan (pre-arrival)", href: "/plan/?stage=pre-arrival" },
       { label: "Before you arrive checklist", href: "/before-you-arrive" },
       { label: "First week guide", href: "/resources/first-week-in-canada" },
+      { label: "Canadian phone / SIM / eSIM", href: "/resources/canadian-phone-sim-esim" },
       { label: "Open a bank account", href: "/resources/open-bank-account-newcomer" },
       { label: "Temporary accommodation", href: "/resources/temporary-accommodation" },
     ],
@@ -131,6 +132,7 @@ export const guides: Guide[] = [
     dateModified: "2026-09-26",
     relatedHrefs: [
       { label: "My Canada Plan", href: "/plan" },
+      { label: "Canadian phone / SIM / eSIM", href: "/resources/canadian-phone-sim-esim" },
       { label: "Get a SIN", href: "/resources/get-sin-canada" },
       { label: "Get a health card", href: "/resources/get-health-card-canada" },
       { label: "Open a bank account", href: "/resources/open-bank-account-newcomer" },
@@ -143,7 +145,7 @@ export const guides: Guide[] = [
         bullets: [
           "Have passport and status documents ready before the immigration hall",
           "Follow your pre-planned pickup or transit route to temporary lodging",
-          "Activate SIM / eSIM and test maps + messaging",
+          "Activate SIM / eSIM and test maps + messaging — see Norra’s Canadian phone / SIM guide",
           "Buy water, simple food, and toiletries if your place is not stocked",
           "Message someone you trust that you arrived safely",
         ],
@@ -642,7 +644,7 @@ export const guides: Guide[] = [
         ],
         callout: {
           kind: "verify",
-          text: "Official online application entry (Government of Canada): sin-nas.https://www.canada.ca/en/Sin/ — only use it after reading the Canada.ca Apply page for your situation.",
+          text: "Official online SIN application portal (Government of Canada): [sin-nas.canada.ca](https://sin-nas.canada.ca/en/Sin/) — only open it after reading the [Canada.ca Apply for a SIN](https://www.canada.ca/en/employment-social-development/services/sin/apply.html) page for your situation.",
         },
       },
       {
@@ -1005,7 +1007,7 @@ export const guides: Guide[] = [
         ],
         callout: {
           kind: "tip",
-          text: "Cross-read Norra's [first week in Canada](/resources/first-week-in-canada) guide for general arrival habits (SIM, transit, essentials) that apply whether or not you are a student.",
+          text: "Cross-read Norra's [first week in Canada](/resources/first-week-in-canada) and [Canadian phone / SIM / eSIM](/resources/canadian-phone-sim-esim) guides for day-one connectivity and arrival habits that apply whether or not you are a student.",
         },
       },
       {
@@ -1577,6 +1579,160 @@ export const guides: Guide[] = [
     ],
   },
 
+  {
+    slug: "canadian-phone-sim-esim",
+    title: "How to get a Canadian phone number (SIM / eSIM)",
+    metaTitle: "Canadian Phone Number — SIM & eSIM Orientation",
+    metaDescription:
+      "A calm day-one map for newcomers: prepaid vs postpaid, physical SIM vs eSIM, what to compare on plans, CRTC Wireless Code rights, and scam red flags — no carrier rankings or invented prices.",
+    eyebrow: "Arrival",
+    summary:
+      "A working Canadian number unlocks maps, two-factor codes, landlords, employers, and school portals. Use this as orientation — Norra does not sell plans or rank carriers.",
+    topics: [
+      "SIM",
+      "eSIM",
+      "phone",
+      "prepaid",
+      "mobile",
+      "arrival",
+      "first week",
+      "CRTC",
+      "connectivity",
+      "airport",
+    ],
+    readingMinutes: 9,
+    updatedLabel: "Sep 2026",
+    datePublished: "2026-09-28",
+    dateModified: "2026-09-28",
+    planCtaHref: "/plan/?stage=just-arrived",
+    relatedHrefs: [
+      { label: "My Canada Plan (just landed)", href: "/plan/?stage=just-arrived" },
+      { label: "First week in Canada", href: "/resources/first-week-in-canada" },
+      { label: "Prepare before landing", href: "/resources/prepare-before-landing" },
+      { label: "Open a bank account", href: "/resources/open-bank-account-newcomer" },
+      { label: "Avoid newcomer scams", href: "/resources/avoid-newcomer-scams" },
+      { label: "SIM & Internet services page", href: "/services/sim-internet" },
+      { label: "Arrival services", href: "/arrival" },
+    ],
+    sections: [
+      {
+        heading: "What this guide is (and is not)",
+        paragraphs: [
+          "In your first hours and days in Canada, a working phone number and data connection make everything else easier: maps to lodging, school or employer two-factor codes, banking apps later, and staying reachable.",
+          "Norra does not sell SIM cards, does not partner with carriers for commissions on this page, and does not declare any plan “best.” Prices, coverage maps, and eligibility change — always confirm on the provider’s own site before you buy.",
+        ],
+        callout: {
+          kind: "verify",
+          text: "Canadian wireless consumer rights are summarized by the CRTC: [Your consumer rights for cell phones](https://crtc.gc.ca/eng/phone/mobile/clients.htm) · [Protected by the Wireless Code](https://crtc.gc.ca/eng/phone/mobile/code.htm)",
+        },
+      },
+      {
+        heading: "Quick navigation checklist",
+        bullets: [
+          "Confirm your phone is unlocked (or buy a cheap unlocked device) before you rely on a Canadian SIM / eSIM",
+          "Decide prepaid vs postpaid for your first weeks — many newcomers start prepaid while they get a Canadian address and credit history",
+          "Choose physical SIM vs eSIM based on what your phone supports and what the seller offers at the airport, a store, or online",
+          "Compare talk, text, data, overage rules, and whether a Canadian number is included — read the provider’s current terms, not blog memory",
+          "Activate, test calls/SMS, and confirm mobile data works before you leave Wi‑Fi",
+          "Save offline maps or screenshots of your lodging address until data is stable",
+          "Keep the packaging or account email; you may need the account number later to port or cancel",
+        ],
+      },
+      {
+        heading: "Physical SIM vs eSIM",
+        paragraphs: [
+          "A physical SIM is a small card you insert. An eSIM is a digital profile downloaded to a compatible phone — useful if you can activate before or right after landing without finding a store.",
+          "Not every phone supports eSIM, and not every Canadian plan is sold as eSIM. Check your device settings (often under Mobile / Cellular) and the provider’s current eSIM instructions.",
+        ],
+        bullets: [
+          "If your phone is carrier-locked to a non-Canadian network, a Canadian SIM may not work until it is unlocked — ask your previous carrier about unlock rules before you travel",
+          "Dual-SIM phones can keep a home-country number for SMS while using a Canadian line for data — useful in week one, but watch roaming charges on the home line",
+          "Airport kiosks, big-box electronics stores, grocery/pharmacy counters, and carrier stores are common places people buy prepaid SIMs — stock and ID rules vary by seller",
+        ],
+        callout: {
+          kind: "tip",
+          text: "Research one or two options before your flight so you are not making a rushed decision in arrivals. Screenshot plan details while you still have Wi‑Fi.",
+        },
+      },
+      {
+        heading: "Prepaid vs postpaid (orientation only)",
+        paragraphs: [
+          "Prepaid usually means you pay in advance for a balance or a monthly prepaid plan — often with less credit check friction. Postpaid means you are billed after the fact under a contract or month-to-month account; providers may ask for Canadian ID, address, and credit information.",
+          "Neither option is universally “better.” Match the product to how long you will stay, whether you already have a Canadian address, and how comfortable you are with contracts.",
+        ],
+        bullets: [
+          "Ask what happens when data runs out — throttle, hard stop, or overage charges",
+          "Ask whether the plan includes a Canadian phone number (some data-only eSIMs do not)",
+          "Ask about international calling/SMS if you still need to reach people abroad",
+          "Read cancellation and auto-renew terms before you tap “buy”",
+        ],
+        callout: {
+          kind: "verify",
+          text: "CRTC explains differences and shopping habits at a high level: [Your consumer rights for cell phones](https://crtc.gc.ca/eng/phone/mobile/clients.htm). For complaints processes after you are a customer, see the Wireless Code pages and the Commission for Complaints for Telecom-television Services (CCTS) links published by the CRTC.",
+        },
+      },
+      {
+        heading: "What to compare on any plan (no rankings)",
+        paragraphs: [
+          "Ignore “best Canadian SIM 2026” listicles that bury affiliate links. Build your own short scorecard from the provider’s live page.",
+        ],
+        bullets: [
+          "Coverage where you will actually live and commute — national marketing maps can look better than a specific subway line or suburb",
+          "Monthly cost and what is included (GB of data, unlimited talk/text claims, throttling after a cap)",
+          "Upfront SIM / activation fees and whether tax is extra",
+          "Contract length, device financing, and early-cancellation rules if you are not on simple prepaid",
+          "Customer-support channels you can use in English or French if you need help activating",
+        ],
+        callout: {
+          kind: "warning",
+          text: "Norra will not invent current dollar prices, “unlimited” definitions, or network quality scores. Those change often — verify on the seller’s site the day you buy.",
+        },
+      },
+      {
+        heading: "Day-of-arrival activation habits",
+        bullets: [
+          "Connect to trusted Wi‑Fi only when needed; prefer activating with instructions from the provider you paid",
+          "Test: place a call or send an SMS to a trusted contact, open maps with mobile data, and receive a login code if a service texts you",
+          "Update your number with school, employer, bank appointments, and people meeting you — once the number is stable",
+          "If activation fails, keep receipts and chat/email transcripts; try official provider support before accepting “help” from strangers in the airport",
+        ],
+        callout: {
+          kind: "tip",
+          text: "Put “Get a local SIM / eSIM” on [My Canada Plan](/plan/?stage=just-arrived) so it sits beside banking, SIN, and housing checklist items for your stage.",
+        },
+      },
+      {
+        heading: "Home internet can wait a beat",
+        paragraphs: [
+          "Mobile data often covers your first days. Home internet installs can require a fixed address, a credit check, and an appointment window — which is easier once temporary lodging is sorted or you have signed a longer lease.",
+          "When you are ready, compare advertised speed, install fees, modem rental, and contract length the same way you would for mobile — on the provider’s own site.",
+        ],
+      },
+      {
+        heading: "Scam and safety red flags",
+        paragraphs: [
+          "Connectivity scams target tired travellers: fake “airport Wi‑Fi upgrade” pages, strangers offering to “activate your SIN phone,” or deals that require wiring money for a “reserved number.”",
+        ],
+        bullets: [
+          "Do not give remote-access control of your phone to someone who approaches you unsolicited",
+          "Be wary of social-media sellers asking for e-transfers before sending a SIM with no trackable business identity",
+          "Public charging cables and unknown QR codes can be risky — prefer your own charger and typed URLs for carrier sites",
+          "A working number does not mean someone is allowed to demand your SIN, banking password, or immigration documents by text",
+        ],
+        callout: {
+          kind: "warning",
+          text: "Cross-read [How to avoid common newcomer scams](/resources/avoid-newcomer-scams). If something feels rushed or secretive, pause and verify on an official or well-known provider domain you typed yourself.",
+        },
+      },
+      {
+        heading: "Put it on My Canada Plan",
+        paragraphs: [
+          "Choose stage “Approved / preparing to travel” or “Just landed,” then tick the connectivity checklist items as you research and activate. Progress stays in this browser until accounts exist — export a JSON backup if you change devices.",
+        ],
+      },
+    ],
+  },
+
 ];
 
 export function getGuide(slug: string): Guide | undefined {
@@ -1624,6 +1780,7 @@ export const hubTopicChips: { id: string; label: string }[] = [
 
 /** Curated homepage / hub featured slugs (order matters) */
 export const featuredGuideSlugs = [
+  "canadian-phone-sim-esim",
   "get-sin-canada",
   "open-bank-account-newcomer",
   "get-health-card-canada",

@@ -14,10 +14,10 @@ export const mainNav = [
 
 export const mobileBottomNav = [
   { label: "Home", href: "/", icon: "Home" },
-  { label: "Guides", href: "/resources", icon: "LayoutGrid" },
+  { label: "Guides", href: "/resources", icon: "BookOpen" },
   { label: "Plan", href: "/plan", icon: "Map" },
-  { label: "Bookings", href: "/dashboard", icon: "Calendar" },
-  { label: "Account", href: "/dashboard", icon: "User" },
+  { label: "Cities", href: "/cities", icon: "MapPinned" },
+  { label: "About", href: "/about", icon: "User" },
 ];
 
 export const footerLinks = {
@@ -34,6 +34,7 @@ export const footerLinks = {
     { label: "Before you arrive", href: "/before-you-arrive" },
     { label: "Prepare before landing", href: "/resources/prepare-before-landing" },
     { label: "First week in Canada", href: "/resources/first-week-in-canada" },
+    { label: "Canadian phone / SIM / eSIM", href: "/resources/canadian-phone-sim-esim" },
     { label: "International student first weeks", href: "/resources/first-weeks-international-student" },
     { label: "Finishing your program", href: "/resources/finishing-your-program" },
     { label: "PGWP / post-grad work", href: "/resources/pgwp-post-graduation-work" },
